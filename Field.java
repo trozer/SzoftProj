@@ -1,4 +1,4 @@
-package projlab;
+package szoftProj;
 
 import java.util.*;
 
