@@ -1,17 +1,19 @@
 package szoftProj;
 
-public class Abyss extends Field{
+public class Abyss extends Field {
+
+	public Abyss() {
+	}
 
 	@Override
 	public void doo(Player player) {
-		// TODO Auto-generated method stub
-		
+		player.step(this);
+		player.kill();
 	}
 
 	@Override
 	public void doo(Bullet bullet) {
-		// TODO Auto-generated method stub
-		
+		bullet.step(this);
 	}
 
 	@Override
@@ -37,7 +39,5 @@ public class Abyss extends Field{
 		// TODO Auto-generated method stub
 		super.addNeighbour(direction, neighbour);
 	}
-	
-	
 
 }

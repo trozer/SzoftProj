@@ -2,17 +2,15 @@ package szoftProj;
 
 public class Wall extends Field {
 
+	public Wall() {
+	}
+
 	@Override
 	public void doo(Player player) {
-
 	}
 
 	@Override
 	public void doo(Bullet bullet) {
-		bullet.step(this);
-		bullet.currentField.removeUnit();
-		
-
 	}
 
 	@Override

@@ -22,14 +22,21 @@ public class PortalWall extends Wall {
 
 	@Override
 	public void doo(Player player) {
-		// TODO Auto-generated method stub
-		super.doo(player);
+		if (portal.amIPortal(this)) {
+			if (portal.getPair(this) != null) {
+				player.move();
+			}
+		}
 	}
 
 	@Override
 	public void doo(Bullet bullet) {
-		// TODO Auto-generated method stub
-		super.doo(bullet);
+		if (portal.amIPortal(this)) {
+			bullet.kill();
+		} else {
+			portal.createPortal(this, bullet.getColor());
+			bullet.kill();
+		}
 	}
 
 	@Override
