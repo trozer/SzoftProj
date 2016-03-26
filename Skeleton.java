@@ -533,18 +533,19 @@ public class Skeleton {
 		
 	}
 	
-	public static void returnMethod(){
+	public static void returnMethod(String methodName, Object called, List<Object> parameters){
 		callDir = "<-";
+		printMethod(methodName, called, parameters);
 		deepness--;	
 	}
 	
-	public static void callMethod() {
+	public static void callMethod(String methodName, Object called, List<Object> parameters) {
 		callDir = "->";
+		printMethod(methodName, called, parameters);
 		deepness++;	
 	}
 	
 	public static void printMethod(String methodName, Object called, List<Object> parameters){
-		deepness++;
 		String method = "-";
 		for(int i = 0; i < deepness; i++) method += "\t";
 		method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
