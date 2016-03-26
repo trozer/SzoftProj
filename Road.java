@@ -6,12 +6,7 @@ import java.util.Map;
 public class Road extends Field {
 
 	// --------Attribútumok--------
-<<<<<<< HEAD
 
-	//protected Map<Direction, Field> neighbours;
-	//protected Unit containedUnit;
-=======
->>>>>>> 809f3c5b2755f1fce729effd7865050a9315f42f
 	
 	
 	// -------Metódusok---------
@@ -20,12 +15,11 @@ public class Road extends Field {
 		super();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-<<<<<<< HEAD
-		Skeleton.callMethod("Road - konstruktor", this, parameters);
-		Skeleton.returnMethod("Road - konstruktor", this, parameters);
-=======
+
+		Skeleton.callMethod("konstruktor", this, parameters);
+		Skeleton.returnMethod("konstruktor", this, parameters);
+
 		Skeleton.callMethod("konstruktor", null, parameters);
->>>>>>> 809f3c5b2755f1fce729effd7865050a9315f42f
 	}
 
 	@Override
@@ -42,23 +36,23 @@ public class Road extends Field {
         		if (containedUnit == null)
         			player.step(this);
         		parameters.add(Skeleton.getEmpty());
-        		Skeleton.callMethod("Road - doo-player-MOVE", this, parameters);
-        		Skeleton.returnMethod("Road - doo-player-MOVE", this, parameters);
+        		Skeleton.callMethod("doo MOVE", this, parameters);
+        		Skeleton.returnMethod("doo MOVE", this, parameters);
         		break;
         
         case GRAB:
         		if (containedUnit != null){
         			containedUnit.accept(this, player);}
         		parameters.add(Skeleton.getEmpty());
-        		Skeleton.callMethod("Road - doo-player-GRAB", this, parameters);
-        		Skeleton.returnMethod("Road - doo-player-GRAB", this, parameters);
+        		Skeleton.callMethod("doo GRAB", this, parameters);
+        		Skeleton.returnMethod("doo GRAB", this, parameters);
         		break;
         		
         default:
         	//TODO
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Road - doo-player-default", this, parameters);
-    		Skeleton.returnMethod("Road - doo-player-default", this, parameters);
+    		Skeleton.callMethod("doo default", this, parameters);
+    		Skeleton.returnMethod("doo default", this, parameters);
         	break;
 		}	
 		
@@ -73,13 +67,13 @@ public class Road extends Field {
         case MOVE:
         	bullet.step(this);
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Road - doo-bullet-MOVE", this, parameters);
-    		Skeleton.returnMethod("Road - doo-bullet-MOVE", this, parameters);
+    		Skeleton.callMethod("doo MOVE", this, parameters);
+    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
         default:
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Road - doo-bullet-default", this, parameters);
-    		Skeleton.returnMethod("Road - doo-bullet-default", this, parameters);
+    		Skeleton.callMethod("doo-bullet-default", this, parameters);
+    		Skeleton.returnMethod("doo default", this, parameters);
         	break;
 		}
 	}
@@ -91,13 +85,13 @@ public class Road extends Field {
 		if (containedUnit == null) {
 			containedUnit = unit;
 			parameters.add("True");
-    		Skeleton.callMethod("Road - addUnit", this, parameters);
-    		Skeleton.returnMethod("Road - addUnit", this, parameters);
+    		Skeleton.callMethod("addUnit", this, parameters);
+    		Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		} else
 			parameters.add("False");
-			Skeleton.callMethod("Road - addUnit", this, parameters);
-			Skeleton.returnMethod("Road - addUnit", this, parameters);
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
 			return false;
 	}
 

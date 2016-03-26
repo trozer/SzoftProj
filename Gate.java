@@ -16,16 +16,16 @@ public class Gate extends Field {
 	public Gate(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Gate - konstruktor", this, parameters);
-		Skeleton.returnMethod("Gate - konstruktor", this, parameters);
+		Skeleton.callMethod("konstruktor", this, parameters);
+		Skeleton.returnMethod("konstruktor", this, parameters);
 	}
 	
 	public void open(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		opened = true;
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Gate - open", this, parameters);
-		Skeleton.returnMethod("Gate - open", this, parameters);
+		Skeleton.callMethod("open", this, parameters);
+		Skeleton.returnMethod("open", this, parameters);
 	}
 	
 	public void close(){
@@ -34,8 +34,8 @@ public class Gate extends Field {
 		if(containedUnit != null){
 		containedUnit.kill();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Gate - close", this, parameters);
-		Skeleton.returnMethod("Gate - close", this, parameters);
+		Skeleton.callMethod("close", this, parameters);
+		Skeleton.returnMethod("close", this, parameters);
 		}
 	}
 	
@@ -55,8 +55,8 @@ public class Gate extends Field {
 				player.step(this);
 			}
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Gate - doo-player-MOVE", this, parameters);
-    		Skeleton.returnMethod("Gate - doo-player-MOVE", this, parameters);
+    		Skeleton.callMethod("doo MOVE", this, parameters);
+    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
 		
         case GRAB:
@@ -64,14 +64,14 @@ public class Gate extends Field {
     			containedUnit.accept(this, player);
         	}
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Gate - doo-player-GRAB", this, parameters);
-    		Skeleton.returnMethod("Gate - doo-player-GRAB", this, parameters);
+    		Skeleton.callMethod("doo GRAB", this, parameters);
+    		Skeleton.returnMethod("doo GRAB", this, parameters);
         	break;
         default:
         	//TODO
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Gate - doo-player-default", this, parameters);
-    		Skeleton.returnMethod("Gate - doo-player-default", this, parameters);
+    		Skeleton.callMethod("doo default", this, parameters);
+    		Skeleton.returnMethod("doo default", this, parameters);
         	break;
 		}
 		
@@ -90,13 +90,13 @@ public class Gate extends Field {
         	else
         		containedUnit.kill();
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Gate - doo-bullet-MOVE", this, parameters);
-    		Skeleton.returnMethod("Gate - doo-bullet-MOVE", this, parameters);
+    		Skeleton.callMethod("doo MOVE", this, parameters);
+    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
         default:
         	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("Gate - doo-bullet-defalt", this, parameters);
-    		Skeleton.returnMethod("Gate - doo-bullet-defalt", this, parameters);
+    		Skeleton.callMethod("doo defalt", this, parameters);
+    		Skeleton.returnMethod("doo defalt", this, parameters);
         	break;
 		}
 	}
@@ -108,14 +108,14 @@ public class Gate extends Field {
 		if (containedUnit == null && opened == true){
 			containedUnit = unit;
 			parameters.add("True");
-    		Skeleton.callMethod("Gate - addUnit", this, parameters);
-    		Skeleton.returnMethod("Gate - addUnit", this, parameters);
+    		Skeleton.callMethod("addUnit", this, parameters);
+    		Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
 			parameters.add("False");
-		Skeleton.callMethod("Gate - addUnit", this, parameters);
-		Skeleton.returnMethod("Gate - addUnit", this, parameters);
+		Skeleton.callMethod("addUnit", this, parameters);
+		Skeleton.returnMethod("addUnit", this, parameters);
 		return false;
 	}
 	

@@ -31,14 +31,14 @@ public abstract class Field {
 			if (entry.getKey() == dir){
 				
 				parameters.add(entry.getValue());
-				Skeleton.callMethod("Field - getNeighbourInDirection", this, parameters);
-				Skeleton.returnMethod("Field - getNeighbourInDirection", this, parameters);
+				Skeleton.callMethod("getNeighbourInDirection", this, parameters);
+				Skeleton.returnMethod("getNeighbourInDirection", this, parameters);
 				return entry.getValue();
 			}
 		}
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Field - getNeighbourInDirection", this, parameters);
-		Skeleton.returnMethod("Field - getNeighbourInDirection", this, parameters);
+		Skeleton.callMethod("getNeighbourInDirection", this, parameters);
+		Skeleton.returnMethod("getNeighbourInDirection", this, parameters);
 		return null;
 	}
 	
@@ -51,22 +51,22 @@ public abstract class Field {
 			containedUnit = unit;
 			
 			parameters.add("True");
-			Skeleton.callMethod("Field - addUnit", this, parameters);
-			Skeleton.returnMethod("Field - addUnit", this, parameters);
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
 			parameters.add("False");
-		Skeleton.callMethod("Field - addUnit", this, parameters);
-		Skeleton.returnMethod("Field - addUnit", this, parameters);
+		Skeleton.callMethod("addUnit", this, parameters);
+		Skeleton.returnMethod("addUnit", this, parameters);
 		return false;
 	}
 	
 	public void removeUnit(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Field - removeUnit", this, parameters);
-		Skeleton.returnMethod("Field - removeUnit", this, parameters);
+		Skeleton.callMethod("removeUnit", this, parameters);
+		Skeleton.returnMethod("removeUnit", this, parameters);
 		containedUnit = null;
 	}
 	
@@ -82,8 +82,8 @@ public abstract class Field {
 			}
 		}
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Field - addNeighbour", this, parameters);
-		Skeleton.returnMethod("Field - addNeighbour", this, parameters);
+		Skeleton.callMethod("addNeighbour", this, parameters);
+		Skeleton.returnMethod("addNeighbour", this, parameters);
 		
 	}
 	
