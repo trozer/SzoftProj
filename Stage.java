@@ -171,7 +171,7 @@ public class Stage
  */                   case 'c':
                         if(table[i].length == 5)    //connection, gate sor, gate oszlop, scale sor, scale oszlop
                         {
-                            fields[(int)(table[i][3])][(int)(table[i][4])].setGate(fieldOni1i2);
+                            (Scale)(fields[(int)(table[i][3])][(int)(table[i][4])]).setGate(fieldOni1i2);
                         }
                         else
                         {
