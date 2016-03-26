@@ -1,4 +1,4 @@
-package szoftProj;
+package SzoftProj;
 
 import java.awt.Color;
 import java.util.ArrayList;
