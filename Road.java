@@ -8,7 +8,8 @@ public class Road extends Field {
 
 	protected Map<Direction, Field> neighbours;
 	protected Unit containedUnit;
-
+	
+	
 	// -------Metódusok---------
 
 	public Road() {
@@ -18,7 +19,7 @@ public class Road extends Field {
 	public void doo(Player player){
 		player.getAction();
 		
-		switch (ewAction.getType()) {
+		switch (newAction.getType()) {
         case MOVE:
         		if (containedUnit != null){
 				containedUnit.accept(this, player);
@@ -42,7 +43,7 @@ public class Road extends Field {
 
 	@Override
 	public void doo(Bullet bullet) {
-		switch (newaction.getType()) {
+		switch (newAction.getType()) {
         case MOVE:
         	bullet.step(this);
         	break;

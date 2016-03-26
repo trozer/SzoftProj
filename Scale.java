@@ -28,7 +28,7 @@ public class Scale extends Field {
 	public void doo(Player player){
 		player.getAction();
 		
-		switch (ewAction.getType()) {
+		switch (newAction.getType()) {
         case MOVE:
 		
 		if (containedUnit != null){
