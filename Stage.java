@@ -104,22 +104,22 @@ public class Stage
                             //field - player kapcsolat
                             fieldOntablei1i2.addUnit(player);
 
-                           /* if(table[i][4] == '+')      //ha van nála doboz, akkor létrehozzuk azt
+                            if(table[i][4] == '+')      //ha van nála doboz, akkor létrehozzuk azt
                             {
                                 Box box = new Box(fieldOntablei1i2);
                                 Skeleton.registerHashCode(box.hashCode(), "box");
                                 player.grabBox(box);
-                            }*/
+                            }
                         }
-/*                        else
+                        else
                         {
                             System.out.println("Hiba: a player információ sora nem 5 karakter hosszú");
                         }
- */                       break;
- /*                   case 'B':           //Bullet információ
+                        break;
+                    case 'B':           //Bullet információ
                         if(table[i].length == 5)
                         {
-                            Action moveAction = new Action(ActionType.Move,this.charToDirection(table[i][3]), this.charToColor(table[i][4]));
+                            Action moveAction = new Action(ActionType.MOVE,this.charToDirection(table[i][3]), this.charToColor(table[i][4]));
                             Skeleton.registerHashCode(moveAction.hashCode(), "action");
 
                             Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
@@ -150,6 +150,8 @@ public class Stage
                     case 'z':           //ZPM információ
                         if(table[i].length == 3)
                         {
+                            Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
+
                             ZPM zpm = new ZPM(fieldOntablei1i2);
                             Skeleton.registerHashCode(zpm.hashCode(), "zpm");
                             fieldOntablei1i2.addUnit(zpm);
@@ -159,7 +161,7 @@ public class Stage
                             System.out.println("Hiba: a zpm információ sora nem 3 karakter hosszú");
                         }
                         break;
-                    case 'p':
+ /*                   case 'p':
                         if(table[i].length == 3)    //csak 1 kijárat nélküli portál van
                         {
                             Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
@@ -246,11 +248,17 @@ public class Stage
     {
         if(color == 'b')
         {
-            return Color.blue;
+            Color c = Color.blue;
+            Skeleton.registerHashCode(c.hashCode(), "color");
+
+            return c;
         }
         else if(color == 'y')
         {
-            return Color.yellow;
+            Color c = Color.yellow;
+            Skeleton.registerHashCode(c.hashCode(), "color");
+
+            return c;
         }
         System.out.println("Hiba: color nem jó karakter");
         return Color.black;

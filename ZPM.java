@@ -1,6 +1,6 @@
 package szoftProj;
 
-public class ZPM{
+public class ZPM extends Unit{
     protected boolean dead = false;
     protected Field currentField;
 
