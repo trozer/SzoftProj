@@ -12,8 +12,11 @@ public class Stage
 
     public Stage (int allZPM)
     {
+        Object allZPMObj = new Object();
+        Skeleton.registerHashCode(allZPMObj.hashCode(),"allZPM");
+
         List<Object> parameters = new ArrayList<Object>();
-        parameters.add(allZPM);
+        parameters.add(allZPMObj);
         parameters.add(Skeleton.getEmpty()); //utolsó paraméter = visszatérési érték
         Skeleton.callMethod("Stage - konstruktor", this, parameters);
 
@@ -68,7 +71,7 @@ public class Stage
                             Skeleton.registerHashCode(r.hashCode(), "road");
                             fields[i][j] = r;
                             break;
-/*                        case 'a':
+                        case 'a':
                             Field a = new Abyss();
                             Skeleton.registerHashCode(a.hashCode(), "abyss");
                             fields[i][j] = a;
@@ -83,7 +86,7 @@ public class Stage
                             Skeleton.registerHashCode(pw.hashCode(), "portalwall");
                             fields[i][j] = pw;
                             break;
-*/                        case 's':
+                        case 's':
                             Field s = new Scale();
                             Skeleton.registerHashCode(s.hashCode(), "scale");
                             fields[i][j] = s;
