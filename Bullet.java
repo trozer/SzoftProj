@@ -35,8 +35,11 @@ public class Bullet extends ActionUnit{
         dead = true;
     }
 
+    public void accept(Player launcher, Field target) {}
+    public void accept(Field launcher, Player target) {}
+
     public void action(){
-        
+
     }
 
 }
