@@ -86,11 +86,11 @@ public class Stage
             }
             else if (readingState == 1) //ha már unit információt olvasunk be, akkor a sorok kezdőkaraterét viszgáljuk
             {
-/*                Field fieldOni1i2 = fields[(int)(table[i][1])][(int)(table[i][2])]; //olvashatóság: a sornak mindig az 1-es és 2-es karaktere a pozíció
+                Field fieldOni1i2 = fields[(int)(table[i][1])][(int)(table[i][2])]; //olvashatóság: a sornak mindig az 1-es és 2-es karaktere a pozíció
 
                 switch (table[i][0])
                 {
-                    case 'P':           //Player információ
+/*                    case 'P':           //Player információ
                         if(table[i].length == 5) //a helyesen paraméterezett player sor 5 elemű (P, x, y, dir, box)
                         {
                             Player player = new Player(allZPM,this.charToDirection(table[i][3]),fieldOni1i2,game);
@@ -168,12 +168,22 @@ public class Stage
                         {
                             System.out.println("Hiba: a portál kapcsolat információ sora nem 3 vagy 5 karakter hosszú");
                         }
+ */                   case 'c':
+                        if(table[i].length == 5)    //connection, gate sor, gate oszlop, scale sor, scale oszlop
+                        {
+                            fields[(int)(table[i][3])][(int)(table[i][4])].setGate(fieldOni1i2);
+                        }
+                        else
+                        {
+                            System.out.println("Hiba: a gate-scale kapcsolat információ sora nem 5 karakter hosszú");
+                        }
 
                     default:
                         System.out.println("Hiba: valamelyik Unit információ sora nem megfelelően kezdődik");
                         break;
+
                 }
-*/            }
+            }
             else
             {
                 System.out.println("Hiba: readingState nem 0 vagy 1");
