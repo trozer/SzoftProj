@@ -542,8 +542,8 @@ public class Skeleton {
 	
 	public static void callMethod(String methodName, Object called, List<Object> parameters) {
 		callDir = "->";
+		deepness++;
 		printMethod(methodName, called, parameters);
-		deepness++;	
 	}
 	
 	public static void printMethod(String methodName, Object called, List<Object> parameters){
@@ -551,9 +551,14 @@ public class Skeleton {
 		for(int i = 0; i < deepness; i++) method += "\t";
 		method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
 		Object last = parameters.get(parameters.size() - 1);
+		Object noComma = null;
+		if(parameters.size() > 1)
+			noComma = parameters.get(parameters.size() - 2);
 		for(Object i : parameters){
-			if(i != last);
+			if(i != last)
 				method += objectName.get(i.hashCode());
+			if(i != noComma)
+				method += ", ";
 		}
 		method += ")";
 		method += " : " + objectName.get(last.hashCode());
