@@ -16,6 +16,7 @@ public abstract class Field {
 		neighbours.put(Direction.SOUTH, null);
 		neighbours.put(Direction.WEST, null);
 		neighbours.put(Direction.EAST, null);
+		containedUnit = null;
 	}
 	
 	public abstract void doo(Player player);

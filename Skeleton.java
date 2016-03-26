@@ -550,14 +550,21 @@ public class Skeleton {
 		if(outputEnabled == true){
 			String method = "-";
 			for(int i = 0; i < deepness; i++) method += "\t";
-			method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
+			if(called != null)
+				method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
+			else
+				method += callDir + "[:" + "null" + "]." + methodName + "(";
 			Object last = parameters.get(parameters.size() - 1);
 			Object noComma = null;
 			if(parameters.size() > 1){
 				noComma = parameters.get(parameters.size() - 2);
 				for(Object i : parameters){
-					if(i != last)
-						method += objectName.get(i.hashCode());
+					if(i != last){
+						if(i != null)
+							method += objectName.get(i.hashCode());
+						else
+							method += "null";
+					}
 					if(i != noComma && i != last)
 						method += ", ";
 				}

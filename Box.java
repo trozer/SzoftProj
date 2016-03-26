@@ -1,6 +1,6 @@
 package szoftProj;
 
-public class Box{
+public class Box extends Unit{
     protected boolean dead = false;
     protected Field currentField;
 

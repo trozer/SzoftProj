@@ -6,19 +6,17 @@ import java.util.Map;
 public class Road extends Field {
 
 	// --------Attribútumok--------
-
-	protected Map<Direction, Field> neighbours;
-	protected Unit containedUnit;
 	
 	
 	// -------Metódusok---------
 
 	public Road() {
+		super();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(neighbours);
 		parameters.add(containedUnit);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Road - konstruktor", this, parameters);
+		Skeleton.callMethod("konstruktor", null, parameters);
 	}
 
 	@Override
