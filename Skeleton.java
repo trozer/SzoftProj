@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
+import java.awt.Color;
 
 public class Skeleton {
 	private static int deepness = 0;
 	private static boolean outputEnabled = false;
 	private static HashMap<Integer, String> objectName  = new HashMap<Integer, String>();
 	private static String callDir = "->";
-	//private static  Player player;
+	private static  Player player;
+	private static Direction currDir;
 	
 	public static void main(String[] args){
 		consoleMenu();
@@ -174,24 +176,28 @@ public class Skeleton {
 				case 'e':
 				{
 					char[][] table = {{'r'},{'>'},{'P','0','0','s','-'}};
+					currDir = Direction.SOUTH;
 					start(table,2);
 				}
 				break;
 				case 'd':
 				{
 					char[][] table = {{'r'},{'>'},{'P','0','0','n','-'}};
+					currDir = Direction.NORTH;
 					start(table,2);
 				}
 				break;
 				case 'k':
 				{
 					char[][] table = {{'r'},{'>'},{'P','0','0','w','-'}};
+					currDir = Direction.WEST;
 					start(table,2);
 				}
 				break;
 				case 'n':
 				{
 					char[][] table = {{'r'},{'>'},{'P','0','0','e','-'}};
+					currDir = Direction.EAST;
 					start(table,2);
 				}
 				break;
@@ -511,10 +517,10 @@ public class Skeleton {
 			player.move();
 		break;
 		case 2:
-			player.turn();
+			player.turn(currDir);
 		break;
 		case 3:
-			player.shoot();
+			player.shoot(Color.BLUE);
 		break;
 		case 4:
 			player.grab();
@@ -557,7 +563,7 @@ public class Skeleton {
 		objectName = new HashMap<Integer, String>();
 	}
 	
-	public static void addPlayer(Player player) { this.player = player; }
+	public static void addPlayer(Player gplayer) { player = gplayer; }
 	
 	
 }
