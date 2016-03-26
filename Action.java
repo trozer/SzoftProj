@@ -26,24 +26,24 @@ public class Action {
 	public ActionType getType(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(type);
-		Skeleton.callMethod("getType()", this, parameters);
-		Skeleton.returnMethod("getType()", this, parameters);
+		Skeleton.callMethod("getType", this, parameters);
+		Skeleton.returnMethod("getType", this, parameters);
 		return type;
 	}
 	
 	public Color getColor(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(color);
-		Skeleton.callMethod("getColor()", this, parameters);
-		Skeleton.returnMethod("getColor()", this, parameters);
+		Skeleton.callMethod("getColor", this, parameters);
+		Skeleton.returnMethod("getColor", this, parameters);
 		return color;
 	}
 	
 	public Direction getDirection(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(direction);
-		Skeleton.callMethod("getDirection()", this, parameters);
-		Skeleton.returnMethod("getDirection()", this, parameters);
+		Skeleton.callMethod("getDirection", this, parameters);
+		Skeleton.returnMethod("getDirection", this, parameters);
 		return direction;
 	}
 }

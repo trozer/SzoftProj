@@ -11,11 +11,11 @@ public abstract class ActionUnit extends Unit{
 	public void move(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("move()", this, parameters);
+		Skeleton.callMethod("move", this, parameters);
 		
 		nextAction = new Action(ActionType.MOVE, currentDirection, null);
 		
-		Skeleton.returnMethod("move()", this, parameters);
+		Skeleton.returnMethod("move", this, parameters);
 	}
 	
 	//Forgas tipusu action-t hoz letre.
@@ -23,11 +23,11 @@ public abstract class ActionUnit extends Unit{
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(direction);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("turn(Direction direction)", this, parameters);
+		Skeleton.callMethod("turn", this, parameters);
 		
 		nextAction = new Action(ActionType.TURN, direction, null);
 		
-		Skeleton.returnMethod("turn(Direction direction)", this, parameters);
+		Skeleton.returnMethod("turn", this, parameters);
 	}
 	
 	
@@ -35,37 +35,37 @@ public abstract class ActionUnit extends Unit{
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(color);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("shoot(Color color)", this, parameters);
-		Skeleton.returnMethod("shoot(Color color)", this, parameters);
+		Skeleton.callMethod("shoot", this, parameters);
+		Skeleton.returnMethod("shoot", this, parameters);
 	}
 	
 	public void grab(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("grab()", this, parameters);
-		Skeleton.returnMethod("grab()", this, parameters);
+		Skeleton.callMethod("grab", this, parameters);
+		Skeleton.returnMethod("grab", this, parameters);
 	}
 	
 	public void drop(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("drop()", this, parameters);
-		Skeleton.returnMethod("drop()", this, parameters);
+		Skeleton.callMethod("drop", this, parameters);
+		Skeleton.returnMethod("drop", this, parameters);
 	}
 	
 	public void step(Field target){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(target);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("step(Field target)", this, parameters);
-		Skeleton.returnMethod("step(Field target)", this, parameters);
+		Skeleton.callMethod("step", this, parameters);
+		Skeleton.returnMethod("step", this, parameters);
 	}
 	
 	public Action getAction(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(nextAction);
-		Skeleton.callMethod("getAction()", this, parameters);
-		Skeleton.returnMethod("getAction()", this, parameters);
+		Skeleton.callMethod("getAction", this, parameters);
+		Skeleton.returnMethod("getAction", this, parameters);
 		
 		return nextAction;
 	}

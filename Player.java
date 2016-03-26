@@ -33,7 +33,7 @@ public class Player extends ActionUnit{
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(zpm);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("addZPM(ZPM zpm)", this, parameters);
+		Skeleton.callMethod("addZPM", this, parameters);
 		
 		this.zpm.add(zpm);
 		allZPM--;
@@ -41,7 +41,7 @@ public class Player extends ActionUnit{
 			game.win();
 		}
 		
-		Skeleton.returnMethod("addZPM(ZPM zpm)", this, parameters);
+		Skeleton.returnMethod("addZPM", this, parameters);
 	}
 	
 	//Doboz felvetele csak akkor, ha meg nincs nala doboz.
@@ -50,8 +50,8 @@ public class Player extends ActionUnit{
 			ArrayList<Object> parameters = new ArrayList<Object>();
 			parameters.add(box);
 			parameters.add(true);
-			Skeleton.callMethod("grabBox(Box box)", this, parameters);
-			Skeleton.returnMethod("grabBox(Box box)", this, parameters);
+			Skeleton.callMethod("grabBox", this, parameters);
+			Skeleton.returnMethod("grabBox", this, parameters);
 			
 			this.box = box;
 			return true;
@@ -61,8 +61,8 @@ public class Player extends ActionUnit{
 			ArrayList<Object> parameters = new ArrayList<Object>();
 			parameters.add(box);
 			parameters.add(false);
-			Skeleton.callMethod("grabBox(Box box)", this, parameters);
-			Skeleton.returnMethod("grabBox(Box box)", this, parameters);
+			Skeleton.callMethod("grabBox", this, parameters);
+			Skeleton.returnMethod("grabBox", this, parameters);
 			
 			return false;
 		}
@@ -72,11 +72,11 @@ public class Player extends ActionUnit{
 	public void dropBox(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("dropBox()", this, parameters);
+		Skeleton.callMethod("dropBox", this, parameters);
 		
 		this.box = null;
 		
-		Skeleton.returnMethod("dropBox()", this, parameters);
+		Skeleton.returnMethod("dropBox", this, parameters);
 	}
 	
 	//Loves tipusu action-t hoz letre a parameterkent kapott szinnel.
@@ -84,45 +84,45 @@ public class Player extends ActionUnit{
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(color);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("shoot(Color color)", this, parameters);
+		Skeleton.callMethod("shoot", this, parameters);
 		
 		nextAction = new Action(ActionType.SHOOT, currentDirection, color);
 		
-		Skeleton.returnMethod("shoot(Color color)", this, parameters);
+		Skeleton.returnMethod("shoot", this, parameters);
 	}
 	
 	//Felvetel tipusu action-t hoz letre.
 	public void grab(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("grab()", this, parameters);
+		Skeleton.callMethod("grab", this, parameters);
 		
 		nextAction = new Action(ActionType.GRAB, currentDirection, null);
 		
-		Skeleton.returnMethod("grab()", this, parameters);
+		Skeleton.returnMethod("grab", this, parameters);
 	}
 	
 	//Lerakas tipus action-t hoz letre.
 	public void drop(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("drop()", this, parameters);
+		Skeleton.callMethod("drop", this, parameters);
 		
 		nextAction = new Action(ActionType.DROP, currentDirection, null);
 		
-		Skeleton.returnMethod("drop()", this, parameters);
+		Skeleton.returnMethod("drop", this, parameters);
 	}
 	
 	//Meghal a jatekos, veget er a jatek.
 	public void kill(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("kill()", this, parameters);
+		Skeleton.callMethod("kill", this, parameters);
 		
 		dead = true;
 		game.lose();
 		
-		Skeleton.returnMethod("kill()", this, parameters);
+		Skeleton.returnMethod("kill", this, parameters);
 	}
 	
 	//Eltavolitja magat a jelenlegi mezorol, majd hozzaadja magat a parameterkent kapott uj mezohoz,
@@ -131,20 +131,20 @@ public class Player extends ActionUnit{
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(target);
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("step(Field target)", this, parameters);
+		Skeleton.callMethod("step", this, parameters);
 		
 		currentField.removeUnit();
 		target.addUnit(this);
 		currentField = target;
 		
-		Skeleton.returnMethod("step(Field target)", this, parameters);
+		Skeleton.returnMethod("step", this, parameters);
 	}
 	//A nextAction alapjan csinal valamit.
 	public void action(){
 		
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("action()", this, parameters);
+		Skeleton.callMethod("action", this, parameters);
 		
 		//Ha move vagy grab, akkor a megfelelo iranyban levo szomszedos mezo doo-jat hivja meg.
 		if (nextAction.getType() == ActionType.MOVE ||
@@ -166,7 +166,7 @@ public class Player extends ActionUnit{
 			game.addUnit(newBullet);
 		}
 		
-		Skeleton.returnMethod("action()", this, parameters);
+		Skeleton.returnMethod("action", this, parameters);
 	}
 	
 }
