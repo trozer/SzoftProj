@@ -28,14 +28,23 @@ public class Portal {
 	}
 
 	public boolean amIPortal(Field field) {
-		return false;
+		return (blue != null || yellow != null);
 	}
 
 	public void createPortal(Field field, Color color) {
-
+		if (color == Color.BLUE) {
+			blue = field;
+		} else if (color == Color.YELLOW) {
+			yellow = field;
+		}
 	}
 
 	public Field getPair(Field field) {
+		if (blue == field) {
+			return yellow;
+		} else if (yellow == field) {
+			return blue;
+		}
 		return null;
 	}
 
