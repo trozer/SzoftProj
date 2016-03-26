@@ -4,13 +4,11 @@ public class ZPM{
     protected boolean dead = false;
     protected Field currentField;
 
-    public void kill(){
-        dead = true;
-    }
+    public ZPM(Field currentfield) {}
 
-    public boolean isDead(){
-        return dead;
-    }
+    public void kill() { dead = true; }
+
+    public boolean isDead() { return dead; }
 
     public void action() {}
     public void accept(Player launcher, Field target) {}
