@@ -43,6 +43,7 @@ public class Stage
             if(table[i][0] == '>')  //tábla-unit információ szétválasztása
             {
                 readingState = 1;
+                continue;
             }
             if(readingState == 0) {     //táblát olvasunk: minden sor minden karakterét egyesével: Fieldek létrehozása
                 for (int j = 0; j < table[i].length; ++j) {
@@ -82,7 +83,6 @@ public class Stage
                             break;
                     }
                 }
-                break;
             }
             else if (readingState == 1) //ha már unit információt olvasunk be, akkor a sorok kezdőkaraterét viszgáljuk
             {
