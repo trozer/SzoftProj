@@ -17,34 +17,38 @@ public class Road extends Field {
 	@Override
 	public void doo(Player player){
 		player.getAction();
-		//newAction.getType();
-		//move
+		
 		switch (ewAction.getType()) {
         case MOVE:
         		if (containedUnit != null){
 				containedUnit.accept(this, player);
         		}
-        		else
-        			if (containedUnit == null)
-        				player.step(this);
+        		if (containedUnit == null)
+        			player.step(this);
         		break;
         
         case GRAB:
         		if (containedUnit != null){
-        			containedUnit.accept(this, player);
+        			containedUnit.accept(this, player);}
+        		break;
+        		
+        default:
+        	//TODO
+        	break;
 		}	
-				
-		//grab
-		/*if (containedUnit != null){
-			containedUnit.accept(this, player);
-		}*/
 		
 		//drop -adunit intézi
 	}
 
 	@Override
 	public void doo(Bullet bullet) {
-		bullet.step(this);
+		switch (newaction.getType()) {
+        case MOVE:
+        	bullet.step(this);
+        	break;
+        default:
+        	break;
+		}
 	}
 
 	@Override

@@ -27,26 +27,42 @@ public class Scale extends Field {
 	@Override
 	public void doo(Player player){
 		player.getAction();
-		//newAction.getType();
-		//move
+		
+		switch (ewAction.getType()) {
+        case MOVE:
+		
 		if (containedUnit != null){
 				containedUnit.accept(this, player);
 		}
-		else
-			if (containedUnit == null){
+		if (containedUnit == null){
 				player.step(this);
 				myGate.open();
 			}
-		//grab
-		/*if (containedUnit != null){
-			containedUnit.accept(this, player);
+		break;
+		
+        case GRAB:
+        	if (containedUnit != null){
+    			containedUnit.accept(this, player);
+    		}
+    		myGate.close();
+    		break;
+    		
+        default:
+        	//TODO
+        	break;
 		}
-		myGate.close();*/
+		
 	}
 	
 	@Override
 	public void doo(Bullet bullet){
-		bullet.step(this);
+		switch (newAction.getType()) {
+        case MOVE:
+        	bullet.step(this);
+        	break;
+        default:
+        	break;
+		}
 	}
 	
 	

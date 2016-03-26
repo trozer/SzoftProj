@@ -30,29 +30,43 @@ public class Gate extends Field {
 	@Override
 	public void doo(Player player){
 		player.getAction();
-		//newAction.getType();
-		//move
-		if (containedUnit != null){
+		
+		switch (newAction.getType()) {
+        case MOVE:
+        	if (containedUnit != null && opened == true){
 				containedUnit.accept(this, player);
-		}
-		else
-			if (containedUnit == null){
+        	}
+        	if (containedUnit == null && opened == true){
 				player.step(this);
 			}
+        	break;
 		
-		//grab
-		/*if (containedUnit != null){
-			containedUnit.accept(this, player);
-		}*/
+        case GRAB:
+        	if (containedUnit != null){
+    			containedUnit.accept(this, player);
+        	}
+        	break;
+        default:
+        	//TODO
+        	break;
+		}
+		
+		
 	}
 	
 	@Override
 	public void doo(Bullet bullet){
-		if (opened == true){
-		bullet.step(this);
+		switch (newAction.getType()) {
+        case MOVE:
+        	if (opened == true){
+        		bullet.step(this);
+        	}
+        	else
+        		containedUnit.kill();
+        	break;
+        default:
+        	break;
 		}
-		else
-			containedUnit.kill();
 	}
 	
 	@Override
