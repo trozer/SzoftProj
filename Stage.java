@@ -35,9 +35,9 @@ public class Stage
         Skeleton.callMethod("init", this, parameters);
 
         //Portal létrehozása
-/*        Portal portal = new Portal();*
+        Portal portal = new Portal();
         Skeleton.registerHashCode(portal.hashCode(), "portal");
-*/
+
         //mezők és unitok létrehozása
         Field[][] fields = new Field[0][];   //ideiglenes tároló a Fieldeknek
 
@@ -132,9 +132,12 @@ public class Stage
                         }
                         break;
                     case 'B':           //Bullet információ
-                        if(table[i].length == 5)
+                        if(table[i].length == 4)
                         {
-                            Action moveAction = new Action(ActionType.MOVE,this.charToDirection(table[i][3]), this.charToColor(table[i][4]));
+                            Color bulletColor = Color.blue;
+                            Skeleton.registerHashCode(bulletColor.hashCode(), "color");
+
+                            Action moveAction = new Action(ActionType.MOVE, this.charToDirection(table[i][3]), bulletColor);
                             Skeleton.registerHashCode(moveAction.hashCode(), "action");
 
                             Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
@@ -146,7 +149,7 @@ public class Stage
                         }
                         else
                         {
-                            System.out.println("Hiba: a bullet információ sora nem 5 karakter hosszú");
+                            System.out.println("Hiba: a bullet információ sora nem 4 karakter hosszú");
                         }
                         break;
                     case 'b':           //box információ
@@ -176,7 +179,7 @@ public class Stage
                             System.out.println("Hiba: a zpm információ sora nem 3 karakter hosszú");
                         }
                         break;
- /*                   case 'p':
+                    case 'p':
                         if(table[i].length == 3)    //csak 1 kijárat nélküli portál van
                         {
                             Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
@@ -194,7 +197,7 @@ public class Stage
                         {
                             System.out.println("Hiba: a portál kapcsolat információ sora nem 3 vagy 5 karakter hosszú");
                         }
- */                   case 'c':
+                    case 'c':
                     if(table[i].length == 5)    //connection, gate sor, gate oszlop, scale sor, scale oszlop
                     {
                         Field fieldOntablei1i2 = fields[Character.getNumericValue(table[i][1])][Character.getNumericValue(table[i][2])];
@@ -259,26 +262,6 @@ public class Stage
         }
 
         return Direction.NONE;  //default return
-    }
-
-    private Color charToColor(char color) //segédfüggvény: karakterből annak betűje alapján színt csinál
-    {
-        if(color == 'b')
-        {
-            Color c = Color.blue;
-            Skeleton.registerHashCode(c.hashCode(), "color");
-
-            return c;
-        }
-        else if(color == 'y')
-        {
-            Color c = Color.yellow;
-            Skeleton.registerHashCode(c.hashCode(), "color");
-
-            return c;
-        }
-        System.out.println("Hiba: color nem jó karakter");
-        return Color.black;
     }
 
     //lefuttat egy kört
