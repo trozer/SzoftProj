@@ -28,7 +28,7 @@ public class Scale extends Field {
 	public void doo(Player player){
 		player.getAction();
 		
-		switch (newAction.getType()) {
+		switch (player.getAction().getType()) {
         case MOVE:
 		
 		if (containedUnit != null){
@@ -56,13 +56,13 @@ public class Scale extends Field {
 	
 	@Override
 	public void doo(Bullet bullet){
-		switch (newAction.getType()) {
+		/*switch (bullet.getAction().getType()) {
         case MOVE:
         	bullet.step(this);
         	break;
         default:
         	break;
-		}
+		}*/
 	}
 	
 	

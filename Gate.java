@@ -31,7 +31,7 @@ public class Gate extends Field {
 	public void doo(Player player){
 		player.getAction();
 		
-		switch (newAction.getType()) {
+		switch (player.getAction().getType()) {
         case MOVE:
         	if (containedUnit != null && opened == true){
 				containedUnit.accept(this, player);
@@ -56,7 +56,7 @@ public class Gate extends Field {
 	
 	@Override
 	public void doo(Bullet bullet){
-		switch (newAction.getType()) {
+		/*switch (bullet.getAction().getType()) {
         case MOVE:
         	if (opened == true){
         		bullet.step(this);
@@ -66,7 +66,7 @@ public class Gate extends Field {
         	break;
         default:
         	break;
-		}
+		}*/
 	}
 	
 	@Override

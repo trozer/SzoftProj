@@ -18,8 +18,7 @@ public class Road extends Field {
 	@Override
 	public void doo(Player player){
 		player.getAction();
-		
-		switch (newAction.getType()) {
+		switch (player.getAction().getType()) {
         case MOVE:
         		if (containedUnit != null){
 				containedUnit.accept(this, player);
@@ -43,13 +42,13 @@ public class Road extends Field {
 
 	@Override
 	public void doo(Bullet bullet) {
-		switch (newAction.getType()) {
+		/*switch (bullet.getAction().getType()) {
         case MOVE:
         	bullet.step(this);
         	break;
         default:
         	break;
-		}
+		}*/
 	}
 
 	@Override
