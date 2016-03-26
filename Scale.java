@@ -7,8 +7,8 @@ public class Scale extends Field {
 
 	//--------Attribútumok--------
 	
-	protected Map<Direction, Field> neighbours;
-	protected Unit containedUnit;
+	//protected Map<Direction, Field> neighbours;
+	//protected Unit containedUnit;
 	private Gate myGate;
 	
 	//-------Metódusok---------
@@ -20,11 +20,9 @@ public class Scale extends Field {
 	
 	public Scale(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(neighbours);
-		parameters.add(containedUnit);
-		parameters.add(myGate);
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - konstruktor", this, parameters);
+		Skeleton.returnMethod("Scale - konstruktor", this, parameters);
 	}
 	
 	public void setGate(Gate gate){
@@ -34,6 +32,7 @@ public class Scale extends Field {
 		else System.out.println("setGate: már van beállítva gate!");
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - setGate", this, parameters);
+		Skeleton.returnMethod("Scale - setGate", this, parameters);
 	}
 	
 	@Override
@@ -54,6 +53,7 @@ public class Scale extends Field {
 			}
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - doo-player-MOVE", this, parameters);
+		Skeleton.returnMethod("Scale - doo-player-MOVE", this, parameters);
 		break;
 		
         case GRAB:
@@ -63,12 +63,14 @@ public class Scale extends Field {
     		myGate.close();
     		parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Scale - doo-player-GRAB", this, parameters);
+    		Skeleton.returnMethod("Scale - doo-player-GRAB", this, parameters);
     		break;
     		
         default:
         	//TODO
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Scale - doo-player-default", this, parameters);
+    		Skeleton.returnMethod("Scale - doo-player-default", this, parameters);
         	break;
 		}
 		
@@ -83,10 +85,12 @@ public class Scale extends Field {
         	bullet.step(this);
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Scale - doo-bullet-MOVE", this, parameters);
+    		Skeleton.returnMethod("Scale - doo-bullet-MOVE", this, parameters);
         	break;
         default:
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Scale - doo-bullet-default", this, parameters);
+    		Skeleton.returnMethod("Scale - doo-bullet-default", this, parameters);
         	break;
 		}
 	}
@@ -101,11 +105,13 @@ public class Scale extends Field {
 			myGate.open();
 			parameters.add("True");
     		Skeleton.callMethod("Scale - addUnit", this, parameters);
+    		Skeleton.returnMethod("Scale - addUnit", this, parameters);
 			return true;
 		}
 		else
 			parameters.add("False");
 			Skeleton.callMethod("Scale - addUnit", this, parameters);
+			Skeleton.returnMethod("Scale - addUnit", this, parameters);
 			return false;
 	}
 	
@@ -116,5 +122,6 @@ public class Scale extends Field {
 		myGate.close();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - removeUnit", this, parameters);
+		Skeleton.returnMethod("Scale - removeUnit", this, parameters);
 	}
 }

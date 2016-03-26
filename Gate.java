@@ -8,18 +8,16 @@ public class Gate extends Field {
 	//--------Attribútumok--------
 	
 	private boolean opened;
-	protected Map<Direction, Field> neighbours;
-	protected Unit containedUnit;
+	//protected Map<Direction, Field> neighbours;
+	//protected Unit containedUnit;
 	
 	//-------Metódusok---------
 	
 	public Gate(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(opened);
-		parameters.add(neighbours);
-		parameters.add(containedUnit);
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Gate - konstruktor", this, parameters);
+		Skeleton.returnMethod("Gate - konstruktor", this, parameters);
 	}
 	
 	public void open(){
@@ -27,6 +25,7 @@ public class Gate extends Field {
 		opened = true;
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Gate - open", this, parameters);
+		Skeleton.returnMethod("Gate - open", this, parameters);
 	}
 	
 	public void close(){
@@ -36,6 +35,7 @@ public class Gate extends Field {
 		containedUnit.kill();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Gate - close", this, parameters);
+		Skeleton.returnMethod("Gate - close", this, parameters);
 		}
 	}
 	
@@ -56,6 +56,7 @@ public class Gate extends Field {
 			}
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Gate - doo-player-MOVE", this, parameters);
+    		Skeleton.returnMethod("Gate - doo-player-MOVE", this, parameters);
         	break;
 		
         case GRAB:
@@ -64,11 +65,13 @@ public class Gate extends Field {
         	}
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Gate - doo-player-GRAB", this, parameters);
+    		Skeleton.returnMethod("Gate - doo-player-GRAB", this, parameters);
         	break;
         default:
         	//TODO
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Gate - doo-player-default", this, parameters);
+    		Skeleton.returnMethod("Gate - doo-player-default", this, parameters);
         	break;
 		}
 		
@@ -88,10 +91,12 @@ public class Gate extends Field {
         		containedUnit.kill();
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Gate - doo-bullet-MOVE", this, parameters);
+    		Skeleton.returnMethod("Gate - doo-bullet-MOVE", this, parameters);
         	break;
         default:
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Gate - doo-bullet-defalt", this, parameters);
+    		Skeleton.returnMethod("Gate - doo-bullet-defalt", this, parameters);
         	break;
 		}
 	}
@@ -104,11 +109,13 @@ public class Gate extends Field {
 			containedUnit = unit;
 			parameters.add("True");
     		Skeleton.callMethod("Gate - addUnit", this, parameters);
+    		Skeleton.returnMethod("Gate - addUnit", this, parameters);
 			return true;
 		}
 		else
 			parameters.add("False");
 		Skeleton.callMethod("Gate - addUnit", this, parameters);
+		Skeleton.returnMethod("Gate - addUnit", this, parameters);
 		return false;
 	}
 	

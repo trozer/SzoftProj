@@ -31,12 +31,13 @@ public abstract class Field {
 				
 				parameters.add(entry.getValue());
 				Skeleton.callMethod("Field - getNeighbourInDirection", this, parameters);
-				
+				Skeleton.returnMethod("Field - getNeighbourInDirection", this, parameters);
 				return entry.getValue();
 			}
 		}
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Field - getNeighbourInDirection", this, parameters);
+		Skeleton.returnMethod("Field - getNeighbourInDirection", this, parameters);
 		return null;
 	}
 	
@@ -49,20 +50,22 @@ public abstract class Field {
 			containedUnit = unit;
 			
 			parameters.add("True");
-			Skeleton.callMethod("Field - addTnit", this, parameters);
-			
+			Skeleton.callMethod("Field - addUnit", this, parameters);
+			Skeleton.returnMethod("Field - addUnit", this, parameters);
 			return true;
 		}
 		else
 			parameters.add("False");
 		Skeleton.callMethod("Field - addUnit", this, parameters);
+		Skeleton.returnMethod("Field - addUnit", this, parameters);
 		return false;
 	}
 	
 	public void removeUnit(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Field - reoveUnit", this, parameters);
+		Skeleton.callMethod("Field - removeUnit", this, parameters);
+		Skeleton.returnMethod("Field - removeUnit", this, parameters);
 		containedUnit = null;
 	}
 	
@@ -79,6 +82,7 @@ public abstract class Field {
 		}
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Field - addNeighbour", this, parameters);
+		Skeleton.returnMethod("Field - addNeighbour", this, parameters);
 		
 	}
 	

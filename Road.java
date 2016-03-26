@@ -7,18 +7,17 @@ public class Road extends Field {
 
 	// --------Attribútumok--------
 
-	protected Map<Direction, Field> neighbours;
-	protected Unit containedUnit;
+	//protected Map<Direction, Field> neighbours;
+	//protected Unit containedUnit;
 	
 	
 	// -------Metódusok---------
 
 	public Road() {
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(neighbours);
-		parameters.add(containedUnit);
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Road - konstruktor", this, parameters);
+		Skeleton.returnMethod("Road - konstruktor", this, parameters);
 	}
 
 	@Override
@@ -36,6 +35,7 @@ public class Road extends Field {
         			player.step(this);
         		parameters.add(Skeleton.getEmpty());
         		Skeleton.callMethod("Road - doo-player-MOVE", this, parameters);
+        		Skeleton.returnMethod("Road - doo-player-MOVE", this, parameters);
         		break;
         
         case GRAB:
@@ -43,12 +43,14 @@ public class Road extends Field {
         			containedUnit.accept(this, player);}
         		parameters.add(Skeleton.getEmpty());
         		Skeleton.callMethod("Road - doo-player-GRAB", this, parameters);
+        		Skeleton.returnMethod("Road - doo-player-GRAB", this, parameters);
         		break;
         		
         default:
         	//TODO
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Road - doo-player-default", this, parameters);
+    		Skeleton.returnMethod("Road - doo-player-default", this, parameters);
         	break;
 		}	
 		
@@ -64,10 +66,12 @@ public class Road extends Field {
         	bullet.step(this);
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Road - doo-bullet-MOVE", this, parameters);
+    		Skeleton.returnMethod("Road - doo-bullet-MOVE", this, parameters);
         	break;
         default:
         	parameters.add(Skeleton.getEmpty());
     		Skeleton.callMethod("Road - doo-bullet-default", this, parameters);
+    		Skeleton.returnMethod("Road - doo-bullet-default", this, parameters);
         	break;
 		}
 	}
@@ -80,10 +84,12 @@ public class Road extends Field {
 			containedUnit = unit;
 			parameters.add("True");
     		Skeleton.callMethod("Road - addUnit", this, parameters);
+    		Skeleton.returnMethod("Road - addUnit", this, parameters);
 			return true;
 		} else
 			parameters.add("False");
 			Skeleton.callMethod("Road - addUnit", this, parameters);
+			Skeleton.returnMethod("Road - addUnit", this, parameters);
 			return false;
 	}
 
