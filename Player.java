@@ -69,16 +69,28 @@ public class Player extends ActionUnit{
 		target.addUnit(this);
 		currentField = target;
 	}
-	
+	//A nextAction alapjan csinal valamit.
 	public void action(){
-		//TODO
+		
+		//Ha move vagy grab, akkor a megfelelo iranyban levo szomszedos mezo doo-jat hivja meg.
+		if (nextAction.getType() == ActionType.MOVE ||
+			nextAction.getType() == ActionType.GRAB){
+				currentField.getNeighbourInDirection(currentDirection).doo(this);
+		}
+		//Ha turn, akkor beallitja az uj iranyt.
+		else if (nextAction.getType() == ActionType.TURN){
+			currentDirection = nextAction.getDirection();
+		}
+		//Ha drop, es van nala doboz, akkor megprobalja lerakni a megfelelo szomszedos mezore. Ha sikerult akkor a sajat box null lesz.
+		else if (nextAction.getType() == ActionType.DROP && box != null){
+			boolean success = currentField.getNeighbourInDirection(currentDirection).addUnit(box);
+			if (success) box = null;
+		}
+		//Ha shoot, letrehozzuk a lovedeket es atadjuk a game-nek.
+		else if (nextAction.getType() == ActionType.SHOOT){
+			Bullet newBullet = new Bullet(nextAction, currentField.getNeighbourInDirection(currentDirection));
+			game.addUnit(newBullet);
+		}
 	}
 	
-	public void accept(Player launcher, Field target){
-		//TODO
-	}
-	
-	public void accept(Field launcher, Player target){
-		//TODO
-	}
 }
