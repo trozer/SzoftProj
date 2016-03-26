@@ -171,7 +171,7 @@ public class Stage
  */                   case 'c':
                         if(table[i].length == 5)    //connection, gate sor, gate oszlop, scale sor, scale oszlop
                         {
-                            (Scale)(fields[(int)(table[i][3])][(int)(table[i][4])]).setGate(fieldOni1i2);
+                            ((Scale)(fields[(int)table[i][3]][(int)table[i][4]])).setGate((Gate)fieldOni1i2);
                         }
                         else
                         {
@@ -195,19 +195,19 @@ public class Stage
             for (int j = 0; j < fields[i].length; ++j) {
                 if (i > 0)                       //északi szomszéd
                 {
-                    fields[i][j].addNeighbour(Direction.North, fields[i - 1][j]);
+                    fields[i][j].addNeighbour(Direction.NORTH, fields[i - 1][j]);
                 }
                 if (i < fields.length - 1)       //déli szomszéd
                 {
-                    fields[i][j].addNeighbour(Direction.South, fields[i + 1][j]);
+                    fields[i][j].addNeighbour(Direction.SOUTH, fields[i + 1][j]);
                 }
                 if (j > 0)                       //nyugati szomszéd
                 {
-                    fields[i][j].addNeighbour(Direction.West, fields[i][j - 1]);
+                    fields[i][j].addNeighbour(Direction.WEST, fields[i][j - 1]);
                 }
                 if (j < fields[i].length - 1)    //keleti nyomszéd
                 {
-                    fields[i][j].addNeighbour(Direction.East, fields[i][j + 1]);
+                    fields[i][j].addNeighbour(Direction.EAST, fields[i][j + 1]);
                 }
             }
         }
@@ -218,16 +218,16 @@ public class Stage
     {
         switch (dir)
         {
-            case 'n' : return Direction.North;
-            case 's' : return Direction.South;
-            case 'e' : return Direction.East;
-            case 'w' : return Direction.West;
+            case 'n' : return Direction.NORTH;
+            case 's' : return Direction.SOUTH;
+            case 'e' : return Direction.EAST;
+            case 'w' : return Direction.WEST;
             default:
                 System.out.println("Hiba: dir nem jó karakter");
                 break;
         }
 
-        return Direction.None;  //default return
+        return Direction.NONE;  //default return
     }
 
     private Color charToColor(char color) //segédfüggvény: karakterből annak betűje alapján színt csinál
