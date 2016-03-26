@@ -8,28 +8,40 @@ public class Scale extends Field {
 	
 	protected Map<Direction, Field> neighbours;
 	protected Unit containedUnit;
-	private Gate mygate;
+	private Gate myGate;
 	
 	//-------Metódusok---------
 	
-	public Scale(Gate mygate, Unit containUnit){
+	/*public Scale(Gate mygate, Unit containUnit){
 		this.mygate = mygate;
 		this.containedUnit = containUnit;
-	};
+	}*/
+	
+	public Scale(){}
+	
+	public void setGate(Gate gate){
+		if(myGate == null) myGate = gate;
+		else System.out.println("setGate: már van beállítva gate!");
+	}
 	
 	@Override
 	public void doo(Player player){
 		player.getAction();
 		//newAction.getType();
-		
+		//move
 		if (containedUnit != null){
 				containedUnit.accept(this, player);
 		}
 		else
 			if (containedUnit == null){
 				player.step(this);
-				mygate.open();
+				myGate.open();
 			}
+		//grab
+		/*if (containedUnit != null){
+			containedUnit.accept(this, player);
+		}
+		myGate.close();*/
 	}
 	
 	@Override
@@ -42,7 +54,7 @@ public class Scale extends Field {
 	public boolean addUnit(Unit unit){
 		if (containedUnit == null){
 			containedUnit = unit;
-			mygate.open();
+			myGate.open();
 			return true;
 		}
 		else
@@ -52,6 +64,6 @@ public class Scale extends Field {
 	@Override
 	public void removeUnit(){
 		containedUnit = null;
-		mygate.close();
+		myGate.close();
 	}
 }

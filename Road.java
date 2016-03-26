@@ -11,21 +11,26 @@ public class Road extends Field {
 	
 	//-------Metódusok---------
 	
-	public Road(Unit containUnit){
-		this.containedUnit = containUnit;
-	};
+	public Road(){}
 	
 	@Override
 	public void doo(Player player){
 		player.getAction();
 		//newAction.getType();
-		
+		//move
 		if (containedUnit != null){
 				containedUnit.accept(this, player);
 		}
 		else
 			if (containedUnit == null)
 				player.step(this);
+		
+		//grab
+		/*if (containedUnit != null){
+			containedUnit.accept(this, player);
+		}*/
+		
+		//drop -adunit intézi
 	}
 	
 	@Override

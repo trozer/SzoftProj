@@ -12,10 +12,7 @@ public class Gate extends Field {
 	
 	//-------Metódusok---------
 	
-	public Gate(Unit containUnit){
-		opened = false;
-		this.containedUnit = containUnit;
-	};
+	public Gate(){}
 	
 	public void open(){
 		opened = true;
@@ -28,11 +25,13 @@ public class Gate extends Field {
 		}
 	}
 	
+	
+	
 	@Override
 	public void doo(Player player){
 		player.getAction();
 		//newAction.getType();
-		
+		//move
 		if (containedUnit != null){
 				containedUnit.accept(this, player);
 		}
@@ -40,6 +39,11 @@ public class Gate extends Field {
 			if (containedUnit == null){
 				player.step(this);
 			}
+		
+		//grab
+		/*if (containedUnit != null){
+			containedUnit.accept(this, player);
+		}*/
 	}
 	
 	@Override
@@ -47,6 +51,8 @@ public class Gate extends Field {
 		if (opened == true){
 		bullet.step(this);
 		}
+		else
+			containedUnit.kill();
 	}
 	
 	@Override
