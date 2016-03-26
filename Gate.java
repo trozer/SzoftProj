@@ -54,26 +54,20 @@ public class Gate extends Field {
         	if (containedUnit == null && opened == true){
 				player.step(this);
 			}
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo MOVE", this, parameters);
-    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
 		
         case GRAB:
         	if (containedUnit != null){
     			containedUnit.accept(this, player);
         	}
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo GRAB", this, parameters);
-    		Skeleton.returnMethod("doo GRAB", this, parameters);
         	break;
         default:
         	//TODO
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo default", this, parameters);
-    		Skeleton.returnMethod("doo default", this, parameters);
         	break;
 		}
+		parameters.add(Skeleton.getEmpty());
+		Skeleton.callMethod("doo", this, parameters);
+		Skeleton.returnMethod("doo", this, parameters);
 		
 		
 	}
@@ -89,31 +83,30 @@ public class Gate extends Field {
         	}
         	else
         		containedUnit.kill();
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo MOVE", this, parameters);
-    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
         default:
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo defalt", this, parameters);
-    		Skeleton.returnMethod("doo defalt", this, parameters);
         	break;
 		}
+		parameters.add(Skeleton.getEmpty());
+		Skeleton.callMethod("doo", this, parameters);
+		Skeleton.returnMethod("doo", this, parameters);
 	}
 	
 	@Override
 	public boolean addUnit(Unit unit){
+		Object object = new Object();
+		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
 		if (containedUnit == null && opened == true){
 			containedUnit = unit;
-			parameters.add("True");
+			parameters.add(object);
     		Skeleton.callMethod("addUnit", this, parameters);
     		Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
-			parameters.add("False");
+			parameters.add(object);
 		Skeleton.callMethod("addUnit", this, parameters);
 		Skeleton.returnMethod("addUnit", this, parameters);
 		return false;

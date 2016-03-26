@@ -43,23 +43,23 @@ public abstract class Field {
 	}
 	
 	public boolean addUnit(Unit unit){
-		
+		Object object = new Object();
+		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
 		
 		if (containedUnit == null){
 			containedUnit = unit;
-			
-			parameters.add("True");
+			parameters.add(object);
 			Skeleton.callMethod("addUnit", this, parameters);
 			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
-			parameters.add("False");
-		Skeleton.callMethod("addUnit", this, parameters);
-		Skeleton.returnMethod("addUnit", this, parameters);
-		return false;
+			parameters.add(object);
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
+			return false;
 	}
 	
 	public void removeUnit(){

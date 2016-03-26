@@ -37,27 +37,21 @@ public class Road extends Field {
         		}
         		if (containedUnit == null)
         			player.step(this);
-        		parameters.add(Skeleton.getEmpty());
-        		Skeleton.callMethod("doo MOVE", this, parameters);
-        		Skeleton.returnMethod("doo MOVE", this, parameters);
         		break;
         
         case GRAB:
         		if (containedUnit != null){
         			containedUnit.accept(this, player);}
-        		parameters.add(Skeleton.getEmpty());
-        		Skeleton.callMethod("doo GRAB", this, parameters);
-        		Skeleton.returnMethod("doo GRAB", this, parameters);
         		break;
         		
         default:
         	//TODO
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo default", this, parameters);
-    		Skeleton.returnMethod("doo default", this, parameters);
+        	
         	break;
-		}	
-		
+		}
+		parameters.add(Skeleton.getEmpty());
+		Skeleton.callMethod("doo", this, parameters);
+		Skeleton.returnMethod("doo", this, parameters);
 		//drop -adunit intézi
 	}
 
@@ -68,30 +62,29 @@ public class Road extends Field {
 		switch (bullet.getAction().getType()) {
         case MOVE:
         	bullet.step(this);
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo MOVE", this, parameters);
-    		Skeleton.returnMethod("doo MOVE", this, parameters);
         	break;
         default:
-        	parameters.add(Skeleton.getEmpty());
-    		Skeleton.callMethod("doo-bullet-default", this, parameters);
-    		Skeleton.returnMethod("doo default", this, parameters);
         	break;
 		}
+		parameters.add(Skeleton.getEmpty());
+		Skeleton.callMethod("doo", this, parameters);
+		Skeleton.returnMethod("doo", this, parameters);
 	}
 
 	@Override
 	public boolean addUnit(Unit unit) {
+		Object object = new Object();
+		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
 		if (containedUnit == null) {
 			containedUnit = unit;
-			parameters.add("True");
+			parameters.add(object);
     		Skeleton.callMethod("addUnit", this, parameters);
     		Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		} else
-			parameters.add("False");
+			parameters.add(object);
 			Skeleton.callMethod("addUnit", this, parameters);
 			Skeleton.returnMethod("addUnit", this, parameters);
 			return false;
