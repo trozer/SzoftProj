@@ -6,10 +6,17 @@ public abstract class Field {
 	
 	//--------Attribútumok--------
 	
-	protected Map<Direction, Field> neighbours;
+	protected Map<Direction, Field> neighbours = new TreeMap<Direction, Field>();
 	protected Unit containedUnit;
 	
 	//-------Metódusok---------
+	
+	Field(){
+		neighbours.put(Direction.NORTH, null);
+		neighbours.put(Direction.SOUTH, null);
+		neighbours.put(Direction.WEST, null);
+		neighbours.put(Direction.EAST, null);
+	}
 	
 	public abstract void doo(Player player);
 	public abstract void doo(Bullet bullet);
