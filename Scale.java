@@ -21,8 +21,8 @@ public class Scale extends Field {
 	public Scale(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("konstruktor", this, parameters);
-		Skeleton.returnMethod("konstruktor", this, parameters);
+		Skeleton.callMethod("Scale - konstruktor", this, parameters);
+		Skeleton.returnMethod("Scale - konstruktor", this, parameters);
 	}
 	
 	public void setGate(Gate gate){

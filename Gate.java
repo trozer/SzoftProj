@@ -16,8 +16,8 @@ public class Gate extends Field {
 	public Gate(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("konstruktor", this, parameters);
-		Skeleton.returnMethod("konstruktor", this, parameters);
+		Skeleton.callMethod("Gate - konstruktor", this, parameters);
+		Skeleton.returnMethod("Gate - konstruktor", this, parameters);
 	}
 	
 	public void open(){

@@ -19,8 +19,8 @@ public class Road extends Field {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 
-		Skeleton.callMethod("konstruktor", this, parameters);
-		Skeleton.returnMethod("konstruktor", this, parameters);
+		Skeleton.callMethod("Road - konstruktor", this, parameters);
+		Skeleton.returnMethod("Road - konstruktor", this, parameters);
 
 	}
 
