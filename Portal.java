@@ -28,7 +28,7 @@ public class Portal {
 	}
 
 	public boolean amIPortal(Field field) {
-		return (blue != null || yellow != null);
+		return (blue == field || yellow == field);
 	}
 
 	public void createPortal(Field field, Color color) {
