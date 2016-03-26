@@ -11,6 +11,7 @@ public class Game {
 	
 	public void update(){
 		stage.update();
+		stage.collectUnits();
 	}
 	
 	public void loadGame(){}
