@@ -14,6 +14,7 @@ public class Skeleton {
 	private static String callDir = "->";
 	private static  Player player;
 	private static Direction currDir;
+	private static Object empty = new Object();
 	
 	public static void main(String[] args){
 		consoleMenu();
@@ -549,10 +550,13 @@ public class Skeleton {
 		String method = "-";
 		for(int i = 0; i < deepness; i++) method += "\t";
 		method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
+		Object last = parameters.get(parameters.size() - 1);
 		for(Object i : parameters){
-			method += objectName.get(i.hashCode());
+			if(i != last);
+				method += objectName.get(i.hashCode());
 		}
 		method += ")";
+		method += " : " + objectName.get(last.hashCode());
 		System.out.println(method);
 	}
 	
@@ -562,6 +566,11 @@ public class Skeleton {
 	
 	public static void clearObjectName(){
 		objectName = new HashMap<Integer, String>();
+		objectName.put(empty.hashCode(), "void");
+	}
+	
+	public static Object getEmpty(){
+		return empty;
 	}
 	
 	public static void addPlayer(Player gplayer) { player = gplayer; }
