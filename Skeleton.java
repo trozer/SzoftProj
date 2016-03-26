@@ -510,6 +510,8 @@ public class Skeleton {
 		clearObjectName();
 		Game game = new Game();
 		Stage stage = new Stage(2);
+		objectName.put(game.hashCode(), "Game");
+		objectName.put(stage.hashCode(), "Stage");
 		stage.init(table,game);
 		game.setStage(stage);
 		

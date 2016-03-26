@@ -12,13 +12,28 @@ public class Stage
 
     public Stage (int allZPM)
     {
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(allZPM);
+        parameters.add(Skeleton.getEmpty()); //utolsó paraméter = visszatérési érték
+        Skeleton.callMethod("Stage - konstruktor", this, parameters);
+
         this.allZPM = allZPM;
         units =  new ArrayList<Unit>();
 
+
+        Skeleton.returnMethod("Stage - konstruktor", this, parameters);
     }
 
     public void init(char[][] table, Game game)
     {
+        Skeleton.registerHashCode(table.hashCode(), "table"); //table regisztrálása, hogy ki lehessen írni
+
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(table);
+        parameters.add(game);
+        parameters.add(Skeleton.getEmpty()); //utolsó paraméter = visszatérési érték
+        Skeleton.callMethod("init", this, parameters);
+
         //Portal létrehozása
 /*        Portal portal = new Portal();*
         Skeleton.registerHashCode(portal.hashCode(), "portal");
@@ -191,7 +206,7 @@ public class Stage
                     {
                         System.out.println("Hiba: a gate-scale kapcsolat információ sora nem 5 karakter hosszú");
                     }
-
+                    break;
                     default:
                         System.out.println("Hiba: valamelyik Unit információ sora nem megfelelően kezdődik");
                         break;
@@ -226,6 +241,8 @@ public class Stage
             }
         }
         fields = null; //az ideiglenes tároló megszüntetése
+
+        Skeleton.returnMethod("init", this, parameters);
     }
 
     private Direction charToDirection(char dir) //segédfüggvény: karakterből annak betűje alapján irányt csinál
@@ -267,25 +284,44 @@ public class Stage
     //lefuttat egy kört
     public void update()
     {
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("update", this, parameters);
+
         if(units != null)
         {
             for (Unit unit : units)
                 unit.action();
         }
+
+        Skeleton.returnMethod("update", this, parameters);
     }
 
     //"halott" egységek törlése units listából
     public void collectUnits()
     {
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("collectUnits", this, parameters);
+
         for(Iterator<Unit> it = units.iterator(); it.hasNext();)
         {
             if(it.next().isDead())
                 it.remove();
         }
+
+        Skeleton.returnMethod("collectUnits", this, parameters);
     }
 
     public void addUnit(Unit unit)
     {
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(unit);
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("addUnit", this, parameters);
+
         this.units.add(unit);   //hozzáad 1 unitot, feltételezzük, hogy a létrehozás helyén be lett regisztrálva a Skeletonba
+
+        Skeleton.returnMethod("addUnit", this, parameters);
     }
 }
