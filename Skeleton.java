@@ -56,7 +56,7 @@ public class Skeleton {
 							in=buffer.readLine();
 							cases = in.charAt(0);
 							if(cases == 'z'){
-								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'z','0','1'},{'b','0','2'}};
+								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'b','0','2'},{'z','0','1'}};
 								start(table,1);
 							}
 							else if(cases == 'd'){
@@ -86,11 +86,11 @@ public class Skeleton {
 						in=buffer.readLine();
 						cases = in.charAt(0);
 						if(cases == 'z'){
-							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'z','0','1'},{'b','0','2'}};
+							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'z','0','1'}};
 							start(table,1);
 						}
 						else if(cases == 'd'){
-							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'b','0','1'},{'b','0','2'}};
+							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'b','0','1'}};
 							start(table,1);
 						}
 						else{
@@ -218,7 +218,7 @@ public class Skeleton {
 					char[][] table = {{'r'},{'>'},{'P','0','0','e','-'}};
 					start(table,3);
 				}else if(cases == 's'){
-					char[][] table = {{'r','r'},{'>'},{'P','0','0','e','-'}};
+					char[][] table = {{'r'},{'>'},{'P','0','0','e','-'}};
 					start(table,3);
 				}else{
 					System.out.println("Helytelen válasz.. :(");
@@ -245,11 +245,11 @@ public class Skeleton {
 							in=buffer.readLine();
 							cases = in.charAt(0);
 							if(cases == 'z'){
-								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'z','0','1'},{'b','0','2'}};
+								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'b','0','2'},{'z','0','1'}};
 								start(table,4);
 							}
 							else if(cases == 'd'){
-								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'b','0','1'},{'b','0','2'}};
+								char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','-'},{'b','0','2'},{'b','0','1'}};
 								start(table,4);
 							}
 							else{
@@ -275,11 +275,11 @@ public class Skeleton {
 						in=buffer.readLine();
 						cases = in.charAt(0);
 						if(cases == 'z'){
-							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'z','0','1'},{'b','0','2'}};
+							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'z','0','1'}};
 							start(table,4);
 						}
 						else if(cases == 'd'){
-							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'b','0','1'},{'b','0','2'}};
+							char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'P','0','0','e','-'},{'b','0','1'}};
 							start(table,4);
 						}
 						else{
@@ -362,7 +362,7 @@ public class Skeleton {
 						in=buffer.readLine();
 						cases = in.charAt(0);
 						if(cases == 'I' || cases == 'i'){
-							char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','b'},{'b','0','1'},{'b','0','2'}};
+							char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','b'},{'b','0','2'},{'b','0','1'}};
 							start(table,5);
 						}else if(cases == 'N' || cases == 'n'){
 							char[][] table= {{'r','g','s'},{'>'},{'c','0','1','0','2'},{'P','0','0','e','b'},{'b','0','2'}};
@@ -443,7 +443,7 @@ public class Skeleton {
 				break;
 				case 'm':
 				{
-					char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'B','0','0','e'},{'z','0','1'},{'b','0','2'}};
+					char[][] table= {{'r','s','g'},{'>'},{'c','0','2','0','1'},{'B','0','0','e'},{'b','0','2'}};
 					start(table,6);
 				}
 				break;
