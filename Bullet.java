@@ -12,11 +12,11 @@ public class Bullet extends ActionUnit{
     protected Field currentField;
 
     public Bullet(Action action, Field currentField){
-        this.action = action;
+        this.nextAction = action;
         this.currentField = currentField;
     }
 
-    public Color getColor(){ color = this.color; }
+    public Color getColor(){ return color; }
 
 
     public void shoot(Color color){
