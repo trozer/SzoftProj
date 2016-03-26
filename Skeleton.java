@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class Skeleton {
 	private static int deepness = 0;
-	private static boolean outputEnabled = false;
+	private static boolean outputEnabled = true;
 	private static HashMap<Integer, String> objectName  = new HashMap<Integer, String>();
 	private static String callDir = "->";
 	private static  Player player;
@@ -547,22 +547,25 @@ public class Skeleton {
 	}
 	
 	public static void printMethod(String methodName, Object called, List<Object> parameters){
-		String method = "-";
-		for(int i = 0; i < deepness; i++) method += "\t";
-		method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
-		Object last = parameters.get(parameters.size() - 1);
-		Object noComma = null;
-		if(parameters.size() > 1)
-			noComma = parameters.get(parameters.size() - 2);
-		for(Object i : parameters){
-			if(i != last)
-				method += objectName.get(i.hashCode());
-			if(i != noComma)
-				method += ", ";
+		if(outputEnabled == true){
+			String method = "-";
+			for(int i = 0; i < deepness; i++) method += "\t";
+			method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
+			Object last = parameters.get(parameters.size() - 1);
+			Object noComma = null;
+			if(parameters.size() > 1){
+				noComma = parameters.get(parameters.size() - 2);
+				for(Object i : parameters){
+					if(i != last)
+						method += objectName.get(i.hashCode());
+					if(i != noComma && i != last)
+						method += ", ";
+				}
+			}
+			method += ")";
+			method += " : " + objectName.get(last.hashCode());
+			System.out.println(method);
 		}
-		method += ")";
-		method += " : " + objectName.get(last.hashCode());
-		System.out.println(method);
 	}
 	
 	public static void registerHashCode(Integer objectHash, String name){
@@ -576,6 +579,14 @@ public class Skeleton {
 	
 	public static Object getEmpty(){
 		return empty;
+	}
+	
+	public static void disableOutput(){
+		outputEnabled = false;
+	}
+	
+	public static void enableOutput(){
+		outputEnabled = true;
 	}
 	
 	public static void addPlayer(Player gplayer) { player = gplayer; }
