@@ -7,14 +7,11 @@ public class Road extends Field {
 
 	// --------Attribútumok--------
 
-<<<<<<< HEAD
-	
-	
-=======
+
 	//protected Map<Direction, Field> neighbours;
 	//protected Unit containedUnit;
 
->>>>>>> 26c13872c5ccdaba11cc3077802967894622c1c2
+
 	// -------Metódusok---------
 
 	public Road() {
@@ -22,16 +19,9 @@ public class Road extends Field {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 
-<<<<<<< HEAD
 		Skeleton.callMethod("konstruktor", this, parameters);
 		Skeleton.returnMethod("konstruktor", this, parameters);
 
-		Skeleton.callMethod("konstruktor", null, parameters);
-=======
-		Skeleton.callMethod("Road - konstruktor", this, parameters);
-		Skeleton.returnMethod("Road - konstruktor", this, parameters);
-
->>>>>>> 26c13872c5ccdaba11cc3077802967894622c1c2
 	}
 
 	@Override
