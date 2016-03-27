@@ -6,10 +6,6 @@ public class ZPM extends Unit{
 
     public ZPM(Field currentfield) {}
 
-    public void kill() { dead = true; }
-
-    public boolean isDead() { return dead; }
-
     public void action() {}
     public void accept(Player launcher, Field target) {}
     public void accept(Field launcher, Player target) {}

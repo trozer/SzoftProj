@@ -6,11 +6,8 @@ public class Box extends Unit{
 
     public Box(Field currentfield) {}
 
-    public void kill() { dead = true; }
+    public void accept(Player launcher, Field target) {
 
-    public boolean isDead() { return dead; }
-
-    public void action() {}
-    public void accept(Player launcher, Field target) {}
+    }
     public void accept(Field launcher, Player target) {}
 }

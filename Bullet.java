@@ -31,10 +31,6 @@ public class Bullet extends ActionUnit{
         nextAction = new Action(ActionType.DROP, currentDirection, null);
     }
 
-    public void kill(){
-        dead = true;
-    }
-
     public void accept(Player launcher, Field target) {}
     public void accept(Field launcher, Player target) {}
 
