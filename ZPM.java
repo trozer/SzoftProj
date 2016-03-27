@@ -11,7 +11,7 @@ public class ZPM extends Unit{
         parameters.add(bullet);
         switch (target.getAction().getType()) {
             case GRAB:
-                if (grabBox(this) == true){
+                if (target.grabBox(this) == true){
                     launcher.removeUnit(this);
                 }
                 break;
