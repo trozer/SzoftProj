@@ -12,8 +12,8 @@ public class Box extends Unit{
         switch (target.getAction().getType()) {
             case DROP:
                 target.addUnit(this);
-                if (DROP == true){
-                    launcher.dropBox();
+                if (target.dropBox(this) == true){
+                    launcher.dropBox(this);
                 }
                 break;
             default:
@@ -28,8 +28,7 @@ public class Box extends Unit{
         parameters.add(bullet);
         switch (target.getAction().getType()) {
             case GRAB:
-                target.grabBox(this);
-                if (GRAB == true){
+                if (target.grabBox(this) == true){
                     launcher.removeUnit(this);
                 }
                 break;
