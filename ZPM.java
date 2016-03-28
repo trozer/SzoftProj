@@ -1,10 +1,10 @@
 package szoftProj;
 
 public class ZPM extends Unit{
-    protected boolean dead = false;
-    protected Field currentField;
 
-    public ZPM(Field currentfield) {}
+    public ZPM(Field currentField) {
+        this.currentField = currentField;
+    }
 
     public void accept(Field launcher, Player target) {
         ArrayList<Object> parameters = new ArrayList<Object>();

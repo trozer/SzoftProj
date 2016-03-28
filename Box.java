@@ -1,10 +1,10 @@
 package szoftProj;
 
 public class Box extends Unit{
-    protected boolean dead = false;
-    protected Field currentField;
 
-    public Box(Field currentfield) {}
+    public Box(Field currentField) {
+        this.currentField = currentField;
+    }
 
     public void accept(Player launcher, Field target) {
         ArrayList<Object> parameters = new ArrayList<Object>();
@@ -41,7 +41,6 @@ public class Box extends Unit{
         }
 
         Skeleton.returnMethod("accept", this, parameters);
-
 
     }
 }
