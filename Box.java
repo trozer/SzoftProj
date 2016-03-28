@@ -14,10 +14,10 @@ public class Box extends Unit{
         parameters.add(Skeleton.getEmpty());
         Skeleton.callMethod("accept", this, parameters);
 
-        switch (target.getAction().getType()) {
+        switch (launcher.getAction().getType()) {
             case DROP:
-                if (target.dropBox(this) == true){
-                    launcher.dropBox(this);
+                if (target.addUnit(this) == true){
+                    launcher.dropBox();
                 }
                 break;
             default:
@@ -35,7 +35,7 @@ public class Box extends Unit{
         switch (target.getAction().getType()) {
             case GRAB:
                 if (target.grabBox(this) == true){
-                    launcher.removeUnit(this);
+                    launcher.removeUnit();
                 }
                 break;
             default:
