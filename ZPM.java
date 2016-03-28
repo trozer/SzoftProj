@@ -17,7 +17,7 @@ public class ZPM extends Unit{
         switch (target.getAction().getType()) {
             case GRAB:
                 target.addZPM(this);
-                launcher.removeUnit(this);
+                launcher.removeUnit();
                 }
                 break;
             default:
