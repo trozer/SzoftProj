@@ -31,13 +31,12 @@ public class Bullet extends ActionUnit{
         Skeleton.callMethod("kill", this, parameters);
 
         dead = true;
-        game.lose();
 
         Skeleton.returnMethod("kill", this, parameters);
     }
 
     public void setCurrentField(Field field){
-        this.field = field;
+        this.setCurrentField(field);
     }
 
 }
