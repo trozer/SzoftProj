@@ -22,12 +22,13 @@ public abstract class Field {
 	public abstract void doo(Player player);
 	public abstract void doo(Bullet bullet);
 	
+	//Visszaadja a praméter kapott irány felõli szomszédját
 	public Field getNeighbourInDirection(Direction dir){
 		
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(dir);
 		
-		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {
+		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {	//így lépkedük végig egy Map objektumon
 			if (entry.getKey() == dir){
 				
 				parameters.add(entry.getValue());
@@ -39,10 +40,10 @@ public abstract class Field {
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("getNeighbourInDirection", this, parameters);
 		Skeleton.returnMethod("getNeighbourInDirection", this, parameters);
-		return null;
+		return null;	//ha nincs szomszédja a megadott irányban
 	}
 	
-	public boolean addUnit(Unit unit){
+	public boolean addUnit(Unit unit){	//új unitot adunk a mezõhöz; csak akkor tehetjük meg, ha az üres
 		Object object = new Object();
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -62,7 +63,7 @@ public abstract class Field {
 			return false;
 	}
 	
-	public void removeUnit(){
+	public void removeUnit(){	//leszedjük a mezõrõl a unitot
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("removeUnit", this, parameters);
@@ -70,7 +71,7 @@ public abstract class Field {
 		containedUnit = null;
 	}
 	
-	public void addNeighbour(Direction direction, Field neighbour){
+	public void addNeighbour(Direction direction, Field neighbour){	//beállítjuk egy mezõ paraméterül kapott iránybeli szomszédját, egy paraméreül kapott típúsú mezõre
 		
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(direction);

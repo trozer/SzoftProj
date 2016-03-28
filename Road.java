@@ -8,13 +8,12 @@ public class Road extends Field {
 	// --------Attribútumok--------
 
 
-	//protected Map<Direction, Field> neighbours;
-	//protected Unit containedUnit;
+	
 
 
 	// -------Metódusok---------
 
-	public Road() {
+	public Road() {	//konstruktor
 		super();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
@@ -25,13 +24,13 @@ public class Road extends Field {
 	}
 
 	@Override
-	public void doo(Player player){
+	public void doo(Player player){	//a játékos cselekedetére "reagál"
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(player);
 		
 		player.getAction();
 		switch (player.getAction().getType()) {
-        case MOVE:
+        case MOVE:	//ha a játékos lépni akar
         		if (containedUnit != null){
 				containedUnit.accept(this, player);
         		}
@@ -39,12 +38,12 @@ public class Road extends Field {
         			player.step(this);
         		break;
         
-        case GRAB:
+        case GRAB:	//ha a játékos fel akar venni valamit
         		if (containedUnit != null){
         			containedUnit.accept(this, player);}
         		break;
         		
-        default:
+        default:	//minden más eset
         	//TODO
         	
         	break;
@@ -56,14 +55,14 @@ public class Road extends Field {
 	}
 
 	@Override
-	public void doo(Bullet bullet) {
+	public void doo(Bullet bullet) {	//a lövedék cselekedetétre reagál
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(bullet);
 		switch (bullet.getAction().getType()) {
-        case MOVE:
+        case MOVE:	//ha megérkezik/lépni akar
         	bullet.step(this);
         	break;
-        default:
+        default:	//minden más eset
         	break;
 		}
 		parameters.add(Skeleton.getEmpty());
@@ -72,7 +71,7 @@ public class Road extends Field {
 	}
 
 	@Override
-	public boolean addUnit(Unit unit) {
+	public boolean addUnit(Unit unit) {	//ha nincs még unit az úton rátehetünk egyet, ha van akkor nem
 		Object object = new Object();
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();

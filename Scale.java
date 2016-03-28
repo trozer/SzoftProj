@@ -7,25 +7,21 @@ public class Scale extends Field {
 
 	//--------Attribútumok--------
 	
-	//protected Map<Direction, Field> neighbours;
-	//protected Unit containedUnit;
+	
 	private Gate myGate;
 	
 	//-------Metódusok---------
 	
-	/*public Scale(Gate mygate, Unit containUnit){
-		this.mygate = mygate;
-		this.containedUnit = containUnit;
-	}*/
 	
-	public Scale(){
+	
+	public Scale(){	//konstruktor
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - konstruktor", this, parameters);
 		Skeleton.returnMethod("Scale - konstruktor", this, parameters);
 	}
 	
-	public void setGate(Gate gate){
+	public void setGate(Gate gate){	//beállítja a saját kapuját, azaz a hozzá tartozó kaput, ha még nincs neki
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(gate);
 		if(myGate == null) myGate = gate;
@@ -36,13 +32,13 @@ public class Scale extends Field {
 	}
 	
 	@Override
-	public void doo(Player player){
+	public void doo(Player player){	//a játékos cselekedetére "reagál"
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(player);
 		player.getAction();
 		
 		switch (player.getAction().getType()) {
-        case MOVE:
+        case MOVE:	//ha a játékos rálép magára húzza és kinyitja a hozzá tartozó kaput
 		
 		if (containedUnit != null){
 				containedUnit.accept(this, player);
@@ -53,14 +49,14 @@ public class Scale extends Field {
 			}
 		break;
 		
-        case GRAB:
+        case GRAB:	//ha a játékos leszed róla egy tárgyat, a hozzá tartozó kapu bezárul
         	if (containedUnit != null){
     			containedUnit.accept(this, player);
     		}
     		myGate.close();
     		break;
     		
-        default:
+        default:	//minden más eset
         	//TODO
         	break;
 		}
@@ -70,14 +66,14 @@ public class Scale extends Field {
 	}
 	
 	@Override
-	public void doo(Bullet bullet){
+	public void doo(Bullet bullet){		//lövedékre reagál
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(bullet);
 		switch (bullet.getAction().getType()) {
-        case MOVE:
+        case MOVE:	//magára húzza a lövedéket, a lövedék nem nyitja ki a kaput
         	bullet.step(this);
         	break;
-        default:
+        default:	//minden más eset
         	break;
 		}
 		parameters.add(Skeleton.getEmpty());
@@ -87,14 +83,14 @@ public class Scale extends Field {
 	
 	
 	@Override
-	public boolean addUnit(Unit unit){
+	public boolean addUnit(Unit unit){	//unitot hejez el a mérlegen, ha nincs rajta semmi
 		Object object = new Object();
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
 		if (containedUnit == null){
 			containedUnit = unit;
-			myGate.open();
+			myGate.open();	//ha rá tud tenni valamit kinyitja a kaput
 			parameters.add(object);
     		Skeleton.callMethod("addUnit", this, parameters);
     		Skeleton.returnMethod("addUnit", this, parameters);
@@ -108,7 +104,7 @@ public class Scale extends Field {
 	}
 
 	@Override
-	public void removeUnit(){
+	public void removeUnit(){	//eltávolítja a unitot ami a mérlegen van, ilyenkor a kapu bezárul 
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		containedUnit = null;
 		myGate.close();
