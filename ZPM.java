@@ -18,7 +18,10 @@ public class ZPM extends Unit{
             case GRAB:
                 target.addZPM(this);
                 launcher.removeUnit();
-
+                break;
+            case MOVE:
+                target.addZPM(this);
+                launcher.removeUnit();
                 break;
             default:
                 break;
