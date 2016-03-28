@@ -6,10 +6,6 @@ import java.util.ArrayList;
 public class Bullet extends ActionUnit{
 
     private Color color;
-    protected Direction currentDirection;
-    protected Action nextAction;
-    protected boolean dead;
-    protected Field currentField;
 
     public Bullet(Action action, Field currentField){
         this.nextAction = action;
@@ -18,24 +14,30 @@ public class Bullet extends ActionUnit{
 
     public Color getColor(){ return color; }
 
+    @Override
+    public void step(Field target){
 
-    public void shoot(Color color){
-        nextAction = new Action(ActionType.SHOOT, currentDirection, color);
+        target.addUnit(this);
+        this.setCurrentField(target);
     }
-
-    public void grab(){
-        nextAction = new Action(ActionType.GRAB, currentDirection, null);
-    }
-
-        public void drop(){
-        nextAction = new Action(ActionType.DROP, currentDirection, null);
-    }
-
-    public void accept(Player launcher, Field target) {}
-    public void accept(Field launcher, Player target) {}
 
     public void action(){
+        
+    }
 
+    public void kill(){
+        ArrayList<Object> parameters = new ArrayList<Object>();
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("kill", this, parameters);
+
+        dead = true;
+        game.lose();
+
+        Skeleton.returnMethod("kill", this, parameters);
+    }
+
+    public void setCurrentField(Field field){
+        this.field = field;
     }
 
 }
