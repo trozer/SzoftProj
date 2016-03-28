@@ -1,5 +1,7 @@
 package szoftProj;
 
+import java.util.ArrayList;
+
 public class Box extends Unit{
 
     public Box(Field currentField) {

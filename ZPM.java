@@ -1,5 +1,7 @@
 package szoftProj;
 
+import java.util.ArrayList;
+
 public class ZPM extends Unit{
 
     public ZPM(Field currentField) {
@@ -14,8 +16,8 @@ public class ZPM extends Unit{
 
         switch (target.getAction().getType()) {
             case GRAB:
-                if (target.grabBox(this) == true){
-                    launcher.removeUnit(this);
+                target.addZPM(this);
+                launcher.removeUnit(this);
                 }
                 break;
             default:
@@ -23,7 +25,6 @@ public class ZPM extends Unit{
         }
 
         Skeleton.returnMethod("accept", this, parameters);
-
 
     }
 }
