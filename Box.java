@@ -8,10 +8,12 @@ public class Box extends Unit{
 
     public void accept(Player launcher, Field target) {
         ArrayList<Object> parameters = new ArrayList<Object>();
-        parameters.add(bullet);
+        parameters.add(launcher);
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("accept", this, parameters);
+
         switch (target.getAction().getType()) {
             case DROP:
-                target.addUnit(this);
                 if (target.dropBox(this) == true){
                     launcher.dropBox(this);
                 }
@@ -19,13 +21,15 @@ public class Box extends Unit{
             default:
                 break;
         }
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("accept", this, parameters);
+
         Skeleton.returnMethod("accept", this, parameters);
     }
     public void accept(Field launcher, Player target) {
         ArrayList<Object> parameters = new ArrayList<Object>();
-        parameters.add(bullet);
+        parameters.add(target);
+        parameters.add(Skeleton.getEmpty());
+        Skeleton.callMethod("accept", this, parameters);
+
         switch (target.getAction().getType()) {
             case GRAB:
                 if (target.grabBox(this) == true){
@@ -35,8 +39,7 @@ public class Box extends Unit{
             default:
                 break;
         }
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("accept", this, parameters);
+
         Skeleton.returnMethod("accept", this, parameters);
 
 
