@@ -25,8 +25,13 @@ public abstract class Unit {
 	
 	public boolean isDead(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		Skeleton.registerHashCode(Boolean.hashCode(dead), "boolean");
-		parameters.add(new Boolean(dead));
+		Object boolObj = new Object();
+		Skeleton.registerHashCode(boolObj.hashCode(),"boolean");
+		parameters.add(boolObj);
+		Skeleton.callMethod("isDead", this, parameters);
+
+
+
 		Skeleton.callMethod("isDead", this, parameters);
 		Skeleton.returnMethod("isDead", this, parameters);
 		return dead;

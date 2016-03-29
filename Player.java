@@ -46,26 +46,33 @@ public class Player extends ActionUnit{
 	
 	//Doboz felvetele csak akkor, ha meg nincs nala doboz.
 	public boolean grabBox(Box box){
+		ArrayList<Object> parameters = new ArrayList<Object>();
+		parameters.add(box);
+		Object boolObj = new Object();
+		Skeleton.registerHashCode(boolObj.hashCode(),"boolean");
+		parameters.add(boolObj);
+		Skeleton.callMethod("grabBox", this, parameters);
+
 		if (this.box == null){
-			ArrayList<Object> parameters = new ArrayList<Object>();
-			Skeleton.registerHashCode(Boolean.hashCode(true), "boolean");
-			parameters.add(box);
-			parameters.add(new Boolean(true));
-			Skeleton.callMethod("grabBox", this, parameters);
+
+			Object trueObj = new Object();
+			Skeleton.registerHashCode(trueObj.hashCode(),"true");
+			parameters.remove(parameters.size() - 1);
+			parameters.add(trueObj);
+
+
 			Skeleton.returnMethod("grabBox", this, parameters);
-			
 			this.box = box;
 			return true;
 		}
 		
 		else {
-			ArrayList<Object> parameters = new ArrayList<Object>();
-			Skeleton.registerHashCode(Boolean.hashCode(false), "boolean");
-			parameters.add(box);
-			parameters.add(new Boolean(false));
-			Skeleton.callMethod("grabBox", this, parameters);
+			Object falseObj = new Object();
+			Skeleton.registerHashCode(falseObj.hashCode(),"true");
+			parameters.remove(parameters.size() - 1);
+			parameters.add(falseObj);
+
 			Skeleton.returnMethod("grabBox", this, parameters);
-			
 			return false;
 		}
 	}
