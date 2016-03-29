@@ -14,7 +14,9 @@ public class Player extends ActionUnit{
 	public Player(int allZPM, Direction direction, Field currentField, Game game){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(allZPM);
-		parameters.add(direction);
+		Object dir = new Object();
+		Skeleton.registerHashCode(dir.hashCode(), "Direction");
+		parameters.add(dir);
 		parameters.add(currentField);
 		parameters.add(game);
 		parameters.add(Skeleton.getEmpty());
@@ -69,7 +71,7 @@ public class Player extends ActionUnit{
 		
 		else {
 			Object falseObj = new Object();
-			Skeleton.registerHashCode(falseObj.hashCode(),"true");
+			Skeleton.registerHashCode(falseObj.hashCode(),"false");
 			parameters.remove(parameters.size() - 1);
 			parameters.add(falseObj);
 

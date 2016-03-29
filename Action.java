@@ -10,8 +10,12 @@ public class Action {
 	
 	public Action(ActionType type, Direction direction, Color color){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(type);
-		parameters.add(direction);
+		Object dir = new Object();
+		Skeleton.registerHashCode(dir.hashCode(), "Direction");
+		parameters.add(dir);
+		Object dir2 = new Object();
+		Skeleton.registerHashCode(dir2.hashCode(), "Direction");
+		parameters.add(dir2);
 		parameters.add(color);
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Konstruktor", this, parameters);
@@ -25,7 +29,9 @@ public class Action {
 	
 	public ActionType getType(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(type);
+		Object dir = new Object();
+		Skeleton.registerHashCode(dir.hashCode(), "Direction");
+		parameters.add(dir);
 		Skeleton.callMethod("getType", this, parameters);
 		Skeleton.returnMethod("getType", this, parameters);
 		return type;
@@ -41,7 +47,9 @@ public class Action {
 	
 	public Direction getDirection(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(direction);
+		Object dir = new Object();
+		Skeleton.registerHashCode(dir.hashCode(), "Direction");
+		parameters.add(dir);
 		Skeleton.callMethod("getDirection", this, parameters);
 		Skeleton.returnMethod("getDirection", this, parameters);
 		return direction;

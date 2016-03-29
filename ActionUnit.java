@@ -21,7 +21,9 @@ public abstract class ActionUnit extends Unit{
 	//Forgas tipusu action-t hoz letre.
 	public void turn(Direction direction){
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(direction);
+		Object dir = new Object();
+		Skeleton.registerHashCode(dir.hashCode(), "Direction");
+		parameters.add(dir);
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("turn", this, parameters);
 		
