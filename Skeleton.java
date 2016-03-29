@@ -215,10 +215,10 @@ public class Skeleton {
 				in=buffer.readLine();
 				cases = in.charAt(0);
 				if(cases == 'k'){
-					char[][] table = {{'r'},{'>'},{'P','0','0','e','-'}};
+					char[][] table = {{'r', 'r', 'r'},{'>'},{'P','0','0','e','-'}};
 					start(table,3);
 				}else if(cases == 's'){
-					char[][] table = {{'r'},{'>'},{'P','0','0','e','-'}};
+					char[][] table = {{'r', 'r', 'r'},{'>'},{'P','0','0','e','-'}};
 					start(table,3);
 				}else{
 					System.out.println("Helytelen válasz.. :(");
@@ -450,7 +450,7 @@ public class Skeleton {
 				case 'u':
 				{
 					char[][] table= {{'r','r'},{'>'},{'B','0','0','e'}};
-					start(table,1);
+					start(table,6);
 				}
 				break;
 				case 'p':

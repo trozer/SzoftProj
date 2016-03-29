@@ -28,6 +28,8 @@ public abstract class Field {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		Object dire = new Object();
 		Skeleton.registerHashCode(dire.hashCode(),"Direction");
+		Object fi = new Object();
+		Skeleton.registerHashCode(fi.hashCode(),"Field");
 		parameters.add(dire);
 		
 		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {	//így lépkedük végig egy Map objektumon
@@ -39,7 +41,7 @@ public abstract class Field {
 				return entry.getValue();
 			}
 		}
-		parameters.add(Skeleton.getEmpty());
+		parameters.add(fi);
 		Skeleton.callMethod("getNeighbourInDirection", this, parameters);
 		Skeleton.returnMethod("getNeighbourInDirection", this, parameters);
 		return null;	//ha nincs szomszédja a megadott irányban

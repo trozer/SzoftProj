@@ -276,8 +276,10 @@ public class Stage
 
         if(units != null)
         {
-            for (Unit unit : units)
-                unit.action();
+           // for (Unit unit : units)
+        	for(int i = 0; i< units.size() ; i++)
+                //unit.action();
+        		units.get(i).action();
         }
 
         Skeleton.returnMethod("update", this, parameters);
