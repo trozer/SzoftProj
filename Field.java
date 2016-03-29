@@ -26,7 +26,9 @@ public abstract class Field {
 	public Field getNeighbourInDirection(Direction dir){
 		
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(dir);
+		Object dire = new Object();
+		Skeleton.registerHashCode(dire.hashCode(),"Direction");
+		parameters.add(dire);
 		
 		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {	//így lépkedük végig egy Map objektumon
 			if (entry.getKey() == dir){
@@ -74,7 +76,9 @@ public abstract class Field {
 	public void addNeighbour(Direction direction, Field neighbour){	//beállítjuk egy mezõ paraméterül kapott iránybeli szomszédját, egy paraméreül kapott típúsú mezõre
 		
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(direction);
+		Object dire = new Object();
+		Skeleton.registerHashCode(dire.hashCode(),"Direction");
+		parameters.add(dire);
 		parameters.add(neighbour);
 		
 		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {
