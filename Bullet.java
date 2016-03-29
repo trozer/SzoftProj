@@ -7,10 +7,10 @@ public class Bullet extends ActionUnit{
 
     private Color color;
 
-    public Bullet(Action action, Field currentField, Color color){
+    public Bullet(Action action, Field currentField){
         this.nextAction = action;
         this.currentField = currentField;
-        this.color = color;
+        this.color = action.getColor();
     }
 
     public Color getColor(){ return color; }

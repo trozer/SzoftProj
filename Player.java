@@ -48,8 +48,7 @@ public class Player extends ActionUnit{
 	public boolean grabBox(Box box){
 		if (this.box == null){
 			ArrayList<Object> parameters = new ArrayList<Object>();
-			Object box = new Object();
-			Skeleton.registerHashCode(Boolean.hashCode(true), "box");
+			Skeleton.registerHashCode(Boolean.hashCode(true), "boolean");
 			parameters.add(box);
 			parameters.add(new Boolean(true));
 			Skeleton.callMethod("grabBox", this, parameters);
@@ -61,7 +60,7 @@ public class Player extends ActionUnit{
 		
 		else {
 			ArrayList<Object> parameters = new ArrayList<Object>();
-			Skeleton.registerHashCode(Boolean.hashCode(false), "box");
+			Skeleton.registerHashCode(Boolean.hashCode(false), "boolean");
 			parameters.add(box);
 			parameters.add(new Boolean(false));
 			Skeleton.callMethod("grabBox", this, parameters);
