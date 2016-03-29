@@ -7,9 +7,10 @@ public class Bullet extends ActionUnit{
 
     private Color color;
 
-    public Bullet(Action action, Field currentField){
+    public Bullet(Action action, Field currentField, Color color){
         this.nextAction = action;
         this.currentField = currentField;
+        this.color = color;
     }
 
     public Color getColor(){ return color; }
@@ -22,7 +23,10 @@ public class Bullet extends ActionUnit{
     }
 
     public void action(){
-        
+        if (nextAction.getType() == ActionType.MOVE ||
+                nextAction.getType() == ActionType.GRAB){
+            currentField.getNeighbourInDirection(currentDirection).doo(this);
+        }
     }
 
     public void kill(){
