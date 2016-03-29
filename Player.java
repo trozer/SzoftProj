@@ -24,6 +24,7 @@ public class Player extends ActionUnit{
 		this.currentDirection = direction;
 		this.currentField = currentField;
 		this.game = game;
+		this.zpm = new ArrayList<ZPM>();
 		
 		Skeleton.returnMethod("Konstruktor", this, parameters);
 	}
