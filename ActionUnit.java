@@ -33,7 +33,7 @@ public abstract class ActionUnit extends Unit{
 	}
 	
 	
-	public void shoot(Color color){//ez itt nem csinál semmit :-(
+	public void shoot(Color color){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(color);
 		parameters.add(Skeleton.getEmpty());
@@ -41,21 +41,21 @@ public abstract class ActionUnit extends Unit{
 		Skeleton.returnMethod("shoot", this, parameters);
 	}
 	
-	public void grab(){ //Tárgy felvételének a szándékát hozná létre mint akció, azonban abstract sként nem csinál semmit. (nem biztos hogy minden tárgy tud felvenni)
+	public void grab(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("grab", this, parameters);
 		Skeleton.returnMethod("grab", this, parameters);
 	}
 	
-	public void drop(){//Tárgy lerakásának a szándékát hozná létre mint akció, azonban abstract õsként nem csinál semmit. (nem biztos hogy minden tárgy tud felvenni)
+	public void drop(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("drop", this, parameters);
 		Skeleton.returnMethod("drop", this, parameters);
 	}
 	
-	public void step(Field target){//Adott mezõre való lépést hajtja végre. A saját mezõjérõl letörli magát, a paraméterben kapott mezõhöz hozzáadja magát és beállítja az aktuális mezõt amin innentõl állni fog (tehát a paraméterben kapotton). 
+	public void step(Field target){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(target);
 		parameters.add(Skeleton.getEmpty());
@@ -63,7 +63,7 @@ public abstract class ActionUnit extends Unit{
 		Skeleton.returnMethod("step", this, parameters);
 	}
 	
-	public Action getAction(){//Lekérdezhetõ a következõ akció.
+	public Action getAction(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		
 		Object dire = new Object();

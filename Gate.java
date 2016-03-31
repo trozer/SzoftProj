@@ -80,7 +80,6 @@ public class Gate extends Field {
         		bullet.step(this);
         	}
         	else
-        		bullet.step(this);
         		containedUnit.kill();
         	break;
         default:	//minden más eset

@@ -8,7 +8,6 @@ public class Action {
 	private ActionType type;
 	private Direction direction;
 	
-	//konstruktor; Konstruktor, megkapja az adott akció típusát, irányát (ha van ) , színét(ha van)
 	public Action(ActionType type, Direction direction, Color color){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		Object dir = new Object();
@@ -30,7 +29,6 @@ public class Action {
 		Skeleton.returnMethod("Konstruktor", this, parameters);
 	}
 	
-	//visszaadja az adott akció típusát
 	public ActionType getType(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		Object dir = new Object();
@@ -41,7 +39,7 @@ public class Action {
 		return type;
 	}
 	
-	public Color getColor(){	//szín lekérdezését teszi lehetõvé
+	public Color getColor(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(color);
 		Skeleton.callMethod("getColor", this, parameters);
@@ -49,7 +47,7 @@ public class Action {
 		return color;
 	}
 	
-	public Direction getDirection(){	//irány lekérdezése
+	public Direction getDirection(){
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		Object dir = new Object();
 		Skeleton.registerHashCode(dir.hashCode(), "Direction");
