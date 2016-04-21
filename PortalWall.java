@@ -5,7 +5,7 @@ public class PortalWall extends Wall {
 	private Portal portal;
 
 	public PortalWall() {
-
+		super();
 	}
 
 	public PortalWall(Portal portal) {
@@ -63,4 +63,8 @@ public class PortalWall extends Wall {
 		super.addNeighbour(direction, neighbour);
 	}
 
+	@Override
+	public String toString(){
+		return "portálfal" + super.toString();
+	}
 }

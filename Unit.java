@@ -50,4 +50,10 @@ public abstract class Unit {
 		Skeleton.callMethod("accept", this, parameters);
 		Skeleton.returnMethod("accept", this, parameters);
 	}
+	
+	@Override
+	public
+	String toString(){
+		return "UNIT VAGYOK";
+	}
 }

@@ -15,6 +15,7 @@ public class Scale extends Field {
 	
 	
 	public Scale(){	//konstruktor
+		super();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - konstruktor", this, parameters);
@@ -88,12 +89,12 @@ public class Scale extends Field {
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
-		if (containedUnit == null){
-			containedUnit = unit;
-			myGate.open();	//ha rá tud tenni valamit kinyitja a kaput
+		if (containedUnits.size() < 3 ){
+			containedUnits.add(unit);
 			parameters.add(object);
-    		Skeleton.callMethod("addUnit", this, parameters);
-    		Skeleton.returnMethod("addUnit", this, parameters);
+			myGate.open();
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
@@ -111,5 +112,10 @@ public class Scale extends Field {
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("removeUnit", this, parameters);
 		Skeleton.returnMethod("removeUnit", this, parameters);
+	}
+	
+	@Override
+	public String toString(){
+		return "mérleg " + super.toString();
 	}
 }

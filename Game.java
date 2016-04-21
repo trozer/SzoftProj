@@ -2,18 +2,23 @@ package szoftProj;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class Game {
 	private State state;
 	private Stage stage;
-	private ActionUnit actionUnit;
+	private ActionUnit Jaffa;
+	private ActionUnit Oneil;
+	
+	public static void main(String[] args){
+		Game game = new Game();
+		//later check args and run appropiate command
+		File argFile = new File("testMap.xml");
+		game.newGame(argFile);
+	}
 	
 	Game(){
 		state = State.MENU;
-		List<Object> l = new ArrayList<Object>();
-		l.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Game - Konstruktor", this, l);
-		Skeleton.returnMethod("Game - Konstruktor", this, l);
 	}
 	
 	public void update(){
@@ -31,17 +36,30 @@ public class Game {
 	public void lose(){
 		state = State.LOSE;
 	}
+	
+	public void setJaffa(ActionUnit Jaffa){
+		this.Jaffa = Jaffa;
+	}
+	
+	public void setOneil(ActionUnit Oneil){
+		this.Oneil = Oneil;
+	}
+	
+	
 	public void win(){
 		state = State.WIN;
 	}
 	public void addUnit(Unit unit){
 		stage.addUnit(unit);
 	}
-	public void newGame(){}
+	public void newGame(File file){
+		this.stage = new Stage(file, this);
+	}
+	public void newGame(){
+		this.stage = new Stage(new File("finalMap.xml"), this);
+	}
 	public void setStage(Stage stage){
 		this.stage = stage;
 	}
-	public void setActionUnit(ActionUnit actionUnit){
-		this.actionUnit = actionUnit;
-	}
+
 }

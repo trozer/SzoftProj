@@ -3,6 +3,7 @@ package szoftProj;
 public class Wall extends Field {
 
 	public Wall() {
+		super();
 	}
 
 	@Override
@@ -31,6 +32,11 @@ public class Wall extends Field {
 	@Override
 	public void addNeighbour(Direction direction, Field neighbour) {
 		super.addNeighbour(direction, neighbour);
+	}
+	
+	@Override
+	public String toString(){
+		return "fal " + super.toString();
 	}
 
 }

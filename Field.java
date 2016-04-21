@@ -1,13 +1,16 @@
 package szoftProj;
 
 import java.util.*;
+import java.awt.Point;
 
 public abstract class Field {
 	
 	//--------Attribútumok--------
 	
 	protected Map<Direction, Field> neighbours = new TreeMap<Direction, Field>();
-	protected Unit containedUnit;
+	protected List<Unit> containedUnits;
+	protected Unit containedUnit; // DELETE THIS LATER, this helped me to avoid to change many functions in other classes
+	protected Point position;
 	
 	//-------Metódusok---------
 	
@@ -16,7 +19,15 @@ public abstract class Field {
 		neighbours.put(Direction.SOUTH, null);
 		neighbours.put(Direction.WEST, null);
 		neighbours.put(Direction.EAST, null);
-		containedUnit = null;
+		containedUnits = new ArrayList<Unit>();
+	}
+	
+	void setPosition(Point position){
+		this.position = position;
+	}
+	
+	Point getPosition(){
+		return this.position;
 	}
 	
 	public abstract void doo(Player player);
@@ -33,9 +44,6 @@ public abstract class Field {
 		for (Map.Entry<Direction, Field> entry : neighbours.entrySet()) {	//így lépkedük végig egy Map objektumon
 			if (entry.getKey() == dir){
 				
-				parameters.add(entry.getValue());
-				Skeleton.callMethod("getNeighbourInDirection", this, parameters);
-				Skeleton.returnMethod("getNeighbourInDirection", this, parameters);
 				return entry.getValue();
 			}
 		}
@@ -51,8 +59,9 @@ public abstract class Field {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
 		
-		if (containedUnit == null){
-			containedUnit = unit;
+		//TODO -> this is (3) not definitive 
+		if (containedUnits.size() < 3 ){
+			containedUnits.add(unit);
 			parameters.add(object);
 			Skeleton.callMethod("addUnit", this, parameters);
 			Skeleton.returnMethod("addUnit", this, parameters);
@@ -65,12 +74,19 @@ public abstract class Field {
 			return false;
 	}
 	
+	//TODO, this is for testing, delete or change this later
+	public void showUnits(){
+		for(Unit u : containedUnits){
+			System.out.println(u.toString());
+		}
+	}
+	
 	public void removeUnit(){	//leszedjük a mezõrõl a unitot
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("removeUnit", this, parameters);
 		Skeleton.returnMethod("removeUnit", this, parameters);
-		containedUnit = null;
+		//containedUnit = null; TODO
 	}
 	
 	public void addNeighbour(Direction direction, Field neighbour){	//beállítjuk egy mezõ paraméterül kapott iránybeli szomszédját, egy paraméreül kapott típúsú mezõre
@@ -89,6 +105,12 @@ public abstract class Field {
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("addNeighbour", this, parameters);
 		Skeleton.returnMethod("addNeighbour", this, parameters);
+		
+	}
+	
+	@Override
+	public String toString(){
+		return position.getX() + "," + position.getY() + " pozíció";
 		
 	}
 	

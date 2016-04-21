@@ -12,6 +12,7 @@ public class Gate extends Field {
 	//-------Metódusok---------
 	
 	public Gate(){	//konstruktor
+		super();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Gate - konstruktor", this, parameters);
@@ -96,11 +97,11 @@ public class Gate extends Field {
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
-		if (containedUnit == null && opened == true){
-			containedUnit = unit;
+		if (containedUnits.size() < 3 && opened == true ){
+			containedUnits.add(unit);
 			parameters.add(object);
-    		Skeleton.callMethod("addUnit", this, parameters);
-    		Skeleton.returnMethod("addUnit", this, parameters);
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		}
 		else
@@ -114,5 +115,9 @@ public class Gate extends Field {
 	public void removeUnit(){
 		containedUnit = null;
 	}*/
+	@Override
+	public String toString(){
+		return "kapu " + super.toString();
+	}
 
 }

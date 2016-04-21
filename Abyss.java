@@ -3,6 +3,7 @@ package szoftProj;
 public class Abyss extends Field {
 
 	public Abyss() {
+		super();
 	}
 
 	@Override
@@ -40,4 +41,8 @@ public class Abyss extends Field {
 		super.addNeighbour(direction, neighbour);
 	}
 
+	@Override
+	public String toString(){
+		return "szakadék " + super.toString();
+	}
 }

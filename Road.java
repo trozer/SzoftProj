@@ -76,11 +76,11 @@ public class Road extends Field {
 		Skeleton.registerHashCode(object.hashCode(), "boolean");
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(unit);
-		if (containedUnit == null) {
-			containedUnit = unit;
+		if (containedUnits.size() < 3 ){
+			containedUnits.add(unit);
 			parameters.add(object);
-    		Skeleton.callMethod("addUnit", this, parameters);
-    		Skeleton.returnMethod("addUnit", this, parameters);
+			Skeleton.callMethod("addUnit", this, parameters);
+			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
 		} else
 			parameters.add(object);
@@ -92,4 +92,8 @@ public class Road extends Field {
 	/*
 	 * @Override public void removeUnit(){ containedUnit = null; }
 	 */
+	@Override
+	public String toString(){
+		return "út " + super.toString();
+	}
 }

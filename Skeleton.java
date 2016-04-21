@@ -16,9 +16,7 @@ public class Skeleton {
 	private static Direction currDir;
 	private static Object empty = new Object();
 	
-	public static void main(String[] args){
-		consoleMenu();
-	}
+
 	
 	public static void consoleMenu(){
 		BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
@@ -507,32 +505,7 @@ public class Skeleton {
 	}
 	
 	public static void start(char[][] table, int control){
-		clearObjectName();
-		Game game = new Game();
-		Stage stage = new Stage(2);
-		objectName.put(game.hashCode(), "Game");
-		objectName.put(stage.hashCode(), "Stage");
-		stage.init(table,game);
-		game.setStage(stage);
-		
-		switch (control){
-		case 1:
-			player.move();
-		break;
-		case 2:
-			player.turn(currDir);
-		break;
-		case 3:
-			player.shoot(Color.BLUE);
-		break;
-		case 4:
-			player.grab();
-		break;
-		case 5:
-			player.drop();
-		break;
-		}
-		game.update();
+
 		
 	}
 	
@@ -549,32 +522,7 @@ public class Skeleton {
 	}
 	
 	public static void printMethod(String methodName, Object called, List<Object> parameters){
-		if(outputEnabled == true){
-			String method = "-";
-			for(int i = 0; i < deepness; i++) method += "\t";
-			if(called != null)
-				method += callDir + "[:" + objectName.get(called.hashCode()) + "]." + methodName + "("; 
-			else
-				method += callDir + "[:" + "null" + "]." + methodName + "(";
-			Object last = parameters.get(parameters.size() - 1);
-			Object noComma = null;
-			if(parameters.size() > 1){
-				noComma = parameters.get(parameters.size() - 2);
-				for(Object i : parameters){
-					if(i != last){
-						if(i != null)
-							method += objectName.get(i.hashCode());
-						else
-							method += "null";
-					}
-					if(i != noComma && i != last)
-						method += ", ";
-				}
-			}
-			method += ")";
-			method += " : " + objectName.get(last.hashCode());
-			System.out.println(method);
-		}
+
 	}
 	
 	public static void registerHashCode(Integer objectHash, String name){
