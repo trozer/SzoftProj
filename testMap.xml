@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Stage>
+	<rows>
+		 <row id='0'>wsaarrww</row>
+		 <row id='1'>wwaarrgw</row>
+		 <row id='2'>waaarrww</row>
+	</rows>
+ 	<units>
+  		<unit row='0' col='3' color="blue" direction="N">Bullet</unit>
+		<unit row='1' col='5' >Box</unit>
+		<unit row='1' col='4' >ZPM</unit>
+		<unit row='2' col='1' direction="W">O'neil</unit>
+		<unit row='0' col='5' direction="W">Jaffa</unit>
+	</units>
+</Stage>
