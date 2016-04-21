@@ -3,7 +3,7 @@
 	<rows>
 		 <row id='0'>wsaarrww</row>
 		 <row id='1'>wwaarrgw</row>
-		 <row id='2'>waaarrww</row>
+		 <row id='2'>waaarrpw</row>
 	</rows>
  	<units>
   		<unit row='0' col='3' color="blue" direction="N">Bullet</unit>
