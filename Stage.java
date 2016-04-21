@@ -18,18 +18,22 @@ public class Stage
     private int allZPM;
     private List<Unit> units;
     private List<Field> fields;
+    private List<Field> roads;
+    private Portal portal;
+    private boolean log;
 
     public Stage (File file, Game game)
     {
         units =  new ArrayList<Unit>();
         fields = new ArrayList<Field>();
+        roads = new ArrayList<Field>();
         init(file, game);
     }
 
     public void init(File stage, Game game){
     	try{
     		
-    		Portal portal = new Portal();
+    		portal = new Portal();
     		
 	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -38,6 +42,9 @@ public class Stage
 	    	NodeList fieldRows = doc.getElementsByTagName("row");
 	    	
 	    	List<List<Field>> buildFields = new ArrayList<List<Field>>();
+	    	List<Scale> connectScales = new ArrayList<Scale>();
+	    	List<Gate> connectGates = new ArrayList<Gate>();
+	    	List<PortalWall> activatePortalWalls = new ArrayList<PortalWall>();
 	    	
 	    	//read fields row by row
 	    	for(int i = 0; i < fieldRows.getLength(); i++){
@@ -49,6 +56,7 @@ public class Stage
 	                switch (row.charAt(j)) {
 		                case 'r':
 		                    field = new Road();
+		                    roads.add(field);
 		                    break;
 		                case 'a':
 		                    field = new Abyss();
@@ -57,13 +65,19 @@ public class Stage
 		                    field = new Wall();
 		                    break;
 		                case 'p':
-		                	field = new PortalWall(portal);
+		                	PortalWall portalWall = new PortalWall(portal); 
+		                	field = portalWall;
+		                	activatePortalWalls.add(portalWall);
 		                    break;
 		                case 's':
-		                	field = new Scale();
+		                	Scale scale = new Scale();
+		                	field = scale;
+		                	connectScales.add(scale);
 		                    break;
 		                case 'g':
-		                	field = new Gate();
+		                	Gate gate = new Gate();
+		                	field = gate;
+		                	connectGates.add(gate);
 		                    break;
 		                default:
 		                    throw new Exception("Hiba: érvénytelen karakter a táblaleíró részben");       
@@ -96,6 +110,49 @@ public class Stage
 	    		}
 	    	}
 	    	
+	    	//make connection between scales and gates
+	    	NodeList nConnections = doc.getElementsByTagName("connection");
+	    	
+	    	for(int i = 0; i < nConnections.getLength(); i++){
+	    		Node nConnection = nConnections.item(i);
+	    		if(nConnection.getNodeType() == Node.ELEMENT_NODE){
+	    			Element connectionElement = (Element) nConnection;
+	    			
+	    			Point fromPos = new Point(Integer.parseInt(connectionElement.getAttribute("fCol")),
+	    									  Integer.parseInt(connectionElement.getAttribute("fRow")));
+	    			Point toPos = new Point(Integer.parseInt(connectionElement.getAttribute("toCol")),
+							  				Integer.parseInt(connectionElement.getAttribute("toRow")));
+	    			for(Scale scale : connectScales){
+	    				for(Gate gate : connectGates){
+	    					if(scale.getPosition().equals(fromPos) &&
+	    					   gate.getPosition().equals(toPos)){
+	    						scale.setGate(gate);
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    	
+	    	
+	    	//activate portalwalls
+	    	NodeList nPortalWallColors = doc.getElementsByTagName("portalwall_color");
+	    	
+	    	for(int i = 0; i < nPortalWallColors.getLength(); i++){
+	    		Node nPortalWallColor = nPortalWallColors.item(i);
+	    		if(nPortalWallColor.getNodeType() == Node.ELEMENT_NODE){
+	    			Element portalWallColorElement = (Element) nPortalWallColor;
+	    			
+	    			Point Pos = new Point(Integer.parseInt(portalWallColorElement.getAttribute("col")),
+	    									  Integer.parseInt(portalWallColorElement.getAttribute("row")));
+					Color color = colorByString(portalWallColorElement.getAttribute("color"));
+					for(PortalWall portalWall : activatePortalWalls){
+						if(portalWall.getPosition().equals(Pos)){
+							portal.createPortal(portalWall, color);
+						}
+					}
+	    		}
+	    	}
+	    	
 	    	NodeList nUnits = doc.getElementsByTagName("unit");
 	    	//add units
 	    	for (Field field : fields){
@@ -110,60 +167,26 @@ public class Stage
 	    				if(field.getPosition().equals(unitPos)){
 	    					String unitType = unitElement.getTextContent();
 	    					if(unitType.equals("Bullet")){
-	    						String rColor = unitElement.getAttribute("color");
-	    						Color color = null;
-	    						if(rColor.equals("blue")){
-	    							color = Color.BLUE;
-	    						}else
-	    						if(rColor.equals("yellow")){
-	    							color = Color.YELLOW;
-	    						}else
-	    						if(rColor.equals("red")){
-	    							color = Color.RED;
-	    						}else
-	    						if(rColor.equals("green")){
-	    							color = Color.GREEN;
-	    						}else
-	    							throw new Exception("Hiba: érvénytelen a megadott szín");
-	    						
-	    						Direction dir;
-	    						switch(unitElement.getAttribute("direction").charAt(0)){
-	    						case 'N':
-	    							dir = Direction.NORTH;
-	    						break;
-	    						case 'E':
-	    							dir = Direction.EAST;
-	    						break;
-	    						case 'W':
-	    							dir = Direction.WEST;
-	    						break;
-	    						case 'S':
-	    							dir = Direction.SOUTH;
-	    						break;
-	    						default:
-	    							throw new Exception("Hiba: érvénytelen a megadott irány");
-	    						}
-	    						field.addUnit(new Bullet(new Action(ActionType.MOVE, dir, color),field));
+	    						Color color = colorByString(unitElement.getAttribute("color"));
+	    						Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));;
+	    						Bullet bullet = new Bullet(new Action(ActionType.MOVE, dir, color),field);
+	    						units.add(bullet);
+	    						field.addUnit(bullet);
 	    					}else
 	    					if(unitType.equals("O'neil") || unitType.equals("Jaffa")){
-	    						Direction dir;
-	    						switch(unitElement.getAttribute("direction").charAt(0)){
-	    						case 'N':
-	    							dir = Direction.NORTH;
-	    						break;
-	    						case 'E':
-	    							dir = Direction.EAST;
-	    						break;
-	    						case 'W':
-	    							dir = Direction.WEST;
-	    						break;
-	    						case 'S':
-	    							dir = Direction.SOUTH;
-	    						break;
-	    						default:
-	    							throw new Exception("Hiba: érvénytelen a megadott irány");
-	    						}
-	    						ActionUnit player = new Player(0, dir, field, game);
+	    						Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
+	    						ActionType actionType = actionTypeByString(unitElement.getAttribute("action"));
+	    						Direction turnDir = Direction.NORTH; //default, this is not affect actions (exclude turn) 
+	    						Color color = null;
+	    						Box box = null;
+	    						if(actionType == ActionType.TURN)
+	    							turnDir = directionByChar(unitElement.getAttribute("turndir").charAt(0));
+	    						if(actionType == ActionType.SHOOT)
+	    							color = colorByString(unitElement.getAttribute("color"));
+	    						if(unitElement.getAttribute("box").equals("true"))
+	    							box = new Box(field);
+	    						ActionUnit player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box);
+	    						units.add(player);
 	    						field.addUnit(player);
 	    						if(unitType.equals("O'neil")){
 	    							game.setOneil(player);
@@ -172,10 +195,14 @@ public class Stage
 	    					}
 	    					else
 	    					if(unitType.equals("Box")){
-	    						field.addUnit(new Box(field));
+	    						Box box = new Box(field);
+	    						units.add(box);
+	    						field.addUnit(box);
 	    					}else
 	    					if(unitType.equals("ZPM")){
-	    						field.addUnit(new ZPM(field));
+	    						allZPM++;
+	    						ZPM zpm = new ZPM(field);
+	    						field.addUnit(zpm);
 	    					}else
 	    						throw new Exception("Hiba: ismeretlen egységtípus");
 	    				}
@@ -188,6 +215,56 @@ public class Stage
     	catch(Exception e){
     		e.printStackTrace();
     	}
+    }
+    
+    public Direction directionByChar(char c) throws Exception{
+		switch(c){
+		case 'N': return Direction.NORTH;
+		case 'E': return Direction.EAST;
+		case 'W': return Direction.WEST;
+		case 'S': return Direction.SOUTH;
+		default:
+			throw new Exception("Hiba: érvénytelen a megadott irány");
+		}
+    }
+    
+    public Color colorByString(String rColor) throws Exception{
+		Color color = null;
+		if(rColor.equals("blue")){
+			color = Color.BLUE;
+		}else
+		if(rColor.equals("yellow")){
+			color = Color.YELLOW;
+		}else
+		if(rColor.equals("red")){
+			color = Color.RED;
+		}else
+		if(rColor.equals("green")){
+			color = Color.GREEN;
+		}else
+			throw new Exception("Hiba: érvénytelen a megadott szín");
+		return color;
+    }
+    
+    public ActionType actionTypeByString(String type) throws Exception{
+		ActionType action = ActionType.NONE;
+		if(type.equals("MOVE")){
+			action = ActionType.MOVE;
+		}else
+		if(type.equals("TURN")){
+			action = ActionType.TURN;
+		}else
+		if(type.equals("SHOOT")){
+			action = ActionType.SHOOT;
+		}else
+		if(type.equals("GRAB")){
+			action = ActionType.GRAB;
+		}else
+		if(type.equals("DROP")){
+			action = ActionType.DROP;
+		}else
+			throw new Exception("Hiba: érvénytelen a megadott akció");
+		return action;
     }
     
     public void checkMap(){
@@ -207,6 +284,10 @@ public class Stage
 			field.showUnits();
 			System.out.println("\n\n");
 		}
+    }
+    
+    public Portal getPortal(){
+    	return portal;
     }
     
 

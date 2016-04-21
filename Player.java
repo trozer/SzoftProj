@@ -11,7 +11,8 @@ public class Player extends ActionUnit{
 	private Game game;
 	
 	//Konstruktor
-	public Player(int allZPM, Direction direction, Field currentField, Game game){
+	public Player(int allZPM, Direction direction,Action action, Field currentField, Game game, Box box){
+		
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(allZPM);
 		Object dir = new Object();
@@ -22,6 +23,7 @@ public class Player extends ActionUnit{
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Konstruktor", this, parameters);
 		
+		this.box = box;
 		this.allZPM = allZPM;
 		this.currentDirection = direction;
 		this.currentField = currentField;

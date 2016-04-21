@@ -20,6 +20,7 @@ public class Scale extends Field {
 		parameters.add(Skeleton.getEmpty());
 		Skeleton.callMethod("Scale - konstruktor", this, parameters);
 		Skeleton.returnMethod("Scale - konstruktor", this, parameters);
+		myGate = null;
 	}
 	
 	public void setGate(Gate gate){	//beállítja a saját kapuját, azaz a hozzá tartozó kaput, ha még nincs neki
@@ -114,8 +115,12 @@ public class Scale extends Field {
 		Skeleton.returnMethod("removeUnit", this, parameters);
 	}
 	
+	//TODO,testing phase, correct this
 	@Override
 	public String toString(){
-		return "mérleg " + super.toString();
+		if(myGate != null)
+			return "mérleg " + super.toString() + " " + myGate.toString();
+		else
+			return "mérleg " + super.toString();
 	}
 }
