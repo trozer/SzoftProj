@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -267,6 +269,8 @@ public class Stage
 		return action;
     }
     
+    
+    //helper function
     public void checkMap(){
     	
     	//list fields and neighbours
@@ -290,7 +294,61 @@ public class Stage
     	return portal;
     }
     
-
+    public void logOff(){
+    	log = false;
+    }
+    
+    public void logOn(){
+    	log = true;
+    }
+    
+    public void createZPM(){
+    	List<Field> emptyRoads = new ArrayList<Field>();
+    	
+    	for(Field road : roads){
+    		if(road.containedUnits.isEmpty()){
+    			emptyRoads.add(road);
+    		}
+    	}
+    	
+    	Random rand = new Random();
+    	int n = rand.nextInt(emptyRoads.size());
+    	
+    	ZPM drop = new ZPM(emptyRoads.get(n));
+    	emptyRoads.get(n).addUnit(drop);
+    	units.add(drop);
+    }
+    
+    //given field's must be initialized
+    public void replaceField(Field field){
+    	Road road = new Road();
+    	Field oldField = fields.get(fields.indexOf(field));
+    	road.setPosition(oldField.getPosition());
+    	road.addNeighbour(Direction.NORTH, field.getNeighbourInDirection(Direction.NORTH));
+    	road.addNeighbour(Direction.WEST, field.getNeighbourInDirection(Direction.WEST));
+    	road.addNeighbour(Direction.EAST, field.getNeighbourInDirection(Direction.EAST));
+    	road.addNeighbour(Direction.SOUTH, field.getNeighbourInDirection(Direction.SOUTH));
+    	fields.set(fields.indexOf(field), road);
+    	
+    	boolean isRoad = false;
+    	for(Field r : roads){
+    		if(r.getPosition().equals(field.getPosition()))
+    			isRoad = true;
+    	}
+    	if(!isRoad)
+    		roads.add(road);
+    	else
+    		roads.set(roads.indexOf(field), road);
+    }
+    
+    List<Unit> getUnit(Field field){
+    	return fields.get(fields.indexOf(field)).getUnit();
+    }
+    
+    int getZPM(){
+    	
+    }
+    
     //lefuttat egy kört
     public void update()
     {
