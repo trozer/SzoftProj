@@ -1,5 +1,6 @@
 package szoftProj;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -9,118 +10,175 @@ public class Scale extends Field {
 	
 	
 	private Gate myGate;
+	int openLimit;
+	boolean blockAddUnit;
 	
 	//-------Metódusok---------
 	
 	
 	
 	public Scale(){	//konstruktor
-		super();
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("Scale - konstruktor", this, parameters);
-		Skeleton.returnMethod("Scale - konstruktor", this, parameters);
-		myGate = null;
+		super();	
+		this.myGate = null;
+		this.openLimit = 45;
+		this.blockAddUnit = false;
+		//ez így csudálatos, szóljatok, ha visszaírhatom :-)
 	}
 	
 	public void setGate(Gate gate){	//beállítja a saját kapuját, azaz a hozzá tartozó kaput, ha még nincs neki
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(gate);
-		if(myGate == null) myGate = gate;
-		else System.out.println("setGate: már van beállítva gate!");
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("setGate", this, parameters);
-		Skeleton.returnMethod("setGate", this, parameters);
+		if(myGate == null) 
+			myGate = gate;
+		else 
+			System.out.println("setGate: már van beállítva gate!");
 	}
 	
 	@Override
 	public void doo(Player player){	//a játékos cselekedetére "reagál"
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(player);
-		player.getAction();
-		
+		int hatar = 0;
 		switch (player.getAction().getType()) {
         case MOVE:	//ha a játékos rálép magára húzza és kinyitja a hozzá tartozó kaput
 		
-		if (containedUnit != null){
-				containedUnit.accept(this, player);
-		}
-		if (containedUnit == null){
+        	if (!containedUnits.isEmpty()){
+        		for(Unit u : containedUnits) u.accept(this, player);
+        	}
+        	if (containedUnits.isEmpty()){
 				player.step(this);
+				containedUnits.add(player);
 				myGate.open();
 			}
-		break;
+        	break;
 		
         case GRAB:	//ha a játékos leszed róla egy tárgyat, a hozzá tartozó kapu bezárul
-        	if (containedUnit != null){
-    			containedUnit.accept(this, player);
+        	if (!containedUnits.isEmpty()){
+        		for(Unit u : containedUnits) u.accept(this, player);
     		}
-    		myGate.close();
+        	//for(Unit u : containedUnits) hatar += u.getWeight();
+			if (hatar < openLimit){
+    			myGate.close();
+        	}
     		break;
     		
         default:	//minden más eset
         	//TODO
         	break;
 		}
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("doo", this, parameters);
-		Skeleton.returnMethod("doo", this, parameters);
 	}
 	
 	@Override
 	public void doo(Bullet bullet){		//lövedékre reagál
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(bullet);
+		
 		switch (bullet.getAction().getType()) {
         case MOVE:	//magára húzza a lövedéket, a lövedék nem nyitja ki a kaput
-        	bullet.step(this);
-        	break;
+        	if (containedUnits.isEmpty()){
+        		bullet.step(this);
+        		containedUnits.add(bullet);
+        		break;
+        	}
+        	else{
+        		//for(Unit u : containedUnits) u.accept(bullet, this);
+        	}
         default:	//minden más eset
         	break;
 		}
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("doo", this, parameters);
-		Skeleton.returnMethod("doo", this, parameters);
 	}
 	
+	/*@Override
+	 public void doo(Replicator replicator){
+		switch (replicator.getAction().getType()) {
+        case MOVE:
+        	replicator.step();
+        	containedUnits.add(replicator);
+        	break;
+    	default:
+			break;
+		}
+	}*/
 	
 	@Override
-	public boolean addUnit(Unit unit){	//unitot hejez el a mérlegen, ha nincs rajta semmi
-		Object object = new Object();
-		Skeleton.registerHashCode(object.hashCode(), "boolean");
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(unit);
-		if (containedUnits.size() < 3 ){
-			containedUnits.add(unit);
-			parameters.add(object);
+	public void forceAddUnit(Unit unit){
+		containedUnits.add(unit);
+	}
+	
+	@Override
+	public boolean addUnit(Unit unit){
+		int hatar = 0;
+		if (!blockAddUnit){
+		containedUnits.add(unit);
+		}
+		blockAddUnit = true;
+			//for(Unit u : containedUnits) u.accept(unit, this);
+		blockAddUnit = false;
+		
+		//for(Unit u : containedUnits) hatar += u.getWeight();
+		if (hatar >= openLimit){
 			myGate.open();
-			Skeleton.callMethod("addUnit", this, parameters);
-			Skeleton.returnMethod("addUnit", this, parameters);
+		}
+		return true;
+		/*if (containedUnits.size() < 3 ){
+			containedUnits.add(unit);
+			myGate.open();
 			return true;
 		}
 		else
-			parameters.add(object);
-			Skeleton.callMethod("addUnit", this, parameters);
-			Skeleton.returnMethod("addUnit", this, parameters);
-			return false;
+			return false;*/
 	}
 
 	@Override
 	public void removeUnit(){	//eltávolítja a unitot ami a mérlegen van, ilyenkor a kapu bezárul 
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		containedUnit = null;
+		containedUnits = new ArrayList<Unit>();
 		myGate.close();
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("removeUnit", this, parameters);
-		Skeleton.returnMethod("removeUnit", this, parameters);
+	}
+	
+	@Override
+	public void removeUnit(Unit unit){
+		int hatar = 0;
+		if (!containedUnits.isEmpty()){
+			containedUnits.remove(unit);
+			//for(Unit u : containedUnits) hatar += u.getWeight();
+		}
+		if (hatar < openLimit){
+			myGate.close();
+		}
+	}
+	
+	@Override
+	public Field getNeighbourInDirection(Direction dir) {
+		// TODO Auto-generated method stub
+		return super.getNeighbourInDirection(dir);
+	}
+
+	@Override
+	public void addNeighbour(Direction direction, Field neighbour) {
+		// TODO Auto-generated method stub
+		super.addNeighbour(direction, neighbour);
 	}
 	
 	//TODO,testing phase, correct this
 	@Override
 	public String toString(){
+		int sulyok = 0;
+		for (int i = 0; i < containedUnits.size(); i++){
+			//sulyok += containedUnits.get(i).getWeight();
+		}
 		if(myGate != null)
-			return "mérleg " + super.toString() + " " + myGate.toString();
+			if(sulyok >= openLimit)
+			//return "mérleg " + super.toString() + " " + myGate.toString();
+				return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+					+ openLimit + " súlyhatár, lenyomva , van hozzákapcsolt kapu, " 
+					+ containedUnits.size() + "darab tárolt egység";
+			else
+				return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+				+ openLimit + " súlyhatár, nincs lenyomva , van hozzákapcsolt kapu, " 
+				+ containedUnits.size() + "darab tárolt egység";
 		else
-			return "mérleg " + super.toString();
+			if(sulyok >= openLimit)
+				//return "mérleg " + super.toString() + " " + myGate.toString();
+					return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+						+ openLimit + " súlyhatár, lenyomva , nincs hozzákapcsolt kapu, " 
+						+ containedUnits.size() + "darab tárolt egység";
+				else
+					return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+					+ openLimit + " súlyhatár, nincs lenyomva , nincs hozzákapcsolt kapu, " 
+					+ containedUnits.size() + "darab tárolt egység";
 	}
 }

@@ -1,7 +1,10 @@
 package szoftProj;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Map;
+
+import javax.swing.text.Position;
 
 public class Road extends Field {
 
@@ -15,32 +18,25 @@ public class Road extends Field {
 
 	public Road() {	//konstruktor
 		super();
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(Skeleton.getEmpty());
-
-		Skeleton.callMethod("Road - konstruktor", this, parameters);
-		Skeleton.returnMethod("Road - konstruktor", this, parameters);
-
 	}
 
 	@Override
 	public void doo(Player player){	//a játékos cselekedetére "reagál"
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(player);
-		
 		player.getAction();
 		switch (player.getAction().getType()) {
         case MOVE:	//ha a játékos lépni akar
-        		if (containedUnit != null){
-				containedUnit.accept(this, player);
-        		}
-        		if (containedUnit == null)
+        		if (containedUnits.isEmpty()){
         			player.step(this);
+        			containedUnits.add(player);
+        		}
+        		else{
+        			for(Unit u : containedUnits) u.accept(this, player);
+        		}
         		break;
         
         case GRAB:	//ha a játékos fel akar venni valamit
-        		if (containedUnit != null){
-        			containedUnit.accept(this, player);}
+        		if (!containedUnits.isEmpty()){
+        			for(Unit u : containedUnits) u.accept(this, player);}
         		break;
         		
         default:	//minden más eset
@@ -48,50 +44,73 @@ public class Road extends Field {
         	
         	break;
 		}
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("doo", this, parameters);
-		Skeleton.returnMethod("doo", this, parameters);
 		//drop -adunit intézi
 	}
 
 	@Override
 	public void doo(Bullet bullet) {	//a lövedék cselekedetétre reagál
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(bullet);
 		switch (bullet.getAction().getType()) {
         case MOVE:	//ha megérkezik/lépni akar
+        	if (containedUnits.isEmpty()){
         	bullet.step(this);
+        	}
+        	else{
+        		//for(Unit u : containedUnits) u.accept(bullet, this);
+			}
         	break;
         default:	//minden más eset
         	break;
 		}
-		parameters.add(Skeleton.getEmpty());
-		Skeleton.callMethod("doo", this, parameters);
-		Skeleton.returnMethod("doo", this, parameters);
+	}
+
+	/*@Override
+	 public void doo(Replicator replicator){
+		switch (replicator.getAction().getType()) {
+        case MOVE:
+        	replicator.step();
+        	containedUnits.add(replicator);
+        	break;
+    	default:
+			break;*/
+	
+	@Override
+	public void forceAddUnit(Unit unit){
+		containedUnits.add(unit);
 	}
 
 	@Override
-	public boolean addUnit(Unit unit) {	//ha nincs még unit az úton rátehetünk egyet, ha van akkor nem
-		Object object = new Object();
-		Skeleton.registerHashCode(object.hashCode(), "boolean");
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		parameters.add(unit);
-		if (containedUnits.size() < 3 ){
+	public void removeUnit(){
+		containedUnits = new ArrayList<Unit>();
+	}
+	
+	@Override
+	void removeUnit(Unit unit){
+		if (!containedUnits.isEmpty()){
+			containedUnits.remove(unit);
+		}
+	}
+	
+	@Override
+	public boolean addUnit(Unit unit){
+		if(containedUnits.isEmpty()){
 			containedUnits.add(unit);
-			parameters.add(object);
-			Skeleton.callMethod("addUnit", this, parameters);
-			Skeleton.returnMethod("addUnit", this, parameters);
 			return true;
-		} else
-			parameters.add(object);
-			Skeleton.callMethod("addUnit", this, parameters);
-			Skeleton.returnMethod("addUnit", this, parameters);
-			return false;
+		}
+		return false;
+	}
+	
+	@Override
+	public Field getNeighbourInDirection(Direction dir) {
+		// TODO Auto-generated method stub
+		return super.getNeighbourInDirection(dir);
 	}
 
-	/*
-	 * @Override public void removeUnit(){ containedUnit = null; }
-	 */
+	@Override
+	public void addNeighbour(Direction direction, Field neighbour) {
+		// TODO Auto-generated method stub
+		super.addNeighbour(direction, neighbour);
+	}
+	
 	@Override
 	public String toString(){
 		return "út " + super.toString();
