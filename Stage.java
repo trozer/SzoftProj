@@ -341,30 +341,63 @@ public class Stage
     		roads.set(roads.indexOf(field), road);
     }
     
-    List<Unit> getUnit(Field field){
-    	return fields.get(fields.indexOf(field)).getUnit();
+    public List<Unit> getUnit(Field field){
+    	return fields.get(fields.indexOf(field)).getUnits();
     }
     
-    int getZPM(){
+    public int getZPM(){
+    	return allZPM;
+    }
+    
+    //helper query, check boxes
+    public List<Unit> listBoxes(){
+    	List<Unit> boxes = new ArrayList<Unit>();
+    	for(Unit box : units){
+    		if(box instanceof Box){
+    			boxes.add(box);
+    		}
+    	}
+    	return boxes;
+    }
+    
+    //helper query, check zpm's
+    public List<Unit> listZPM(){
+    	List<Unit> zpms = new ArrayList<Unit>();
+    	for(Unit zpm : units){
+    		if(zpm instanceof ZPM){
+    			zpms.add(zpm);
+    		}
+    	}
+    	return zpms;
+    }
+    
+    public Field getField(Point position){
+    	for(Field field : fields){
+    		if(field.getPosition().equals(position))
+    			return field;
+    	}
+    	return null;
+    }
+    
+    public void update(){
+    	List<String> before = new ArrayList<String>();
+    	List<String> after = new ArrayList<String>();
     	
-    }
-    
-    //lefuttat egy kört
-    public void update()
-    {
-        List<Object> parameters = new ArrayList<Object>();
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("update", this, parameters);
-
-        if(units != null)
-        {
-           // for (Unit unit : units)
-        	for(int i = 0; i< units.size() ; i++)
-                //unit.action();
-        		units.get(i).action();
+    	if(log){
+	        for(Unit unit : units){
+	        	before.add(unit.toString());
+	        }
+    	}
+    	
+        for(Unit unit : units){
+        	unit.action();
         }
-
-        Skeleton.returnMethod("update", this, parameters);
+        
+    	if(log){
+	        for(Unit unit : units){
+	        	after.add(unit.toString());
+	        }
+    	}
     }
 
     //"halott" egységek törlése units listából
