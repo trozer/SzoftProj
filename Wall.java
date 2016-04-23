@@ -11,6 +11,10 @@ public class Wall extends Field {
 	}
 
 	@Override
+	public void doo(Replicator replicator) {
+	}
+
+	@Override
 	public void doo(Bullet bullet) {
 	}
 
