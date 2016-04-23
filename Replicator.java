@@ -15,7 +15,7 @@ public class Replicator extends ActionUnit{
 	}
 
 	public void replaceField(){
-		//game.replaceField(currentField); //TODO
+		game.replaceField(currentField);
 		currentField.removeUnit(this);
 		kill();
 	}
