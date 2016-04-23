@@ -25,9 +25,19 @@ public class Replicator extends ActionUnit{
 		currentField.removeUnit();
 		target.addUnit(this);
 		currentField = target;
+	}
+	
+	//A nextAction alapjan csinal valamit.
+	public void action() {
+		//Ha move, akkor a megfelelo iranyban levo szomszedos mezo doo-jat hivja meg.
+		if (nextAction.getType() == ActionType.MOVE){
+			currentField.getNeighbourInDirection(currentDirection).doo(this);
+		}
 		
-		//TODO irányváltoztatást meg kell még csinálni
-		nextAction = new Action(ActionType.MOVE, currentDirection, null);
+		//Ha turn, akkor beallitja az uj iranyt.
+		else if (nextAction.getType() == ActionType.TURN){
+			currentDirection = nextAction.getDirection();
+		}
 	}
 	
 	public String toString(){
