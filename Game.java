@@ -28,6 +28,10 @@ public class Game {
 		pause = false;
 	}
 
+	public void setReplicator(Replicator replicator){
+		this.Replicator = replicator;
+	}
+
 	public void update(){
 		if(!pause){
 			stage.update();
