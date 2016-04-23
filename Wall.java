@@ -30,7 +30,7 @@ public class Wall extends Field {
 		return true;
 	}
 
-	public void forceAddUnit(Unit unit){
+	public forceAddUnit(Unit unit){
 		return super.addUnit(unit);
 	}
 
