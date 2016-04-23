@@ -31,8 +31,7 @@ public class Stage implements Serializable
     private boolean log;
     private List<String> lastLog;
 
-    public Stage (File file, Game game)
-    {
+    public Stage (File file, Game game) throws Exception {
         units =  new ArrayList<Unit>();
         fields = new ArrayList<Field>();
         roads = new ArrayList<Field>();
@@ -44,9 +43,7 @@ public class Stage implements Serializable
         init(file, game);
     }
 
-    public void init(File stage, Game game){
-    	try{
-    		
+    public void init(File stage, Game game) throws Exception{
     		portal = new Portal();
     		
 	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -239,10 +236,6 @@ public class Stage implements Serializable
 	    	}
 	    	
 	    	//checkMap();
-    	}
-    	catch(Exception e){
-    		e.printStackTrace();
-    	}
     }
     
     public Direction directionByChar(char c) throws Exception{
