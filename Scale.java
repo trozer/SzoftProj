@@ -20,7 +20,7 @@ public class Scale extends Field {
 	public Scale(){	//konstruktor
 		super();	
 		this.myGate = null;
-		this.openLimit = 45;
+		this.openLimit = 15;
 		this.blockAddUnit = false;
 		//ez így csudálatos, szóljatok, ha visszaírhatom :-)
 	}
