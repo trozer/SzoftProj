@@ -75,7 +75,7 @@ public class Game {
 				} else if ("saveGame".startsWith(command)) {
 					//// TODO: 2016. 04. 23.
 				} else if ("exitGame".startsWith(command)) {
-					//// TODO: 2016. 04. 23.
+					break;
 				//Cselekvések
 				} else if ("move".startsWith(command)) {
 					String executor = readString(tokenizer);
