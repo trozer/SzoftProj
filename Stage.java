@@ -13,17 +13,23 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.Serializable;
 import java.awt.Point;
 
-public class Stage
+public class Stage implements Serializable
 {
-    private int allZPM;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int allZPM;
     private List<Unit> units;
     private List<ZPM> zpms;
     private List<Field> fields;
     private List<Field> roads;
     private Portal portal;
     private boolean log;
+    private List<String> lastLog;
 
     public Stage (File file, Game game)
     {
@@ -31,6 +37,10 @@ public class Stage
         fields = new ArrayList<Field>();
         roads = new ArrayList<Field>();
         zpms = new ArrayList<ZPM>();
+        lastLog = new ArrayList<String>();
+        log = false;
+        portal = null;
+        allZPM = 0;
         init(file, game);
     }
 
@@ -177,7 +187,7 @@ public class Stage
 	    						units.add(bullet);
 	    						field.addUnit(bullet);
 	    					}else
-	    					if(unitType.equals("O'neil") || unitType.equals("Jaffa")){
+	    					if(unitType.equals("O'neill") || unitType.equals("Jaffa")){
 	    						Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
 	    						ActionType actionType = actionTypeByString(unitElement.getAttribute("action"));
 	    						Direction turnDir = Direction.NORTH; //default, this is not affect actions (exclude turn) 
@@ -192,7 +202,7 @@ public class Stage
 	    						ActionUnit player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box);
 	    						units.add(player);
 	    						field.addUnit(player);
-	    						if(unitType.equals("O'neil")){
+	    						if(unitType.equals("O'neill")){
 	    							game.setOneil(player);
 	    						}else
 	    							game.setJaffa(player);
@@ -396,17 +406,22 @@ public class Stage
     	return null;
     }
     
+    List<String> getLog(){
+    	return lastLog;
+    }
+    
     public void update(){
     	List<String> before = new ArrayList<String>();
     	List<String> after = new ArrayList<String>();
+    	lastLog = new ArrayList<String>();
     	
     	if(log){
 	        for(Field field : fields){
 	        	before.add(field.toString());
+	        	for(Unit fieldUnit : field.getUnits()){
+	        		before.add(fieldUnit.toString());
+	        	}
 	        }
-	        for(Unit unit : units){
-	        	before.add(unit.toString());
-	        } 
     	}
     	
         for(Unit unit : units){
@@ -416,17 +431,19 @@ public class Stage
     	if(log){
 	        for(Field field : fields){
 	        	after.add(field.toString());
+	        	for(Unit fieldUnit : field.getUnits()){
+	        		after.add(fieldUnit.toString());
+	        	}
 	        }
-	        for(Unit unit : units){
-	        	after.add(unit.toString());
+	        for(String beforeStr : before){
+	        	if(!after.contains(beforeStr)){
+	        		lastLog.add(beforeStr);
+	        	}
 	        }
-	        for(int i = 0; i < after.size(); i++){
-	        	if(i < before.size()){
-	        		if(!before.get(i).equals(after.get(i))){
-	        			System.out.println(before.get(i) + "\n Az elõbbi cselekvés utáni állapot:" + after.get(i));
-	        		}
-	        	}else{
-	        		System.out.println(after.get(i));
+	        lastLog.add("\n\n");
+	        for(String afterStr : after){
+	        	if(!before.contains(afterStr)){
+	        		lastLog.add(afterStr);
 	        	}
 	        }
     	}
