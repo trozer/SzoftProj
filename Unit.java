@@ -35,6 +35,10 @@ public abstract class Unit {
 		currentField = field;
 	}
 	
+	public int getWeight(){
+		return weight;
+	}
+	
 	@Override
 	public
 	String toString(){
