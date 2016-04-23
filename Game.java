@@ -170,6 +170,77 @@ public class Game {
 
 					setReplicatorDir(false, dir);
 				} else if ("setUnitPos".startsWith(command)) {
+					String firstparam = readString(tokenizer);
+					if("oneill".startsWith(firstparam)){
+						String targetX;
+						String targetY;
+						Field targetField = null;
+						try {
+							targetX = readString(tokenizer);
+							targetY = readString(tokenizer);
+							int X = Integer.parseInt(targetX);
+							int Y = Integer.parseInt(targetY);
+							targetField = stage.getField(new Point(X,Y));
+						} catch (Exception e){
+							throw new Exception("Hibásan megadott célmezõ paraméter!");
+						}
+						stage.setUnitPos(Oneill, targetField);
+					} else if ("jaffa".startsWith(firstparam)) {
+						String targetX;
+						String targetY;
+						Field targetField = null;
+						try {
+							targetX = readString(tokenizer);
+							targetY = readString(tokenizer);
+							int X = Integer.parseInt(targetX);
+							int Y = Integer.parseInt(targetY);
+							targetField = stage.getField(new Point(X,Y));
+						} catch (Exception e){
+							throw new Exception("Hibásan megadott célmezõ paraméter!");
+						}
+						stage.setUnitPos(Jaffa, targetField);
+					} else if ("replicator".startsWith(firstparam)) {
+						String targetX;
+						String targetY;
+						Field targetField = null;
+						try {
+							targetX = readString(tokenizer);
+							targetY = readString(tokenizer);
+							int X = Integer.parseInt(targetX);
+							int Y = Integer.parseInt(targetY);
+							targetField = stage.getField(new Point(X,Y));
+						} catch (Exception e){
+							throw new Exception("Hibásan megadott célmezõ paraméter!");
+						}
+						stage.setUnitPos(Replicator, targetField);
+					} else {
+						String originX;
+						String originY;
+						Field originField;
+						try {
+							originX = firstparam;
+							originY = readString(tokenizer);
+							int X = Integer.parseInt(originX);
+							int Y = Integer.parseInt(originY);
+							originField = stage.getField(new Point(X,Y));
+						} catch (Exception e){
+							throw new Exception("Hibásan megadott indulási mezõ paraméter!");
+						}
+
+						String targetX;
+						String targetY;
+						Field targetField;
+						try {
+							targetX = readString(tokenizer);
+							targetY = readString(tokenizer);
+							int X = Integer.parseInt(targetX);
+							int Y = Integer.parseInt(targetY);
+							targetField = stage.getField(new Point(X,Y));
+						} catch (Exception e){
+							throw new Exception("Hibásan megadott célmezõ paraméter!");
+						}
+						stage.setUnitPos(originField,targetField);
+					}
 				} else if ("killUnit".startsWith(command)) {
 					String executor = readString(tokenizer);
 					if("oneill".startsWith(executor)){
