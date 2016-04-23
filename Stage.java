@@ -197,12 +197,13 @@ public class Stage
 	    						}else
 	    							game.setJaffa(player);
 	    					}
+	    					else
 	    					if(unitType.equals("Replicator")){
-	    					//	Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
-	    					//	ActionUnit replicator = new Player(allZPM, dir,new Action(ActionType.MOVE, Direction.NORTH, null), field, game);
-	    					//	units.add(replicator);
-	    					//	field.addUnit(replicator);
-	    					//	game.setReplicator(replicator);
+	    						Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
+	    						ActionUnit replicator = new Replicator(game, dir, field);
+	    						units.add(replicator);
+	    						field.addUnit(replicator);
+	    						game.setReplicator(replicator);
 	    					}
 	    					else
 	    					if(unitType.equals("Box")){
@@ -296,6 +297,7 @@ public class Stage
 					+ " \nNyugat: " + west
 					+ " \nKelet: " + east
 					+ " \nDél: " + south + "\n");
+			System.out.println("Rajta levõ egység: ");
 			field.showUnits();
 			System.out.println("\n\n");
 		}

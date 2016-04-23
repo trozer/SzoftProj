@@ -45,6 +45,10 @@ public class Game {
 		this.Oneil = Oneil;
 	}
 	
+	//TODO
+	public void setReplicator(ActionUnit replicator){
+		
+	}
 	
 	public void win(){
 		state = State.WIN;
@@ -57,6 +61,10 @@ public class Game {
 	}
 	public void newGame(){
 		this.stage = new Stage(new File("finalMap.xml"), this);
+	}
+	
+	public void replaceField(Field field){
+		stage.replaceField(field);
 	}
 	public void setStage(Stage stage){
 		this.stage = stage;
