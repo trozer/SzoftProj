@@ -102,9 +102,35 @@ public class Game {
 					String cmd = "shoot " + executor + " " + color;
 					control(cmd);
 				} else if ("getUnit".startsWith(command)) {
+					String executor = readString(tokenizer);
+					if("oneill".startsWith(executor)){
+						System.out.println(Oneill.toString());
+					} else if ("jaffa".startsWith(executor)) {
+						System.out.println(Jaffa.toString());
+					} else if ("replicator".startsWith(executor)) {
+						System.out.println(Replicator.toString());
+					} else {
+						throw new Exception("Hibás lekérdezendõ egységazonosító!");
+					}
 				} else if ("getZPM".startsWith(command)) {
+				/*	if(tokenizer.hasMoreTokens()){
+						String executor = readString(tokenizer);
+						if("oneill".startsWith(executor)){
+							System.out.println(Oneill.getZPM());
+						} else if ("jaffa".startsWith(executor)) {
+							System.out.println(Jaffa.getZPM());
+						} else {
+							throw new Exception("Hibás lekérdezendõ egységazonosító!");
+						}
+					} else {
+						stage.getZPM();
+					}*/
 				} else if ("getField".startsWith(command)) {
+					int posX = Integer.parseInt(readString(tokenizer));
+					int posY = Integer.parseInt(readString(tokenizer));
+					System.out.println(stage.getField(new Point(posX, posY)).toString());
 				} else if ("getPortal".startsWith(command)) {
+					System.out.println(stage.getPortal().toString());
 				} else if ("listBoxes".startsWith(command)) {
 					List<Unit> boxes = stage.listBoxes();
 					for(Unit unit : boxes){
@@ -134,6 +160,22 @@ public class Game {
 					setReplicatorDir(false, dir);
 				} else if ("setUnitPos".startsWith(command)) {
 				} else if ("killUnit".startsWith(command)) {
+					String executor = readString(tokenizer);
+					if("oneill".startsWith(executor)){
+						Oneill.kill();
+					} else if ("jaffa".startsWith(executor)) {
+						Jaffa.kill();
+					} else if ("replicator".startsWith(executor)) {
+						Replicator.kill();
+					} else {
+						int posX = Integer.parseInt(readString(tokenizer));
+						int posY = Integer.parseInt(readString(tokenizer));
+						List<Unit> units = stage.getUnit(stage.getField(new Point(posX, posY)));
+
+						for(Unit unit : units){
+							unit.kill();
+						}
+					}
 				} else if ("addBox".startsWith(command)) {
 				} else if ("addZPM".startsWith(command)) {
 				} else if ("addReplicator".startsWith(command)) {
@@ -331,11 +373,19 @@ public class Game {
 	public void replaceField(Field field){
 		stage.replaceField(field);
 	}
-	public void newGame(File file){
-		this.stage = new Stage(file, this);
+	public void newGame(File file) throws Exception{
+		try {
+			this.stage = new Stage(file, this);
+		} catch (Exception e){
+			throw new Exception(e);
+		}
 	}
-	public void newGame(){
-		this.stage = new Stage(new File("finalMap.xml"), this);
+	public void newGame() throws Exception{
+		try {
+			this.stage = new Stage(new File("testMap.xml"), this);
+		} catch (Exception e){
+			throw new Exception(e);
+		}
 	}
 	public void setStage(Stage stage){
 		this.stage = stage;
