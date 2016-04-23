@@ -66,8 +66,8 @@ public class PortalWall extends Wall {
 	@Override
 	public String toString(){
 		if(portal.amIPortal(this))
-			return "port·l" + super.toString() + " port·l vagyok";
+			return "port√°l: " + super.toString() + " port√°l vagyok";
 		else
-			return "port·l" + super.toString() ;
+			return "port√°l: " + super.toString() ;
 	}
 }

@@ -46,7 +46,7 @@ public class Wall extends Field {
 	
 	@Override
 	public String toString(){
-		return "fal " + super.toString();
+		return "fal: " + super.toString();
 	}
 
 }

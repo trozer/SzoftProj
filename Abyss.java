@@ -33,6 +33,7 @@ public class Abyss extends Field {
 
 	@Override
 	public void doo(Bullet bullet) {
+		containedUnits.add(bullet);
 		bullet.step(this);
 	}
 
@@ -46,7 +47,7 @@ public class Abyss extends Field {
 	public boolean addUnit(Unit unit) {
 		// TODO Auto-generated method stub
 		containedUnits.add(unit);
-		return true;
+		return false;
 	}
 
 	@Override
@@ -63,6 +64,6 @@ public class Abyss extends Field {
 
 	@Override
 	public String toString(){
-		return "szakadék " + super.toString();
+		return "szakadék: " + super.toString();
 	}
 }
