@@ -115,6 +115,6 @@ public class Road extends Field {
 	
 	@Override
 	public String toString(){
-		return "út " + super.toString();
+		return "út: " + super.toString();
 	}
 }

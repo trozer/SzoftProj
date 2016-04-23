@@ -134,11 +134,11 @@ public class Gate extends Field {
 	@Override
 	public String toString(){
 		if (opened)
-			return "kapu: " + " (" + position.getX() + "," + position.getY() + ") pozíció, "
+			return "kapu: " + " (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 				+ "nyitva, "
 				+ containedUnits.size() + " darab tárolt egység";
 		else
-			return "kapu: " + " (" + position.getX() + "," + position.getY() + ") pozíció, "
+			return "kapu: " + " (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 				+ "zárva, "
 				+ containedUnits.size() + " darab tárolt egység";
 	}

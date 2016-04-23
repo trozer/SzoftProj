@@ -162,20 +162,20 @@ public class Scale extends Field {
 		}
 		if(myGate != null)
 			if(sulyok >= openLimit)
-				return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+				return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 					+ openLimit + " súlyhatár, lenyomva , van hozzákapcsolt kapu, " 
 					+ containedUnits.size() + "darab tárolt egység";
 			else
-				return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+				return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 				+ openLimit + " súlyhatár, nincs lenyomva , van hozzákapcsolt kapu, " 
 				+ containedUnits.size() + "darab tárolt egység";
 		else
 			if(sulyok >= openLimit)
-					return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+					return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 						+ openLimit + " súlyhatár, lenyomva , nincs hozzákapcsolt kapu, " 
 						+ containedUnits.size() + "darab tárolt egység";
 				else
-					return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
+					return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 					+ openLimit + " súlyhatár, nincs lenyomva , nincs hozzákapcsolt kapu, " 
 					+ containedUnits.size() + "darab tárolt egység";
 	}

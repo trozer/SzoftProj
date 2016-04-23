@@ -89,9 +89,14 @@ public abstract class Field {
 		containedUnits.add(unit);
 	}
 	
+	public int toInt(double d){
+		int x = (int) d;
+		return x;
+	}
+	
 	@Override
 	public String toString(){
-		return " (" + position.getX() + "," + position.getY() + ") pozíció, "
+		return " (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 				+ containedUnits.size() + " darab tárolt egység";
 		
 	}
