@@ -203,7 +203,7 @@ public class Stage implements Serializable
 
 	    						if(unitType.equals("O'neill")){
 	    							player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box, "O'neill");
-	    							game.setOneil(player);
+	    							game.setOneill(player);
 	    						}else{
 	    							player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box ,"Jaffa");
 	    							game.setJaffa(player);
