@@ -19,6 +19,7 @@ public class Stage
 {
     private int allZPM;
     private List<Unit> units;
+    private List<ZPM> zpms;
     private List<Field> fields;
     private List<Field> roads;
     private Portal portal;
@@ -29,6 +30,7 @@ public class Stage
         units =  new ArrayList<Unit>();
         fields = new ArrayList<Field>();
         roads = new ArrayList<Field>();
+        zpms = new ArrayList<ZPM>();
         init(file, game);
     }
 
@@ -195,6 +197,13 @@ public class Stage
 	    						}else
 	    							game.setJaffa(player);
 	    					}
+	    					if(unitType.equals("Replicator")){
+	    					//	Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
+	    					//	ActionUnit replicator = new Player(allZPM, dir,new Action(ActionType.MOVE, Direction.NORTH, null), field, game);
+	    					//	units.add(replicator);
+	    					//	field.addUnit(replicator);
+	    					//	game.setReplicator(replicator);
+	    					}
 	    					else
 	    					if(unitType.equals("Box")){
 	    						Box box = new Box(field);
@@ -205,6 +214,8 @@ public class Stage
 	    						allZPM++;
 	    						ZPM zpm = new ZPM(field);
 	    						field.addUnit(zpm);
+	    						units.add(zpm);
+	    						zpms.add(zpm);
 	    					}else
 	    						throw new Exception("Hiba: ismeretlen egys�gt�pus");
 	    				}
@@ -317,6 +328,7 @@ public class Stage
     	ZPM drop = new ZPM(emptyRoads.get(n));
     	emptyRoads.get(n).addUnit(drop);
     	units.add(drop);
+    	zpms.add(drop);
     }
     
     //given field's must be initialized
@@ -345,10 +357,6 @@ public class Stage
     	return fields.get(fields.indexOf(field)).getUnits();
     }
     
-    public int getZPM(){
-    	return allZPM;
-    }
-    
     //helper query, check boxes
     public List<Unit> listBoxes(){
     	List<Unit> boxes = new ArrayList<Unit>();
@@ -361,14 +369,21 @@ public class Stage
     }
     
     //helper query, check zpm's
-    public List<Unit> listZPM(){
-    	List<Unit> zpms = new ArrayList<Unit>();
-    	for(Unit zpm : units){
-    		if(zpm instanceof ZPM){
-    			zpms.add(zpm);
-    		}
-    	}
+    public List<ZPM> listZPM(){
     	return zpms;
+    }
+    
+    int getAllZPM(){
+    	return allZPM;
+    }
+    
+    int getZPM(){
+    	int count = 0;
+    	for(ZPM zpm : zpms){
+    		if(zpm.getCurrentField() != null)
+    			count++;
+    	}
+    	return count;
     }
     
     public Field getField(Point position){
@@ -384,9 +399,12 @@ public class Stage
     	List<String> after = new ArrayList<String>();
     	
     	if(log){
+	        for(Field field : fields){
+	        	before.add(field.toString());
+	        }
 	        for(Unit unit : units){
 	        	before.add(unit.toString());
-	        }
+	        } 
     	}
     	
         for(Unit unit : units){
@@ -394,37 +412,70 @@ public class Stage
         }
         
     	if(log){
+	        for(Field field : fields){
+	        	after.add(field.toString());
+	        }
 	        for(Unit unit : units){
 	        	after.add(unit.toString());
 	        }
+	        for(int i = 0; i < after.size(); i++){
+	        	if(i < before.size()){
+	        		if(!before.get(i).equals(after.get(i))){
+	        			System.out.println(before.get(i) + "\n Az el�bbi cselekv�s ut�ni �llapot:" + after.get(i));
+	        		}
+	        	}else{
+	        		System.out.println(after.get(i));
+	        	}
+	        }
+    	}
+    	
+    	collectUnits();
+    }
+
+    public void collectUnits(){
+        for(Unit unit : units){
+            if(unit.isDead())
+            	units.remove(unit);
+        }
+        for(ZPM zpm : zpms){
+        	if(zpm.isDead())
+        		zpms.remove(zpm);
+        }
+    }
+
+    public void killUnit(Unit unit){
+    		unit.kill();
+    }
+    
+    public void killUnit(Field field){
+    	for(Unit fieldUnit : field.getUnits()){
+    		fieldUnit.kill();
     	}
     }
-
-    //"halott" egységek törlése units listából
-    public void collectUnits()
-    {
-        List<Object> parameters = new ArrayList<Object>();
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("collectUnits", this, parameters);
-
-        for(Iterator<Unit> it = units.iterator(); it.hasNext();)
-        {
-            if(it.next().isDead())
-                it.remove();
-        }
-
-        Skeleton.returnMethod("collectUnits", this, parameters);
+    
+    public void setUnitPos(Unit unit, Field field){
+    	unit.getCurrentField().removeUnit(unit);
+    	unit.setCurrentField(field);
+    	field.addUnit(unit);
     }
-
+    
+    public void setUnitPos(Field fieldFrom, Field fieldTo){
+    	List<Unit> fromUnits = fieldFrom.getUnits();
+    	for(Unit unit : fromUnits){
+    		fieldFrom.removeUnit(unit);
+    		fieldTo.addUnit(unit);
+    		unit.setCurrentField(fieldTo);
+    	}
+    }
+    
     public void addUnit(Unit unit)
     {
-        List<Object> parameters = new ArrayList<Object>();
-        parameters.add(unit);
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("addUnit", this, parameters);
-
-        this.units.add(unit);   //hozzáad 1 unitot, feltételezzük, hogy a létrehozás helyén be lett regisztrálva a Skeletonba
-
-        Skeleton.returnMethod("addUnit", this, parameters);
+    	units.add(unit); 
+    }
+    
+    public void addUnit(ZPM unit)
+    {
+    	units.add(unit); 
+    	zpms.add(unit); 
     }
 }

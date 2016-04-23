@@ -51,6 +51,14 @@ public abstract class Unit {
 		Skeleton.returnMethod("accept", this, parameters);
 	}
 	
+	public Field getCurrentField(){
+		return currentField;
+	}
+	
+	public void setCurrentField(Field field){
+		currentField = field;
+	}
+	
 	@Override
 	public
 	String toString(){
