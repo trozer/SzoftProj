@@ -191,18 +191,22 @@ public class Game {
 			int randomDir = new Random().nextInt(4) + 1;
 			switch (randomDir){
 				case 1:
+					Replicator.turn(Direction.NORTH);
 					break;
 				case 2:
+					Replicator.turn(Direction.WEST);
 					break;
 				case 3:
+					Replicator.turn(Direction.EAST);
 					break;
 				case 4:
+					Replicator.turn(Direction.SOUTH);
 					break;
 				default:
 					break;
 			}
 		} else {
-
+			Replicator.turn(dir);
 		}
 	}
 
