@@ -31,11 +31,13 @@ public class Replicator extends ActionUnit{
 		//Ha move, akkor a megfelelo iranyban levo szomszedos mezo doo-jat hivja meg.
 		if (nextAction.getType() == ActionType.MOVE){
 			currentField.getNeighbourInDirection(currentDirection).doo(this);
+			nextAction = null;
 		}
 		
 		//Ha turn, akkor beallitja az uj iranyt.
 		else if (nextAction.getType() == ActionType.TURN){
 			currentDirection = nextAction.getDirection();
+			nextAction = null;
 		}
 	}
 	
