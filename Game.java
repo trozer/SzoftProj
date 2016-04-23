@@ -1,6 +1,8 @@
 package szoftProj;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.util.List;
 import java.io.File;
 import java.util.Random;
@@ -9,15 +11,16 @@ public class Game {
 	private State state;
 	private Stage stage;
 	private ActionUnit Jaffa;
-	private ActionUnit Oneil;
+	private ActionUnit Oneill;
 	private ActionUnit Replicator;
 	private boolean pause;
 
 	public static void main(String[] args){
 		Game game = new Game();
 		//later check args and run appropiate command
-		File argFile = new File("testMap.xml");
-		game.newGame(argFile);
+		//File argFile = new File("testMap.xml");
+		//game.newGame(argFile);
+		game.console();
 	}
 
 	Game(){
@@ -34,12 +37,113 @@ public class Game {
 
 	public void loadGame(){}
 	public void saveGame(){}
-	public void control(String cmd){
+
+	public void console(){
+
+		BufferedReader instream = new BufferedReader(new InputStreamReader(System.in));
+		while (true) {
+			try {
+				String inputLine = instream.readLine();
+				StringTokenizer tokenizer = new StringTokenizer(inputLine, " -");
+				String command = tokenizer.nextToken();
+
+				if ("newGame".startsWith(command)) {
+					if (tokenizer.hasMoreTokens()){
+						newGame(new File(readString(tokenizer)));
+					} else {
+						newGame();
+					}
+				} else if ("update".startsWith(command)) {
+					update();
+
+					//kimenet kiíratása
+					List<String> changes = stage.getLog();
+					for(String str : changes) {
+						System.out.println(str);
+					}
+					break;		//az update után végzett a program
+				} else if ("loadGame".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				} else if ("saveGame".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				} else if ("exitGame".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				//Cselekvések
+				} else if ("move".startsWith(command)) {
+					String executor = readString(tokenizer);
+					String cmd = "move " + executor;
+					control(cmd);
+
+				} else if ("turn".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				} else if ("grab".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				} else if ("drop".startsWith(command)) {
+					//// TODO: 2016. 04. 23.
+				} else if ("getUnit".startsWith(command)) {
+				} else if ("getZPM".startsWith(command)) {
+				} else if ("getField".startsWith(command)) {
+				} else if ("getPortal".startsWith(command)) {
+				} else if ("listBoxes".startsWith(command)) {
+				} else if ("listZPMs".startsWith(command)) {
+				} else if ("setReplicatorDir".startsWith(command)) {
+				} else if ("setUnitPos".startsWith(command)) {
+				} else if ("killUnit".startsWith(command)) {
+				} else if ("addBox".startsWith(command)) {
+				} else if ("addZPM".startsWith(command)) {
+				} else if ("addReplicator".startsWith(command)) {
+
+				} else if ("e".startsWith(command)) {
+					break;
+				} else {
+					throw new Exception("Hibas parancs! (" + inputLine + ")");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private String readString(StringTokenizer tokenizer) throws Exception{
+		if (tokenizer.hasMoreElements()) {
+			return tokenizer.nextToken();
+		} else {
+			throw new Exception("Keves parameter!");
+		}
+	}
+
+	public void control(String cmd) throws Exception{
 		/*? Konverzió a külvilág és a játék belsõ mûködése között: a 
 		felhasználói bemeneti eseményeknek megfelelõen helyesen beállítja a Player 
 		következõ update()­ben végrehajtandó cselekedetét. A cmd paraméterben kapott 
 		információ alapján tudja, hogy mit kell beállítani. A mûködés egy egyszerû switch 
 		case szerkezet és a parancs darabolás (parsolása). */
+
+		try {
+			StringTokenizer tokenizer = new StringTokenizer(cmd, " -");
+			String command = tokenizer.nextToken();
+
+			if("move".startsWith(command)){
+				String executor = readString(tokenizer);
+				if("oneill".startsWith(executor)){
+					Oneill.move();
+				} else if ("jaffa".startsWith(executor)) {
+					Jaffa.move();
+				} else if ("replicator".startsWith(executor)) {
+					Replicator.move();
+				} else {
+					throw new Exception("Hibás végrehajtó a move cselekvésnél!");
+				}
+			} else if ("turn".startsWith(command)){
+				// TODO: 2016. 04. 23. többi
+			} else {
+				throw new Exception("Hibás végrehajtandó parancsmegnevezés!");
+			}
+
+		} catch (Exception e){
+			throw new Exception(e);
+		}
+
 	}
 
 	String command(String cmd){
@@ -78,8 +182,8 @@ public class Game {
 		this.Jaffa = Jaffa;
 	}
 
-	public void setOneil(ActionUnit Oneil){
-		this.Oneil = Oneil;
+	public void setOneill(ActionUnit Oneill){
+		this.Oneill = Oneill;
 	}
 
 	public void setReplicatorDir(boolean random, Direction dir){
