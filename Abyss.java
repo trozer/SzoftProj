@@ -8,8 +8,19 @@ public class Abyss extends Field {
 
 	@Override
 	public void doo(Player player) {
-		player.step(this);
-		player.kill();
+
+		switch (player.getAction().getType()) {
+			case MOVE:
+				player.step(this);
+				player.kill();
+				}
+				break;
+		case GRAB:
+			break;
+		case DROP:
+			break;
+		default:
+			break;
 	}
 
 	@Override
@@ -43,6 +54,6 @@ public class Abyss extends Field {
 
 	@Override
 	public String toString(){
-		return "szakadék " + super.toString();
+		return "szakadÃ©k " + super.toString();
 	}
 }
