@@ -9,7 +9,7 @@
   		<unit row='0' col='3' color="blue" direction="N">Bullet</unit><!-- minden attribútumot adjadtok meg, kivéve a játékosnál turndirt és colort (ezeket csak akkor, ha lő vagy fordul), ha nem így tesztek, hiba lesz -->
 		<unit row='1' col='5' >Box</unit><!-- ZPM-ek és Boxok hamarabb legyenek, mint a játékosok, ez nagyban megkönnyíti a dolgokat -->
 		<unit row='1' col='4' >ZPM</unit>
-		<unit row='2' col='1' direction="W" action="SHOOT" box='true' color='blue'>O'neil</unit>
+		<unit row='2' col='1' direction="W" action="SHOOT" box='true' color='blue'>O'neill</unit>
 		<unit row='0' col='5' direction="E" action="TURN" box='false' turndir='S'>Jaffa</unit>
 	</units>
 	<field_properties>

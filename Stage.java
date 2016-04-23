@@ -199,13 +199,17 @@ public class Stage implements Serializable
 	    							color = colorByString(unitElement.getAttribute("color"));
 	    						if(unitElement.getAttribute("box").equals("true"))
 	    							box = new Box(field);
-	    						ActionUnit player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box);
+	    						ActionUnit player;
+
+	    						if(unitType.equals("O'neill")){
+	    							player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box, "O'neill");
+	    							game.setOneil(player);
+	    						}else{
+	    							player = new Player(allZPM, dir,new Action(actionType, turnDir, color), field, game,box ,"Jaffa");
+	    							game.setJaffa(player);
+	    						}
 	    						units.add(player);
 	    						field.addUnit(player);
-	    						if(unitType.equals("O'neill")){
-	    							game.setOneil(player);
-	    						}else
-	    							game.setJaffa(player);
 	    					}
 	    					else
 	    					if(unitType.equals("Replicator")){
@@ -213,7 +217,7 @@ public class Stage implements Serializable
 	    						ActionUnit replicator = new Replicator(game, dir, field);
 	    						units.add(replicator);
 	    						field.addUnit(replicator);
-	    						game.setReplicator(replicator);
+	    						//game.setReplicator(replicator);
 	    					}
 	    					else
 	    					if(unitType.equals("Box")){
