@@ -6,9 +6,11 @@ public class Portal {
 
 	private Field blue;
 	private Field yellow;
+	private Field red;
+	private  Field green;
 
 	public Portal() {
-
+		
 	}
 
 	public Field getBlue() {
