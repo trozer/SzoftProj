@@ -36,6 +36,6 @@ public class Box extends Unit{
     
     @Override
     public String toString(){
-    	return "    Doboz";
+    	return "Doboz";
     }
 }

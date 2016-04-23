@@ -50,7 +50,7 @@ public class Bullet extends ActionUnit{
     	if (dead == false) elet = "él";
 		else elet = "halott";
     	
-    	return "    " + szin + " lövedék, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
+    	return szin + " lövedék, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
     }
 
 }
