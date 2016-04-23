@@ -325,7 +325,7 @@ public class Stage implements Serializable
     	log = true;
     }
     
-    public void createZPM(){
+    public Field getEmptyRoad(){
     	List<Field> emptyRoads = new ArrayList<Field>();
     	
     	for(Field road : roads){
@@ -336,9 +336,13 @@ public class Stage implements Serializable
     	
     	Random rand = new Random();
     	int n = rand.nextInt(emptyRoads.size());
-    	
-    	ZPM drop = new ZPM(emptyRoads.get(n));
-    	emptyRoads.get(n).addUnit(drop);
+    	return emptyRoads.get(n);
+    }
+    
+    public void createZPM(){
+    	Field empty = getEmptyRoad();
+    	ZPM drop = new ZPM(empty);
+    	empty.addUnit(drop);
     	units.add(drop);
     	zpms.add(drop);
     }
