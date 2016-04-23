@@ -1,7 +1,5 @@
 package szoftProj;
 
-import java.util.ArrayList;
-
 public class ZPM extends Unit{
 
     public ZPM(Field currentField) {
@@ -9,11 +7,6 @@ public class ZPM extends Unit{
     }
 
     public void accept(Field launcher, Player target) {
-        ArrayList<Object> parameters = new ArrayList<Object>();
-        parameters.add(launcher);
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("accept", this, parameters);
-
         switch (target.getAction().getType()) {
             case GRAB:
                 target.addZPM(this);
@@ -26,8 +19,9 @@ public class ZPM extends Unit{
             default:
                 break;
         }
-
-        Skeleton.returnMethod("accept", this, parameters);
-
+    }
+    
+    public String toString(){
+    	return "ZPM";
     }
 }

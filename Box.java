@@ -1,7 +1,5 @@
 package szoftProj;
 
-import java.util.ArrayList;
-
 public class Box extends Unit{
 
     public Box(Field currentField) {
@@ -9,10 +7,6 @@ public class Box extends Unit{
     }
 
     public void accept(Player launcher, Field target) {
-        ArrayList<Object> parameters = new ArrayList<Object>();
-        parameters.add(launcher);
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("accept", this, parameters);
 
         switch (launcher.getAction().getType()) {
             case DROP:
@@ -23,15 +17,9 @@ public class Box extends Unit{
             default:
                 break;
         }
-
-        Skeleton.returnMethod("accept", this, parameters);
     }
+    
     public void accept(Field launcher, Player target) {
-        ArrayList<Object> parameters = new ArrayList<Object>();
-        parameters.add(target);
-        parameters.add(Skeleton.getEmpty());
-        Skeleton.callMethod("accept", this, parameters);
-
         switch (target.getAction().getType()) {
             case GRAB:
                 if (target.grabBox(this) == true){
@@ -41,8 +29,9 @@ public class Box extends Unit{
             default:
                 break;
         }
-
-        Skeleton.returnMethod("accept", this, parameters);
-
+    }
+    
+    public String toString(){
+    	return "Doboz";
     }
 }
