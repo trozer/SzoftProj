@@ -3,6 +3,7 @@ package szoftProj;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.nio.channels.Pipe;
 import java.util.StringTokenizer;
 import java.util.List;
 import java.io.File;
@@ -105,21 +106,43 @@ public class Game {
 				} else if ("getField".startsWith(command)) {
 				} else if ("getPortal".startsWith(command)) {
 				} else if ("listBoxes".startsWith(command)) {
+					List<Unit> boxes = stage.listBoxes();
+					for(Unit unit : boxes){
+						System.out.println(unit.toString());
+					}
 				} else if ("listZPMs".startsWith(command)) {
+					List<ZPM> ZPMs = stage.listZPM();
+					for(ZPM zpm : ZPMs){
+						System.out.println(zpm.toString());
+					}
 				} else if ("setReplicatorDir".startsWith(command)) {
+					String direction = readString(tokenizer);
+					Direction dir;
+
+					if("north".startsWith(direction)){
+						dir = Direction.NORTH;
+					} else if ("west".startsWith(direction)) {
+						dir = Direction.WEST;
+					} else if ("east".startsWith(direction)) {
+						dir = Direction.EAST;
+					} else if ("sout".startsWith(direction)) {
+						dir = Direction.SOUTH;
+					} else {
+						throw new Exception("Hibás fordulási irány!");
+					}
+
+					setReplicatorDir(false, dir);
 				} else if ("setUnitPos".startsWith(command)) {
 				} else if ("killUnit".startsWith(command)) {
 				} else if ("addBox".startsWith(command)) {
 				} else if ("addZPM".startsWith(command)) {
 				} else if ("addReplicator".startsWith(command)) {
-
-				} else if ("e".startsWith(command)) {
-					break;
 				} else {
-					throw new Exception("Hibas parancs! (" + inputLine + ")");
+					throw new Exception("Hibás parancs! (" + inputLine + ")");
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				break;
 			}
 		}
 	}
