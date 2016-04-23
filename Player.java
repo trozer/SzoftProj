@@ -73,7 +73,6 @@ public class Player extends ActionUnit{
 	//es beallitja a currentFieldet az uj mezore.
 	public void step(Field target){
 		currentField.removeUnit();
-		target.addUnit(this);
 		currentField = target;
 	}
 	//A nextAction alapjan csinal valamit.
@@ -82,6 +81,7 @@ public class Player extends ActionUnit{
 		if (nextAction.getType() == ActionType.MOVE ||
 			nextAction.getType() == ActionType.GRAB){
 				currentField.getNeighbourInDirection(currentDirection).doo(this);
+				nextAction = null;
 		}
 		//Ha turn, akkor beallitja az uj iranyt.
 		else if (nextAction.getType() == ActionType.TURN){
@@ -99,7 +99,6 @@ public class Player extends ActionUnit{
 		}
 	}
 	
-	//TODO Az lenne az igazi ha tudná, hogy O'Neill vagy Jaffa.
 	public String toString(){
 		String cselekves;
 		String irany;
@@ -127,7 +126,7 @@ public class Player extends ActionUnit{
 		if (dead == false) elet = "él";
 		else elet = "halott";
 		
-    	return "    " + name + ": " + cselekves + "cselekvést akar végrehajtani, " + irany + " irányba néz, " + weight + " tömegü, "
+    	return name + ": " + cselekves + "cselekvést akar végrehajtani, " + irany + " irányba néz, " + weight + " tömegü, "
     			+ doboz + zpm.size() + " db begyüjtött ZPM van nála, " + elet;
     }
 }
