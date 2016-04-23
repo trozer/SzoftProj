@@ -60,16 +60,27 @@ public class Game {
 						newGame();
 					}
 				} else if ("update".startsWith(command)) {
-					update();
-					//kimenet kiíratása
-					List<String> changes = stage.getLog();
-					if(changes != null) {
-						for (String str : changes) {
-							System.out.println(str);
+					if (!tokenizer.hasMoreTokens()){
+						update();
+						//kimenet kiíratása
+						List<String> changes = stage.getLog();
+						if(changes != null) {
+							for (String str : changes) {
+								System.out.println(str);
+							}
+							break;        //az update után kilép a program
+						} else {
+							System.out.println("");		//nem történt változás
 						}
-						break;        //az update után kilép a program
 					} else {
-						System.out.println("");		//nem történt változás
+						String updateState = readString(tokenizer);
+						if("pause".startsWith(updateState)){
+							pause();
+						} else if ("resume".startsWith(updateState)) {
+							resume();
+						} else {
+							throw new Exception("Az update automatizálása a pause és resume paraméterekkel állítható!");
+						}
 					}
 				} else if ("loadGame".startsWith(command)) {
 					//// TODO: 2016. 04. 23.
@@ -113,18 +124,18 @@ public class Game {
 						throw new Exception("Hibás lekérdezendõ egységazonosító!");
 					}
 				} else if ("getZPM".startsWith(command)) {
-				/*	if(tokenizer.hasMoreTokens()){
+					if(tokenizer.hasMoreTokens()){
 						String executor = readString(tokenizer);
 						if("oneill".startsWith(executor)){
-							System.out.println(Oneill.getZPM());
+							System.out.println(((Player)Oneill).getCollectedZPM());
 						} else if ("jaffa".startsWith(executor)) {
-							System.out.println(Jaffa.getZPM());
+							System.out.println(((Player)Jaffa).getCollectedZPM());
 						} else {
 							throw new Exception("Hibás lekérdezendõ egységazonosító!");
 						}
 					} else {
 						stage.getZPM();
-					}*/
+					}
 				} else if ("getField".startsWith(command)) {
 					int posX = Integer.parseInt(readString(tokenizer));
 					int posY = Integer.parseInt(readString(tokenizer));
@@ -170,15 +181,32 @@ public class Game {
 					} else {
 						int posX = Integer.parseInt(readString(tokenizer));
 						int posY = Integer.parseInt(readString(tokenizer));
-						List<Unit> units = stage.getUnit(stage.getField(new Point(posX, posY)));
-
-						for(Unit unit : units){
-							unit.kill();
-						}
+						stage.killUnit(stage.getField(new Point(posX, posY)));
 					}
 				} else if ("addBox".startsWith(command)) {
+					Road target = (Road)stage.getEmptyRoad();
+					Box newBox = new Box(target);
+					target.addUnit(newBox);
+					stage.addUnit(newBox);
 				} else if ("addZPM".startsWith(command)) {
+					Road target = (Road)stage.getEmptyRoad();
+					ZPM newZPM = new ZPM(target);
+					target.addUnit(newZPM);
+					stage.addUnit(newZPM);
 				} else if ("addReplicator".startsWith(command)) {
+					Road target = (Road)stage.getEmptyRoad();
+					Replicator newReplicator = new Replicator(this, Direction.NORTH, target);
+					target.addUnit(newReplicator);
+					stage.addUnit(newReplicator);
+				} else if ("talkativeStage".startsWith(command)) {
+					String talkState = readString(tokenizer);
+					if("on".startsWith(talkState)){
+						talkativeStage();
+					} else if ("off".startsWith(talkState)) {
+						muteStage();
+					} else {
+						throw new Exception("A Stage beszédessége csak on illetve off paraméterrel állítható!");
+					}
 				} else {
 					throw new Exception("Hibás parancs! (" + inputLine + ")");
 				}
@@ -369,6 +397,9 @@ public class Game {
 	}
 	public void createZPM(){
 		stage.createZPM();
+	}
+	public int getAllZPM(){
+		return stage.getZPM();
 	}
 	public void replaceField(Field field){
 		stage.replaceField(field);
