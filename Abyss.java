@@ -19,6 +19,18 @@ public class Abyss extends Field {
 		}
 	}
 
+	public void doo(Replicator replicator) {
+
+		switch (replicator.getAction().getType()) {
+			case MOVE:
+				replicator.step(this);
+				replicator.replaceField();
+				break;
+			default:
+				break;
+		}
+	}
+
 	@Override
 	public void doo(Bullet bullet) {
 		bullet.step(this);
