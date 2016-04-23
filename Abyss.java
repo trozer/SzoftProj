@@ -13,14 +13,10 @@ public class Abyss extends Field {
 			case MOVE:
 				player.step(this);
 				player.kill();
-				}
 				break;
-		case GRAB:
-			break;
-		case DROP:
-			break;
-		default:
-			break;
+			default:
+				break;
+		}
 	}
 
 	@Override
