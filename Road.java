@@ -55,7 +55,7 @@ public class Road extends Field {
         	bullet.step(this);
         	}
         	else{
-        		//for(Unit u : containedUnits) u.accept(bullet, this);
+        		for(Unit u : containedUnits) u.accept(bullet, this);
 			}
         	break;
         default:	//minden más eset
@@ -63,15 +63,17 @@ public class Road extends Field {
 		}
 	}
 
-	/*@Override
+	@Override
 	 public void doo(Replicator replicator){
 		switch (replicator.getAction().getType()) {
         case MOVE:
-        	replicator.step();
+        	replicator.step(this);
         	containedUnits.add(replicator);
         	break;
     	default:
-			break;*/
+			break;
+		}
+	}
 	
 	@Override
 	public void forceAddUnit(Unit unit){

@@ -63,7 +63,7 @@ public class Gate extends Field {
 					containedUnits.add(bullet);
 				}
 				else{
-					//for(Unit u : containedUnits) u.accept(bullet, this);
+					for(Unit u : containedUnits) u.accept(bullet, this);
 				}
 				break;
 			default:	//minden más eset
@@ -77,19 +77,19 @@ public class Gate extends Field {
 		}
 	}
 	
-	/*@Override
+	@Override
 	public void doo(Replicator replicator){
 		if (opened == true){
 			switch (replicator.getAction().getType()) {
 			case MOVE:
-				replicator.step();
+				replicator.step(this);
 				containedUnits.add(replicator);
 				break;
 			default:
 				break;
 			}
 		}
-	}*/
+	}
 	
 	@Override
 	public void forceAddUnit(Unit unit){

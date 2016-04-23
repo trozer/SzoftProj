@@ -52,7 +52,7 @@ public class Scale extends Field {
         	if (!containedUnits.isEmpty()){
         		for(Unit u : containedUnits) u.accept(this, player);
     		}
-        	//for(Unit u : containedUnits) hatar += u.getWeight();
+        	for(Unit u : containedUnits) hatar += u.getWeight();
 			if (hatar < openLimit){
     			myGate.close();
         	}
@@ -75,24 +75,24 @@ public class Scale extends Field {
         		break;
         	}
         	else{
-        		//for(Unit u : containedUnits) u.accept(bullet, this);
+        		for(Unit u : containedUnits) u.accept(bullet, this);
         	}
         default:	//minden más eset
         	break;
 		}
 	}
 	
-	/*@Override
+	@Override
 	 public void doo(Replicator replicator){
 		switch (replicator.getAction().getType()) {
         case MOVE:
-        	replicator.step();
+        	replicator.step(this);
         	containedUnits.add(replicator);
         	break;
     	default:
 			break;
 		}
-	}*/
+	}
 	
 	@Override
 	public void forceAddUnit(Unit unit){
@@ -106,10 +106,10 @@ public class Scale extends Field {
 		containedUnits.add(unit);
 		}
 		blockAddUnit = true;
-			//for(Unit u : containedUnits) u.accept(unit, this);
+			for(Unit u : containedUnits) u.accept(unit, this);
 		blockAddUnit = false;
 		
-		//for(Unit u : containedUnits) hatar += u.getWeight();
+		for(Unit u : containedUnits) hatar += u.getWeight();
 		if (hatar >= openLimit){
 			myGate.open();
 		}
@@ -134,7 +134,7 @@ public class Scale extends Field {
 		int hatar = 0;
 		if (!containedUnits.isEmpty()){
 			containedUnits.remove(unit);
-			//for(Unit u : containedUnits) hatar += u.getWeight();
+			for(Unit u : containedUnits) hatar += u.getWeight();
 		}
 		if (hatar < openLimit){
 			myGate.close();
@@ -158,11 +158,10 @@ public class Scale extends Field {
 	public String toString(){
 		int sulyok = 0;
 		for (int i = 0; i < containedUnits.size(); i++){
-			//sulyok += containedUnits.get(i).getWeight();
+			sulyok += containedUnits.get(i).getWeight();
 		}
 		if(myGate != null)
 			if(sulyok >= openLimit)
-			//return "mérleg " + super.toString() + " " + myGate.toString();
 				return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
 					+ openLimit + " súlyhatár, lenyomva , van hozzákapcsolt kapu, " 
 					+ containedUnits.size() + "darab tárolt egység";
@@ -172,7 +171,6 @@ public class Scale extends Field {
 				+ containedUnits.size() + "darab tárolt egység";
 		else
 			if(sulyok >= openLimit)
-				//return "mérleg " + super.toString() + " " + myGate.toString();
 					return "mérleg: (" + position.getX() + "," + position.getY() + ") pozíció, "
 						+ openLimit + " súlyhatár, lenyomva , nincs hozzákapcsolt kapu, " 
 						+ containedUnits.size() + "darab tárolt egység";

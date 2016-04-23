@@ -9,7 +9,7 @@ public abstract class Field {
 	
 	protected Map<Direction, Field> neighbours = new TreeMap<Direction, Field>();
 	protected List<Unit> containedUnits;
-	protected Unit containedUnit; // DELETE THIS LATER, this helped me to avoid to change many functions in other classes
+	//protected Unit containedUnit; // DELETE THIS LATER, this helped me to avoid to change many functions in other classes
 	//egyenlõre a fenti sort nem töröltem, mert nem akarom, hogy azok az osztályok miatt amiket nem én írtam hiba legyen benne
 	protected Point position;
 	
@@ -31,9 +31,9 @@ public abstract class Field {
 		return this.position;
 	}
 	
-	public abstract void doo(Player player);
+	public void doo(Player player){};
 	public abstract void doo(Bullet bullet);
-	//public abstract void doo(Replicator replicator);
+	public void doo(Replicator replicator){};
 	
 	public List<Unit> getUnits(){
 		return containedUnits;
