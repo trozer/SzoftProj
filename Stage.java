@@ -423,7 +423,7 @@ public class Stage implements Serializable
 	        for(Field field : fields){
 	        	before.add(field.toString());
 	        	for(Unit fieldUnit : field.getUnits()){
-	        		before.add(fieldUnit.toString());
+	        		before.add("\t" + fieldUnit.toString());
 	        	}
 	        }
     	}
@@ -436,7 +436,7 @@ public class Stage implements Serializable
 	        for(Field field : fields){
 	        	after.add(field.toString());
 	        	for(Unit fieldUnit : field.getUnits()){
-	        		after.add(fieldUnit.toString());
+	        		after.add("\t" + fieldUnit.toString());
 	        	}
 	        }
 	        for(String beforeStr : before){
