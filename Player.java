@@ -9,9 +9,10 @@ public class Player extends ActionUnit{
 	private ArrayList<ZPM> zpm;
 	private int allZPM;
 	private Game game;
+	private String name;
 	
 	//Konstruktor
-	public Player(int allZPM, Direction direction,Action action, Field currentField, Game game, Box box){
+	public Player(int allZPM, Direction direction,Action action, Field currentField, Game game, Box box, String name){
 		this.box = box;
 		this.allZPM = allZPM;
 		this.currentDirection = direction;
@@ -19,6 +20,7 @@ public class Player extends ActionUnit{
 		this.game = game;
 		this.zpm = new ArrayList<ZPM>();
 		this.weight = 15;
+		this.name = name;
 	}
 	
 	//ZPM felvetele. Ha elfogyott a palyarol az osszes, akkor nyertunk.
@@ -99,6 +101,33 @@ public class Player extends ActionUnit{
 	
 	//TODO Az lenne az igazi ha tudná, hogy O'Neill vagy Jaffa.
 	public String toString(){
-    	return "Játékos";
+		String cselekves;
+		String irany;
+		String doboz;
+		String elet;
+		
+		if (nextAction != null) {
+			if (nextAction.getType() == ActionType.DROP) cselekves = "lerakás ";
+			else if (nextAction.getType() == ActionType.GRAB) cselekves = "felvétel ";
+			else if (nextAction.getType() == ActionType.MOVE) cselekves = "mozgás ";
+			else if (nextAction.getType() == ActionType.SHOOT) cselekves = "lövés ";
+			else if (nextAction.getType() == ActionType.TURN) cselekves = "fordulás ";
+			else cselekves = "semmi ";
+		}
+		else cselekves = "semmi ";
+		
+		if (currentDirection == Direction.NORTH) irany = "észak";
+		else if (currentDirection == Direction.EAST) irany = "kelet";
+		else if (currentDirection == Direction.SOUTH) irany = "dél";
+		else irany = "nyugat";
+		
+		if (box != null) doboz = "van nála doboz, ";
+		else doboz = "nincs nála doboz, ";
+		
+		if (dead == false) elet = "él";
+		else elet = "halott";
+		
+    	return "    " + name + ": " + cselekves + "cselekvést akar végrehajtani, " + irany + " irányba néz, " + weight + " tömegü, "
+    			+ doboz + zpm.size() + " db begyüjtött ZPM van nála, " + elet;
     }
 }

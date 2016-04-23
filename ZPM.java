@@ -7,6 +7,7 @@ public class ZPM extends Unit{
         this.weight = 0;
     }
 
+    @Override
     public void accept(Field launcher, Player target) {
         switch (target.getAction().getType()) {
             case GRAB:
@@ -22,7 +23,8 @@ public class ZPM extends Unit{
         }
     }
     
+    @Override
     public String toString(){
-    	return "ZPM";
+    	return "    ZPM";
     }
 }

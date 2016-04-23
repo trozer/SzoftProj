@@ -6,7 +6,8 @@ public class Box extends Unit{
         this.currentField = currentField;
         this.weight = 5;
     }
-
+    
+    @Override
     public void accept(Player launcher, Field target) {
 
         switch (launcher.getAction().getType()) {
@@ -20,6 +21,7 @@ public class Box extends Unit{
         }
     }
     
+    @Override
     public void accept(Field launcher, Player target) {
         switch (target.getAction().getType()) {
             case GRAB:
@@ -32,7 +34,8 @@ public class Box extends Unit{
         }
     }
     
+    @Override
     public String toString(){
-    	return "Doboz";
+    	return "    Doboz";
     }
 }

@@ -28,21 +28,29 @@ public class Bullet extends ActionUnit{
         }
     }
 
-    public void kill(){
-        dead = true;
-    }
-
     public void setCurrentField(Field field){
         this.setCurrentField(field);
     }
     
     public String toString(){
-    	String szin = "";
+    	String szin;
+    	String irany;
+    	String elet;
+    	
     	if (color == Color.BLUE) szin = "Kék";
     	else if (color == Color.YELLOW) szin = "Sárga";
     	else if (color == Color.GREEN) szin = "Zöld";
-    	else if (color == Color.RED) szin = "Piros";
-    	return szin + " lövedék";
+    	else szin = "Piros";
+    	
+    	if (currentDirection == Direction.NORTH) irany = "észak";
+		else if (currentDirection == Direction.EAST) irany = "kelet";
+		else if (currentDirection == Direction.SOUTH) irany = "dél";
+		else irany = "nyugat";
+    	
+    	if (dead == false) elet = "él";
+		else elet = "halott";
+    	
+    	return "    " + szin + " lövedék, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
     }
 
 }
