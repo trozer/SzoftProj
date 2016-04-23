@@ -45,7 +45,7 @@ public class Abyss extends Field {
 	@Override
 	public boolean addUnit(Unit unit) {
 		// TODO Auto-generated method stub
-		return super.addUnit(unit);
+		containedUnits.add(unit);
 	}
 
 	@Override

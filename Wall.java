@@ -16,6 +16,8 @@ public class Wall extends Field {
 
 	@Override
 	public void doo(Bullet bullet) {
+		bullet.step(this);
+		bullet.kill();
 	}
 
 	@Override
@@ -25,6 +27,10 @@ public class Wall extends Field {
 
 	@Override
 	public boolean addUnit(Unit unit) {
+
+	}
+
+	void forceAddUnit(Unit unit){
 		return super.addUnit(unit);
 	}
 
