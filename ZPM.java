@@ -4,6 +4,7 @@ public class ZPM extends Unit{
 
     public ZPM(Field currentField) {
         this.currentField = currentField;
+        this.weight = 0;
     }
 
     public void accept(Field launcher, Player target) {

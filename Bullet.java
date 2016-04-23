@@ -10,19 +10,21 @@ public class Bullet extends ActionUnit{
         this.nextAction = action;
         this.currentField = currentField;
         this.color = action.getColor();
+        this.weight = 0;
     }
 
     public Color getColor(){ return color; }
 
     @Override
     public void step(Field target){
+    	currentField.removeUnit(this);
         target.addUnit(this);
         this.setCurrentField(target);
     }
 
     public void action(){
-        if (nextAction.getType() == ActionType.MOVE || nextAction.getType() == ActionType.GRAB){
-        	
+        if (nextAction.getType() == ActionType.MOVE){
+        	currentField.getNeighbourInDirection(currentDirection).doo(this);
         }
     }
 

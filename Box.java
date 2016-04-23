@@ -4,6 +4,7 @@ public class Box extends Unit{
 
     public Box(Field currentField) {
         this.currentField = currentField;
+        this.weight = 5;
     }
 
     public void accept(Player launcher, Field target) {

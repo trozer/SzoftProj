@@ -18,6 +18,7 @@ public class Player extends ActionUnit{
 		this.currentField = currentField;
 		this.game = game;
 		this.zpm = new ArrayList<ZPM>();
+		this.weight = 15;
 	}
 	
 	//ZPM felvetele. Ha elfogyott a palyarol az osszes, akkor nyertunk.
@@ -96,7 +97,7 @@ public class Player extends ActionUnit{
 		}
 	}
 	
-	// Az lenne az igazi ha tudná, hogy O'Neill vagy Jaffa.
+	//TODO Az lenne az igazi ha tudná, hogy O'Neill vagy Jaffa.
 	public String toString(){
     	return "Játékos";
     }
