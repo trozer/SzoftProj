@@ -7,10 +7,10 @@ public class Portal {
 	private Field blue;
 	private Field yellow;
 	private Field red;
-	private  Field green;
+	private Field green;
 
 	public Portal() {
-		
+
 	}
 
 	public Field getBlue() {
@@ -29,8 +29,24 @@ public class Portal {
 		this.yellow = yellow;
 	}
 
+	public Field getRed() {
+		return red;
+	}
+
+	public void setRed(Field red) {
+		this.red = red;
+	}
+
+	public Field getGreen() {
+		return green;
+	}
+
+	public void setGreen(Field green) {
+		this.green = green;
+	}
+
 	public boolean amIPortal(Field field) {
-		return (blue == field || yellow == field);
+		return (blue == field || yellow == field || red == field || green == field);
 	}
 
 	public void createPortal(Field field, Color color) {
@@ -38,6 +54,10 @@ public class Portal {
 			blue = field;
 		} else if (color == Color.YELLOW) {
 			yellow = field;
+		} else if (color == Color.RED) {
+			red = field;
+		} else if (color == Color.GREEN) {
+			green = field;
 		}
 	}
 
@@ -46,6 +66,8 @@ public class Portal {
 			return yellow;
 		} else if (yellow == field) {
 			return blue;
+		} else if (red == field) {
+			return green;
 		}
 		return null;
 	}
