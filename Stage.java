@@ -38,7 +38,7 @@ public class Stage implements Serializable
         roads = new ArrayList<Field>();
         zpms = new ArrayList<ZPM>();
         lastLog = new ArrayList<String>();
-        log = false;
+        log = true;
         portal = null;
         allZPM = 0;
         init(file, game);
@@ -214,7 +214,7 @@ public class Stage implements Serializable
 	    					else
 	    					if(unitType.equals("Replicator")){
 	    						Direction dir = directionByChar(unitElement.getAttribute("direction").charAt(0));
-	    						ActionUnit replicator = new Replicator(game, dir, field);
+	    						Replicator replicator = new Replicator(game, dir, field);
 	    						units.add(replicator);
 	    						field.addUnit(replicator);
 	    						game.setReplicator(replicator);
@@ -447,7 +447,7 @@ public class Stage implements Serializable
 	        		lastLog.add(beforeStr);
 	        	}
 	        }
-	        lastLog.add("\n\n");
+	        lastLog.add("\n");
 	        for(String afterStr : after){
 	        	if(!before.contains(afterStr)){
 	        		lastLog.add(afterStr);
