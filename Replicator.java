@@ -14,10 +14,19 @@ public class Replicator extends ActionUnit{
 		this.nextAction = new Action(ActionType.MOVE, Direction.NORTH, null);
 	}
 
+	//Kezdemenyezi a mezo cserejet (utra), majd megoli magat
 	public void replaceField(){
 		game.replaceField(currentField);
 		currentField.removeUnit(this);
 		kill();
+	}
+	
+	//Eltavolitja magat a jelenlegi mezorol, majd hozzaadja magat a parameterkent kapott uj mezohoz,
+	//es beallitja a currentFieldet az uj mezore.
+	public void step(Field target){
+		currentField.removeUnit();
+		target.addUnit(this);
+		currentField = target;
 	}
 	
 	public String toString(){
