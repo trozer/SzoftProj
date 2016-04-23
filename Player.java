@@ -23,11 +23,18 @@ public class Player extends ActionUnit{
 		this.name = name;
 	}
 	
-	//ZPM felvetele. Ha elfogyott a palyarol az osszes, akkor nyertunk.
+	//Oszzegyujtott ZPM-ek szamat adja vissza
+	public int getCollectedZPM(){
+		return zpm.size();
+	}
+	
+	//ZPM felvetele. Ha elfogyott a palyarol az osszes, akkor nyertunk
 	public void addZPM(ZPM zpm){
 		this.zpm.add(zpm);
-		allZPM--;
-		if (allZPM == 0){
+		if (name.equals("O'neill") && this.zpm.size() % 2 == 0){
+			game.createZPM();
+		}
+		if (game.getAllZPM() == 0) {
 			game.win();
 		}
 	}
