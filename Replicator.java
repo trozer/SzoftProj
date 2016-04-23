@@ -23,7 +23,6 @@ public class Replicator extends ActionUnit{
 	//es beallitja a currentFieldet az uj mezore. Illetve választ 
 	public void step(Field target){
 		currentField.removeUnit();
-		target.addUnit(this);
 		currentField = target;
 	}
 	
@@ -52,6 +51,6 @@ public class Replicator extends ActionUnit{
 		if (dead == false) elet = "él";
 		else elet = "halott";
 		
-    	return "    Replikátor, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
+    	return "Replikátor, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
     }
 }
