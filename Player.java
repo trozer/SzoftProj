@@ -86,16 +86,19 @@ public class Player extends ActionUnit{
 		//Ha turn, akkor beallitja az uj iranyt.
 		else if (nextAction.getType() == ActionType.TURN){
 			currentDirection = nextAction.getDirection();
+			nextAction = null;
 		}
 		//Ha drop, es van nala doboz, akkor megprobalja lerakni a megfelelo szomszedos mezore. Ha sikerult akkor a sajat box null lesz.
 		else if (nextAction.getType() == ActionType.DROP && box != null){
 			boolean success = currentField.getNeighbourInDirection(currentDirection).addUnit(box);
 			if (success) box = null;
+			nextAction = null;
 		}
 		//Ha shoot, letrehozzuk a lovedeket es atadjuk a game-nek.
 		else if (nextAction.getType() == ActionType.SHOOT){
 			Bullet newBullet = new Bullet(nextAction, currentField.getNeighbourInDirection(currentDirection));
 			game.addUnit(newBullet);
+			nextAction = null;
 		}
 	}
 	
