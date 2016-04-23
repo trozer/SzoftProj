@@ -1,5 +1,6 @@
 package szoftProj;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -59,13 +60,16 @@ public class Game {
 					}
 				} else if ("update".startsWith(command)) {
 					update();
-
 					//kimenet kiíratása
 					List<String> changes = stage.getLog();
-					for(String str : changes) {
-						System.out.println(str);
+					if(changes != null) {
+						for (String str : changes) {
+							System.out.println(str);
+						}
+						break;        //az update után kilép a program
+					} else {
+						System.out.println("");		//nem történt változás
 					}
-					break;		//az update után végzett a program
 				} else if ("loadGame".startsWith(command)) {
 					//// TODO: 2016. 04. 23.
 				} else if ("saveGame".startsWith(command)) {
@@ -79,11 +83,23 @@ public class Game {
 					control(cmd);
 
 				} else if ("turn".startsWith(command)) {
-					//// TODO: 2016. 04. 23.
+					String executor = readString(tokenizer);
+					String dir = readString(tokenizer);
+					String cmd = "turn " + executor + " " + dir;
+					control(cmd);
 				} else if ("grab".startsWith(command)) {
-					//// TODO: 2016. 04. 23.
+					String executor = readString(tokenizer);
+					String cmd = "grab " + executor;
+					control(cmd);
 				} else if ("drop".startsWith(command)) {
-					//// TODO: 2016. 04. 23.
+					String executor = readString(tokenizer);
+					String cmd = "drop " + executor;
+					control(cmd);
+				} else if ("shoot".startsWith(command)) {
+					String executor = readString(tokenizer);
+					String color = readString(tokenizer);
+					String cmd = "shoot " + executor + " " + color;
+					control(cmd);
 				} else if ("getUnit".startsWith(command)) {
 				} else if ("getZPM".startsWith(command)) {
 				} else if ("getField".startsWith(command)) {
@@ -139,7 +155,73 @@ public class Game {
 					throw new Exception("Hibás végrehajtó a move cselekvésnél!");
 				}
 			} else if ("turn".startsWith(command)){
-				// TODO: 2016. 04. 23. többi
+				String executor = readString(tokenizer);
+				String direction = readString(tokenizer);
+				Direction dir;
+
+				if("north".startsWith(direction)){
+					dir = Direction.NORTH;
+				} else if ("west".startsWith(direction)) {
+					dir = Direction.WEST;
+				} else if ("east".startsWith(direction)) {
+					dir = Direction.EAST;
+				} else if ("sout".startsWith(direction)) {
+					dir = Direction.SOUTH;
+				} else {
+					throw new Exception("Hibás fordulási irány!");
+				}
+
+				if("oneill".startsWith(executor)){
+					Oneill.turn(dir);
+				} else if ("jaffa".startsWith(executor)) {
+					Jaffa.turn(dir);
+				} else if ("replicator".startsWith(executor)) {
+					Replicator.turn(dir);
+				} else {
+					throw new Exception("Hibás végrehajtó a turn cselekvésnél!");
+				}
+			} else if ("grab".startsWith(command)){
+				String executor = readString(tokenizer);
+				if("oneill".startsWith(executor)){
+					Oneill.grab();
+				} else if ("jaffa".startsWith(executor)) {
+					Jaffa.grab();
+				} else {
+					throw new Exception("Hibás végrehajtó a grab cselekvésnél!");
+				}
+			} else if ("drop".startsWith(command)){
+				String executor = readString(tokenizer);
+				if("oneill".startsWith(executor)){
+					Oneill.drop();
+				} else if ("jaffa".startsWith(executor)) {
+					Jaffa.drop();
+				} else {
+					throw new Exception("Hibás végrehajtó a drop cselekvésnél!");
+				}
+			} else if ("shoot".startsWith(command)){
+				String executor = readString(tokenizer);
+				String colorStr = readString(tokenizer);
+				Color color;
+
+				if("blue".startsWith(colorStr)){
+					color = Color.BLUE;
+				} else if ("yellow".startsWith(colorStr)) {
+					color = Color.YELLOW;
+				} else if ("red".startsWith(colorStr)) {
+					color = Color.RED;
+				} else if ("green".startsWith(colorStr)) {
+					color = Color.GREEN;
+				} else {
+					throw new Exception("Hibás lövedék szín!");
+				}
+
+				if("oneill".startsWith(executor)){
+					Oneill.shoot(color);
+				} else if ("jaffa".startsWith(executor)) {
+					Jaffa.shoot(color);
+				} else {
+					throw new Exception("Hibás végrehajtó a shoot cselekvésnél!");
+				}
 			} else {
 				throw new Exception("Hibás végrehajtandó parancsmegnevezés!");
 			}
