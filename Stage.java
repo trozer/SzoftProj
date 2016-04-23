@@ -217,7 +217,7 @@ public class Stage implements Serializable
 	    						ActionUnit replicator = new Replicator(game, dir, field);
 	    						units.add(replicator);
 	    						field.addUnit(replicator);
-	    						//game.setReplicator(replicator);
+	    						game.setReplicator(replicator);
 	    					}
 	    					else
 	    					if(unitType.equals("Box")){
@@ -238,7 +238,7 @@ public class Stage implements Serializable
 	    		}
 	    	}
 	    	
-	    	checkMap();
+	    	//checkMap();
     	}
     	catch(Exception e){
     		e.printStackTrace();
@@ -290,6 +290,9 @@ public class Stage implements Serializable
 		}else
 		if(type.equals("DROP")){
 			action = ActionType.DROP;
+		}else
+		if(type.equals("NONE")){
+			action = ActionType.NONE;
 		}else
 			throw new Exception("Hiba: érvénytelen a megadott akció");
 		return action;
