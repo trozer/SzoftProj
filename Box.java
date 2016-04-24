@@ -40,6 +40,6 @@ public class Box extends Unit{
 		if (dead == false) elet = "él";
 		else elet = "halott";
 		
-    	return "Doboz " + elet;
+    	return "Doboz " + weight + " tömegû " + elet;
     }
 }

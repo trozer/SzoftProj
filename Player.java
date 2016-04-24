@@ -85,6 +85,7 @@ public class Player extends ActionUnit{
 	//A nextAction alapjan csinal valamit.
 	public void action(){
 		//Ha move vagy grab, akkor a megfelelo iranyban levo szomszedos mezo doo-jat hivja meg.
+		if(nextAction == null) return;
 		if (nextAction.getType() == ActionType.MOVE ||
 			nextAction.getType() == ActionType.GRAB){
 				currentField.getNeighbourInDirection(currentDirection).doo(this);
