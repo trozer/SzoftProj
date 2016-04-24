@@ -50,6 +50,7 @@ public class Game {
 		while (true) {
 			try {
 				String inputLine = instream.readLine();
+				if (inputLine == null) break;
 				StringTokenizer tokenizer = new StringTokenizer(inputLine, " -");
 				String command = tokenizer.nextToken();
 
