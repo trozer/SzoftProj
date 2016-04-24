@@ -55,6 +55,13 @@ public class Replicator extends ActionUnit{
 		}
 	}
 	
+	public void accept(Unit unit, Field field){
+		field.removeUnit(unit);
+		field.removeUnit();
+		unit.kill();
+		this.kill();
+	}
+	
 	public String toString(){
 		String irany;
 		String elet;
