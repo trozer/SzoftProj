@@ -31,9 +31,9 @@ public abstract class Field {
 		return this.position;
 	}
 	
-	public void doo(Player player){};
-	public abstract void doo(Bullet bullet);
-	public void doo(Replicator replicator){};
+	public void doo(Player player){}
+	public void doo(Bullet bullet){}
+	public void doo(Replicator replicator){}
 	
 	public List<Unit> getUnits(){
 		return containedUnits;

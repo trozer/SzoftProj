@@ -27,11 +27,11 @@ public class Wall extends Field {
 
 	@Override
 	public boolean addUnit(Unit unit) {
-		return true;
+		return false;
 	}
 
 	public void forceAddUnit(Unit unit){
-		super.addUnit(unit);
+		super.forceAddUnit(unit);
 	}
 
 	@Override
