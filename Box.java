@@ -26,7 +26,7 @@ public class Box extends Unit{
         switch (target.getAction().getType()) {
             case GRAB:
                 if (target.grabBox(this) == true){
-                    launcher.removeUnit();
+                    launcher.removeUnit(this);
                 }
                 break;
             default:

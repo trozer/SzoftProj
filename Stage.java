@@ -220,7 +220,8 @@ public class Stage implements Serializable
 	    					if(unitType.equals("Box")){
 	    						Box box = new Box(field);
 	    						units.add(box);
-	    						field.addUnit(box);
+	    						if(!connectGates.contains(field))
+	    							field.addUnit(box);
 	    					}else
 	    					if(unitType.equals("ZPM")){
 	    						allZPM++;
@@ -234,6 +235,14 @@ public class Stage implements Serializable
 	    			}
 	    		}
 	    	}
+	    	
+	    	for(Field field : fields){
+	    		for(Unit unit : units){
+	    			if(unit.getCurrentField().equals(field) && !field.getUnits().contains(unit))
+	    				field.addUnit(unit);
+	    		}
+	    	}
+
 	    	
 	    	//checkMap();
     }
@@ -463,8 +472,6 @@ public class Stage implements Serializable
 				nextElement.getCurrentField().removeUnit(nextElement);
 				iterator.remove();
 			}
-				
-			
 		}
     	
         for(ZPM zpm : zpms){
