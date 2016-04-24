@@ -144,7 +144,9 @@ public class Game {
 				} else if ("getField".startsWith(command)) {
 					int posX = Integer.parseInt(readString(tokenizer));
 					int posY = Integer.parseInt(readString(tokenizer));
-					System.out.println(stage.getField(new Point(posX, posY)).toString());
+					Field target = stage.getField(new Point(posX, posY));
+					if(target == null) throw new Exception("Az adott pozíción nincsen mezõ!");
+					System.out.println(target.toString());
 				} else if ("getPortal".startsWith(command)) {
 					System.out.println(stage.getPortal().toString());
 				} else if ("listBoxes".startsWith(command)) {
