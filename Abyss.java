@@ -46,7 +46,7 @@ public class Abyss extends Field {
 	@Override
 	public boolean addUnit(Unit unit) {
 		// TODO Auto-generated method stub
-		containedUnits.add(unit);
+		unit.kill();
 		return false;
 	}
 
@@ -64,6 +64,6 @@ public class Abyss extends Field {
 
 	@Override
 	public String toString(){
-		return "szakadÃ©k: " + super.toString();
+		return "szakadék: " + super.toString();
 	}
 }
