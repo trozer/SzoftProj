@@ -39,21 +39,25 @@ public class Scale extends Field {
         case MOVE:	//ha a játékos rálép magára húzza és kinyitja a hozzá tartozó kaput
 		
         	if (!containedUnits.isEmpty()){
-        		for(Unit u : containedUnits) u.accept(this, player);
+        		for(int i = 0; i < containedUnits.size(); i++) 
+    				containedUnits.get(i).accept(this, player);
         	}
         	if (containedUnits.isEmpty()){
 				player.step(this);
 				containedUnits.add(player);
-				myGate.open();
+				if (myGate != null)
+					myGate.open();
 			}
         	break;
 		
         case GRAB:	//ha a játékos leszed róla egy tárgyat, a hozzá tartozó kapu bezárul
         	if (!containedUnits.isEmpty()){
-        		for(Unit u : containedUnits) u.accept(this, player);
+        		for(int i = 0; i < containedUnits.size(); i++) 
+    				containedUnits.get(i).accept(this, player);
     		}
-        	for(Unit u : containedUnits) hatar += u.getWeight();
-			if (hatar < openLimit){
+        	for(int i = 0; i < containedUnits.size(); i++) 
+				hatar += containedUnits.get(i).getWeight();
+			if (hatar < openLimit && myGate != null){
     			myGate.close();
         	}
     		break;
@@ -75,7 +79,8 @@ public class Scale extends Field {
         		break;
         	}
         	else{
-        		for(Unit u : containedUnits) u.accept(bullet, this);
+        		for(int i = 0; i < containedUnits.size(); i++) 
+    				containedUnits.get(i).accept(bullet, this);
         	}
         default:	//minden más eset
         	break;
@@ -106,7 +111,8 @@ public class Scale extends Field {
 		containedUnits.add(unit);
 		}
 		blockAddUnit = true;
-			for(Unit u : containedUnits) u.accept(unit, this);
+			for(int i = 0; i < containedUnits.size(); i++) 
+				containedUnits.get(i).accept(unit, this);
 		blockAddUnit = false;
 		
 		for(Unit u : containedUnits) hatar += u.getWeight();

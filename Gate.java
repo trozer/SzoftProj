@@ -22,7 +22,8 @@ public class Gate extends Field {
 	
 	public void close(){	//bezárja a kaput, a kapuban lévõ unitokat megsemmisíti
 		opened = false;
-		for(Unit u : containedUnits) u.kill();
+		for(int i = 0; i < containedUnits.size(); i++) 
+			containedUnits.get(i).kill();
 		containedUnits = new ArrayList<Unit>();
 	}
 	
@@ -36,13 +37,15 @@ public class Gate extends Field {
 					containedUnits.add(player);
 				}
 				else{
-					for(Unit u : containedUnits) u.accept(this, player);
+					for(int i = 0; i < containedUnits.size(); i++) 
+						containedUnits.get(i).accept(this, player);
 				}
 				break;
     
 			case GRAB:	//ha a játékos fel akar venni valamit
 				if (!containedUnits.isEmpty()){
-					for(int i = 0; i < containedUnits.size(); i++) containedUnits.get(i).accept(this, player);
+					for(int i = 0; i < containedUnits.size(); i++) 
+						containedUnits.get(i).accept(this, player);
 					}
 				break;
     		
@@ -65,7 +68,8 @@ public class Gate extends Field {
 					containedUnits.add(bullet);
 				}
 				else{
-					for(Unit u : containedUnits) u.accept(bullet, this);
+					for(int i = 0; i < containedUnits.size(); i++) 
+						containedUnits.get(i).accept(bullet, this);
 				}
 				break;
 			default:	//minden más eset

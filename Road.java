@@ -30,13 +30,16 @@ public class Road extends Field {
         			containedUnits.add(player);
         		}
         		else{
-        			for(Unit u : containedUnits) u.accept(this, player);
+        			for(int i = 0; i < containedUnits.size(); i++) 
+        				containedUnits.get(i).accept(this, player);
         		}
         		break;
         
         case GRAB:	//ha a játékos fel akar venni valamit
         		if (!containedUnits.isEmpty()){
-        			for(Unit u : containedUnits) u.accept(this, player);}
+        			for(int i = 0; i < containedUnits.size(); i++) 
+        				containedUnits.get(i).accept(this, player);
+    			}
         		break;
         		
         default:	//minden más eset
@@ -55,7 +58,8 @@ public class Road extends Field {
         	bullet.step(this);
         	}
         	else{
-        		for(Unit u : containedUnits) u.accept(bullet, this);
+        		for(int i = 0; i < containedUnits.size(); i++) 
+    				containedUnits.get(i).accept(bullet, this);
 			}
         	break;
         default:	//minden más eset

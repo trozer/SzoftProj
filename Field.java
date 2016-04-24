@@ -62,9 +62,9 @@ public abstract class Field {
 	
 	//TODO, this is for testing, delete or change this later
 	public void showUnits(){
-		for(Unit u : containedUnits){
-			System.out.println(u.toString());
-		}
+		for(int i = 0; i < containedUnits.size(); i++) 
+			System.out.println(containedUnits.get(i).toString());
+		
 	}
 	
 	public void removeUnit(){	
