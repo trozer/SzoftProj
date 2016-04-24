@@ -456,12 +456,17 @@ public class Stage implements Serializable
     }
 
     public void collectUnits(){
-        for(Unit unit : units){
-            if(unit.isDead()){
-            	unit.getCurrentField().removeUnit(unit);
-            	units.remove(unit);
-            }
-        }
+    	Iterator<Unit> iterator = units.iterator();
+        while (iterator.hasNext()) {
+        	Unit nextElement = iterator.next();
+			if(nextElement.isDead()){
+				nextElement.getCurrentField().removeUnit(nextElement);
+				iterator.remove();
+			}
+				
+			
+		}
+    	
         for(ZPM zpm : zpms){
         	if(zpm.isDead())
         		zpms.remove(zpm);
