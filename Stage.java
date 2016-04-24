@@ -437,8 +437,8 @@ public class Stage implements Serializable
 	        }
     	}
     	
-        for(Unit unit : units){
-        	unit.action();
+        for(int i = 0; i < units.size(); i++){
+        	units.get(i).action();
         }
         
     	if(log){
