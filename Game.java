@@ -17,13 +17,13 @@ public class Game {
 	private ActionUnit Replicator;
 	private boolean pause;
 
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		Game game = new Game();
 		//later check args and run appropiate command
 		//File argFile = new File("testMap.xml");
 		//game.newGame(argFile);
 		game.console();
-	}
+	}*/
 
 	Game(){
 		state = State.MENU;
@@ -298,8 +298,8 @@ public class Game {
 					throw new Exception("Hibás parancs! (" + inputLine + ")");
 				}
 			} catch (Exception e) {
-				//System.out.println(e);
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				//e.printStackTrace();
 				break;
 			}
 		}
