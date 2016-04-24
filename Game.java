@@ -299,6 +299,7 @@ public class Game {
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				break;
 			}
 		}
 	}
@@ -347,7 +348,7 @@ public class Game {
 					dir = Direction.WEST;
 				} else if ("east".startsWith(direction)) {
 					dir = Direction.EAST;
-				} else if ("sout".startsWith(direction)) {
+				} else if ("south".startsWith(direction)) {
 					dir = Direction.SOUTH;
 				} else {
 					throw new Exception("Hibás fordulási irány!");
