@@ -37,10 +37,10 @@ public class Bullet extends ActionUnit{
     	String irany;
     	String elet;
     	
-    	if (color == Color.BLUE) szin = "Kék";
-    	else if (color == Color.YELLOW) szin = "Sárga";
-    	else if (color == Color.GREEN) szin = "Zöld";
-    	else szin = "Piros";
+    	if (color == Color.BLUE) szin = "blue";
+    	else if (color == Color.YELLOW) szin = "yellow";
+    	else if (color == Color.GREEN) szin = "green";
+    	else szin = "red";
     	
     	if (currentDirection == Direction.NORTH) irany = "észak";
 		else if (currentDirection == Direction.EAST) irany = "kelet";
@@ -50,7 +50,7 @@ public class Bullet extends ActionUnit{
     	if (dead == false) elet = "él";
 		else elet = "halott";
     	
-    	return szin + " lövedék, mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + elet;
+    	return "lövedék: mozgás cselekvést akar végrehajtani, " + irany + " irányba néz, " + szin + ", " + elet;
     }
 
 }
