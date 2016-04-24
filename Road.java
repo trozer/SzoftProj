@@ -56,10 +56,12 @@ public class Road extends Field {
         case MOVE:	//ha megérkezik/lépni akar
         	if (containedUnits.isEmpty()){
         	bullet.step(this);
+        	
         	}
         	else{
         		for(int i = 0; i < containedUnits.size(); i++) 
     				containedUnits.get(i).accept(bullet, this);
+        		bullet.step(this);
 			}
         	break;
         default:	//minden más eset
