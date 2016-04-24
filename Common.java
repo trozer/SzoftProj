@@ -59,9 +59,52 @@ public class Common {
 							System.out.println("11: Játékos karakter mûködõ portálnak megy");
 							System.out.println("12: Játékos karakter üres és nyitott kapuból lép ki");
 							System.out.println("13: Játékos karakter üres és nyitott kapuból lép ki dobozzal elzárt útra");
-							System.out.println("14: Játékos karakter portálból lép ki üres útra");
-							System.out.println("15: Játékos fordul egy úton");
-							System.out.println("16: Játékos karakter scale-rõl lép le, üres útra");
+							System.out.println("14: Játékos fordul egy úton");
+							System.out.println("15: Játékos karakter scale-rõl lép le, üres útra");
+							/***************************** megvalósítsásra vár************************/
+							System.out.println("16: A játékos karakter dobozt rak egy üres mezõre");
+							System.out.println("17: A játékos karakter dobozt rak egy már dobozt tartalmazó mezõre");
+							System.out.println("18: A játékos karakter dobozt rak egy üres, nyitott kapura");
+							System.out.println("19: A játékos karakter dobozt rak egy nem üres, nyitott kapura");
+							System.out.println("20: A játékos karakter dobozt rak egy zárt kapura");
+							System.out.println("21: A játékos karakter dobozt vesz fel útról");
+							System.out.println("22: A játékos karakter dobozt vesz fel abbysrõl");
+							System.out.println("23: A játékos karakter dobozt vesz fel zárt kapuról");
+							System.out.println("24: A játékos karakter dobozt vesz fel nyitott portálról");
+							System.out.println("25: O’Neill lövedéket indít");
+							System.out.println("26: Jaffa lövedéket indít");
+							System.out.println("27: Lövedék falba csapódik");
+							System.out.println("28: Lövedék portál falba csapódik");
+							System.out.println("29: Lövedék becsapódás portál falba, úgy, hogy nyitva van valahol egy portál pár");
+							System.out.println("30: Lövedék portálba csapódik");
+							System.out.println("31: Lövedék úton halad át");
+							System.out.println("32: Lövedék mérlegen halad át");
+							System.out.println("33: Lövedék abyssen halad át");
+							System.out.println("34: JLövedék nyitott kapun halad át");
+							System.out.println("35: Játékos ZPM-re lép");
+							System.out.println("36: Játékos ZPM-et vesz fel");
+							System.out.println("37: Dobozt rak mérlegre (0 doboz van rajta)");
+							System.out.println("38: Dobozt rak mérlegre (1 doboz van rajta)");
+							System.out.println("39: Dobozt rak mérlegre (2 doboz van rajta)");
+							System.out.println("40: Dobozt rak mérlegre (3 doboz van rajta)");
+							System.out.println("41: Dobozt rak abyss-ra");
+							System.out.println("42: Dobozt rak falra");
+							System.out.println("43: Dobozt rak nyitott portálra");
+							System.out.println("44: Dobozt vesz fel nyitott kapuról (kapuban van doboz");
+							System.out.println("45: Dobozt vesz fel nyitott kapuról (kapuban nincs doboz)");
+							System.out.println("46: Dobozt vesz fel mérlegrõl (nincs rajta doboz)");
+							System.out.println("47: Dobozt vesz fel mérlegrõl (1 doboz van rajta)");
+							System.out.println("48: Dobozt vesz fel mérlegrõl (3 doboz van rajta)");
+							System.out.println("49: Dobozt vesz fel mérlegrõl (4 doboz van rajta)");
+							System.out.println("50: Replikátor lép (abyss)");
+							System.out.println("51: Replikátor lép (zárt kapu)");
+							System.out.println("52: Replikátor lép (mûködõ portál)");
+							System.out.println("53: Replikátor lép (üres út)");
+							System.out.println("54: Replikátor lép (dobozzal elzárt út)");
+							System.out.println("55: Replikátor lép (O'Neill-el elzárt út)");
+							System.out.println("56: Replikátor lép (lövedékkel találkozik)");
+							System.out.println("57: Replikátor lép (scale, van hozzákapcsolt kapu)");
+							System.out.println("58: Replikátor lép (fal)");
 						} else {
 							try {
 								int testCase = Integer.parseInt(command);
@@ -130,14 +173,10 @@ public class Common {
 										expectedFile = new File("lep_grb_elvart.txt");
 										break;
 									case 14:
-										commandFile = new File("lep_pr.txt");
-										expectedFile = new File("lep_pr_elvart.txt");
-										break;
-									case 15:
 										commandFile = new File("fordul_r.txt");
 										expectedFile = new File("fordul_r_elvart.txt");
 										break;
-									case 16:
+									case 15:
 										commandFile = new File("lep_sr.txt");
 										expectedFile = new File("lep_sr_elvart.txt");
 										break;
