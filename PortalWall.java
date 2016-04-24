@@ -24,10 +24,17 @@ public class PortalWall extends Wall {
 
 	@Override
 	public void doo(Player player) {
+		switch (player.getAction().getType()) {
+        case MOVE:
 		if (portal.amIPortal(this)) {
 			if (portal.getPair(this) != null) {
-				player.step(this);
+				player.step(portal.getPair(this));
+				portal.getPair(this).containedUnits.add(player);
 			}
+		}
+		break;
+		default:
+			break;
 		}
 	}
 
