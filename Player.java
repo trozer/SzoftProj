@@ -136,7 +136,7 @@ public class Player extends ActionUnit{
 		if (dead == false) elet = "él";
 		else elet = "halott";
 		
-    	return name + ": " + cselekves + "cselekvést akar végrehajtani, " + irany + " irányba néz, " + weight + " tömegü, "
-    			+ doboz + zpm.size() + " db begyüjtött ZPM van nála, " + elet;
+    	return name + ": " + cselekves + "cselekvést akar végrehajtani, " + irany + " irányba néz, " + weight + " tömegû, "
+    			+ doboz + zpm.size() + " db begyûjtött ZPM van nála, " + elet;
     }
 }
