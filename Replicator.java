@@ -55,7 +55,8 @@ public class Replicator extends ActionUnit{
 		}
 	}
 	
-	public void accept(Unit unit, Field field){
+	@Override
+	public void accept(Bullet unit, Field field){
 		field.removeUnit(unit);
 		field.removeUnit();
 		unit.kill();
