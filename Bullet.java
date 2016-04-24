@@ -9,6 +9,7 @@ public class Bullet extends ActionUnit{
     public Bullet(Action action, Field currentField){
         this.nextAction = action;
         this.currentField = currentField;
+        this.currentDirection = action.getDirection();
         this.color = action.getColor();
         this.weight = 0;
     }
@@ -29,7 +30,7 @@ public class Bullet extends ActionUnit{
     }
 
     public void setCurrentField(Field field){
-        this.setCurrentField(field);
+        this.currentField = field;
     }
     
     public String toString(){
