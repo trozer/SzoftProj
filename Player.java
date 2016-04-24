@@ -104,7 +104,8 @@ public class Player extends ActionUnit{
 		}
 		//Ha shoot, letrehozzuk a lovedeket es atadjuk a game-nek.
 		else if (nextAction.getType() == ActionType.SHOOT){
-			Bullet newBullet = new Bullet(nextAction, currentField.getNeighbourInDirection(currentDirection));
+			Action act = new Action(ActionType.MOVE, currentDirection, nextAction.getColor());
+			Bullet newBullet = new Bullet(act, currentField.getNeighbourInDirection(currentDirection));
 			game.addUnit(newBullet);
 			nextAction = null;
 		}
