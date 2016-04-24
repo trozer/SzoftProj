@@ -1,5 +1,7 @@
 package szoftProj;
 
+import java.awt.Color;
+
 public class PortalWall extends Wall {
 
 	private Portal portal;
@@ -68,8 +70,12 @@ public class PortalWall extends Wall {
 	@Override
 	public String toString(){
 		if(portal.amIPortal(this))
-			return "portál" + super.toString() + " portál vagyok";
+			return "portálfal: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, " 
+				+ portal.getColor(this) + "színû portál van rajta, " 
+				+ containedUnits.size() + "darab tárolt egység";
 		else
-			return "portál" + super.toString() ;
+			return "portálfal: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, " 
+			+ "nincs rajta portál, " 
+			+ containedUnits.size() + "darab tárolt egység";
 	}
 }
