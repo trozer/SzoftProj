@@ -17,13 +17,13 @@ public class Game {
 	private ActionUnit Replicator;
 	private boolean pause;
 
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		Game game = new Game();
 		//later check args and run appropiate command
 		//File argFile = new File("testMap.xml");
 		//game.newGame(argFile);
 		game.console();
-	}
+	}*/
 
 	Game(){
 		state = State.MENU;
@@ -115,10 +115,13 @@ public class Game {
 				} else if ("getUnit".startsWith(command)) {
 					String executor = readString(tokenizer);
 					if("oneill".startsWith(executor)){
+						if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 						System.out.println(Oneill.toString());
 					} else if ("jaffa".startsWith(executor)) {
+						if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 						System.out.println(Jaffa.toString());
 					} else if ("replicator".startsWith(executor)) {
+						if(Replicator == null) throw new Exception("Nincs Replicator a pályán");
 						System.out.println(Replicator.toString());
 					} else {
 						throw new Exception("Hibás lekérdezendõ egységazonosító!");
@@ -127,8 +130,10 @@ public class Game {
 					if(tokenizer.hasMoreTokens()){
 						String executor = readString(tokenizer);
 						if("oneill".startsWith(executor)){
+							if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 							System.out.println(((Player)Oneill).getCollectedZPM());
 						} else if ("jaffa".startsWith(executor)) {
+							if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 							System.out.println(((Player)Jaffa).getCollectedZPM());
 						} else {
 							throw new Exception("Hibás lekérdezendõ egységazonosító!");
@@ -184,6 +189,7 @@ public class Game {
 						} catch (Exception e){
 							throw new Exception("Hibásan megadott célmezõ paraméter!");
 						}
+						if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 						stage.setUnitPos(Oneill, targetField);
 					} else if ("jaffa".startsWith(firstparam)) {
 						String targetX;
@@ -198,6 +204,7 @@ public class Game {
 						} catch (Exception e){
 							throw new Exception("Hibásan megadott célmezõ paraméter!");
 						}
+						if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 						stage.setUnitPos(Jaffa, targetField);
 					} else if ("replicator".startsWith(firstparam)) {
 						String targetX;
@@ -212,6 +219,7 @@ public class Game {
 						} catch (Exception e){
 							throw new Exception("Hibásan megadott célmezõ paraméter!");
 						}
+						if(Replicator == null) throw new Exception("Nincs Replicator a pályán");
 						stage.setUnitPos(Replicator, targetField);
 					} else {
 						String originX;
@@ -244,10 +252,13 @@ public class Game {
 				} else if ("killUnit".startsWith(command)) {
 					String executor = readString(tokenizer);
 					if("oneill".startsWith(executor)){
+						if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 						Oneill.kill();
 					} else if ("jaffa".startsWith(executor)) {
+						if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 						Jaffa.kill();
 					} else if ("replicator".startsWith(executor)) {
+						if(Replicator == null) throw new Exception("Nincs Replicator a pályán");
 						Replicator.kill();
 					} else {
 						int posX = Integer.parseInt(readString(tokenizer));
@@ -256,16 +267,19 @@ public class Game {
 					}
 				} else if ("addBox".startsWith(command)) {
 					Road target = (Road)stage.getEmptyRoad();
+					if(target == null) throw new Exception("Nincs üres mezõ!");
 					Box newBox = new Box(target);
 					target.addUnit(newBox);
 					stage.addUnit(newBox);
 				} else if ("addZPM".startsWith(command)) {
 					Road target = (Road)stage.getEmptyRoad();
+					if(target == null) throw new Exception("Nincs üres mezõ!");
 					ZPM newZPM = new ZPM(target);
 					target.addUnit(newZPM);
 					stage.addUnit(newZPM);
 				} else if ("addReplicator".startsWith(command)) {
 					Road target = (Road)stage.getEmptyRoad();
+					if(target == null) throw new Exception("Nincs üres mezõ!");
 					Replicator newReplicator = new Replicator(this, Direction.NORTH, target);
 					target.addUnit(newReplicator);
 					stage.addUnit(newReplicator);
@@ -283,7 +297,6 @@ public class Game {
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				break;
 			}
 		}
 	}
@@ -310,10 +323,13 @@ public class Game {
 			if("move".startsWith(command)){
 				String executor = readString(tokenizer);
 				if("oneill".startsWith(executor)){
+					if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 					Oneill.move();
 				} else if ("jaffa".startsWith(executor)) {
+					if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 					Jaffa.move();
 				} else if ("replicator".startsWith(executor)) {
+					if(Replicator == null) throw new Exception("Nincs Replicator a pályán");
 					Replicator.move();
 				} else {
 					throw new Exception("Hibás végrehajtó a move cselekvésnél!");
@@ -336,10 +352,13 @@ public class Game {
 				}
 
 				if("oneill".startsWith(executor)){
+					if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 					Oneill.turn(dir);
 				} else if ("jaffa".startsWith(executor)) {
+					if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 					Jaffa.turn(dir);
 				} else if ("replicator".startsWith(executor)) {
+					if(Replicator == null) throw new Exception("Nincs Replicator a pályán");
 					Replicator.turn(dir);
 				} else {
 					throw new Exception("Hibás végrehajtó a turn cselekvésnél!");
@@ -347,8 +366,10 @@ public class Game {
 			} else if ("grab".startsWith(command)){
 				String executor = readString(tokenizer);
 				if("oneill".startsWith(executor)){
+					if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 					Oneill.grab();
 				} else if ("jaffa".startsWith(executor)) {
+					if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 					Jaffa.grab();
 				} else {
 					throw new Exception("Hibás végrehajtó a grab cselekvésnél!");
@@ -356,8 +377,10 @@ public class Game {
 			} else if ("drop".startsWith(command)){
 				String executor = readString(tokenizer);
 				if("oneill".startsWith(executor)){
+					if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 					Oneill.drop();
 				} else if ("jaffa".startsWith(executor)) {
+					if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 					Jaffa.drop();
 				} else {
 					throw new Exception("Hibás végrehajtó a drop cselekvésnél!");
@@ -380,8 +403,10 @@ public class Game {
 				}
 
 				if("oneill".startsWith(executor)){
+					if(Oneill == null) throw new Exception("Nincs Oneill a pályán");
 					Oneill.shoot(color);
 				} else if ("jaffa".startsWith(executor)) {
+					if(Jaffa == null) throw new Exception("Nincs Jaffa a pályán");
 					Jaffa.shoot(color);
 				} else {
 					throw new Exception("Hibás végrehajtó a shoot cselekvésnél!");
@@ -436,7 +461,8 @@ public class Game {
 		this.Oneill = Oneill;
 	}
 
-	public void setReplicatorDir(boolean random, Direction dir){
+	public void setReplicatorDir(boolean random, Direction dir) throws Exception{
+		if(Replicator == null) throw new Exception("Nincs replicator a pályán!");
 		if(random){
 			int randomDir = new Random().nextInt(4) + 1;
 			switch (randomDir){
