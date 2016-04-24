@@ -24,7 +24,7 @@ public class PortalWall extends Wall {
 	public void doo(Player player) {
 		if (portal.amIPortal(this)) {
 			if (portal.getPair(this) != null) {
-				player.move();
+				player.step(this);
 			}
 		}
 	}
@@ -32,9 +32,11 @@ public class PortalWall extends Wall {
 	@Override
 	public void doo(Bullet bullet) {
 		if (portal.amIPortal(this)) {
+			bullet.step(this);
 			bullet.kill();
 		} else {
 			portal.createPortal(this, bullet.getColor());
+			bullet.step(this);
 			bullet.kill();
 		}
 	}
@@ -66,8 +68,8 @@ public class PortalWall extends Wall {
 	@Override
 	public String toString(){
 		if(portal.amIPortal(this))
-			return "port√°l: " + super.toString() + " port√°l vagyok";
+			return "port·l" + super.toString() + " port·l vagyok";
 		else
-			return "port√°l: " + super.toString() ;
+			return "port·l" + super.toString() ;
 	}
 }
