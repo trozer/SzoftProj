@@ -457,8 +457,10 @@ public class Stage implements Serializable
 
     public void collectUnits(){
         for(Unit unit : units){
-            if(unit.isDead())
+            if(unit.isDead()){
+            	unit.getCurrentField().removeUnit(unit);
             	units.remove(unit);
+            }
         }
         for(ZPM zpm : zpms){
         	if(zpm.isDead())
