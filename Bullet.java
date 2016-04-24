@@ -19,7 +19,7 @@ public class Bullet extends ActionUnit{
     @Override
     public void step(Field target){
     	currentField.removeUnit(this);
-        target.addUnit(this);
+        target.forceAddUnit(this);
         this.setCurrentField(target);
     }
 
