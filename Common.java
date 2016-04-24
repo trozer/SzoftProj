@@ -60,6 +60,8 @@ public class Common {
 							System.out.println("12: Játékos karakter üres és nyitott kapuból lép ki");
 							System.out.println("13: Játékos karakter üres és nyitott kapuból lép ki dobozzal elzárt útra");
 							System.out.println("14: Játékos karakter portálból lép ki üres útra");
+							System.out.println("15: Játékos fordul egy úton");
+							System.out.println("16: Játékos karakter scale-rõl lép le, üres útra");
 						} else {
 							try {
 								int testCase = Integer.parseInt(command);
@@ -130,6 +132,14 @@ public class Common {
 									case 14:
 										commandFile = new File("lep_pr.txt");
 										expectedFile = new File("lep_pr_elvart.txt");
+										break;
+									case 15:
+										commandFile = new File("fordul_r.txt");
+										expectedFile = new File("fordul_r_elvart.txt");
+										break;
+									case 16:
+										commandFile = new File("lep_sr.txt");
+										expectedFile = new File("lep_sr_elvart.txt");
 										break;
 									default:
 										System.out.println("Nincs ilyen teszteset!");
