@@ -167,19 +167,19 @@ public class Scale extends Field {
 			if(sulyok >= openLimit)
 				return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 					+ openLimit + " súlyhatár, lenyomva , van hozzákapcsolt kapu, " 
-					+ containedUnits.size() + "darab tárolt egység";
+					+ containedUnits.size() + " darab tárolt egység";
 			else
 				return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 				+ openLimit + " súlyhatár, nincs lenyomva , van hozzákapcsolt kapu, " 
-				+ containedUnits.size() + "darab tárolt egység";
+				+ containedUnits.size() + " darab tárolt egység";
 		else
 			if(sulyok >= openLimit)
 					return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 						+ openLimit + " súlyhatár, lenyomva , nincs hozzákapcsolt kapu, " 
-						+ containedUnits.size() + "darab tárolt egység";
+						+ containedUnits.size() + " darab tárolt egység";
 				else
 					return "mérleg: (" + toInt(position.getX()) + "," + toInt(position.getY()) + ") pozíció, "
 					+ openLimit + " súlyhatár, nincs lenyomva , nincs hozzákapcsolt kapu, " 
-					+ containedUnits.size() + "darab tárolt egység";
+					+ containedUnits.size() + " darab tárolt egység";
 	}
 }
