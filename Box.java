@@ -36,6 +36,10 @@ public class Box extends Unit{
     
     @Override
     public String toString(){
-    	return "Doboz";
+    	String elet;
+		if (dead == false) elet = "él";
+		else elet = "halott";
+		
+    	return "Doboz " + elet;
     }
 }
