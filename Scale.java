@@ -111,7 +111,8 @@ public class Scale extends Field {
 		
 		for(Unit u : containedUnits) hatar += u.getWeight();
 		if (hatar >= openLimit){
-			myGate.open();
+			if(myGate != null)
+				myGate.open();
 		}
 		return true;
 		/*if (containedUnits.size() < 3 ){
@@ -126,7 +127,8 @@ public class Scale extends Field {
 	@Override
 	public void removeUnit(){	//eltávolítja a unitot ami a mérlegen van, ilyenkor a kapu bezárul 
 		containedUnits = new ArrayList<Unit>();
-		myGate.close();
+		if(myGate != null)
+			myGate.close();
 	}
 	
 	@Override
@@ -137,7 +139,8 @@ public class Scale extends Field {
 			for(Unit u : containedUnits) hatar += u.getWeight();
 		}
 		if (hatar < openLimit){
-			myGate.close();
+			if(myGate != null)
+				myGate.close();
 		}
 	}
 	
