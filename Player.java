@@ -106,6 +106,7 @@ public class Player extends ActionUnit{
 		else if (nextAction.getType() == ActionType.SHOOT){
 			Action act = new Action(ActionType.MOVE, currentDirection, nextAction.getColor());
 			Bullet newBullet = new Bullet(act, currentField.getNeighbourInDirection(currentDirection));
+			currentField.getNeighbourInDirection(currentDirection).forceAddUnit(newBullet);
 			game.addUnit(newBullet);
 			nextAction = null;
 		}
