@@ -65,6 +65,6 @@ public class Abyss extends Field {
 
 	@Override
 	public String toString(){
-		return "szakadÃ©k: " + super.toString();
+		return "szakadék: " + super.toString();
 	}
 }
